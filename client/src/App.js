@@ -1,10 +1,13 @@
 import React from 'react';
-import UserForm from "../src/components/UserForm"
+import Uploads from "../src/components/Uploads"
+/* import UserForm from "../src/components/UserForm" */
+
 
 function App() {
   return (
     <div className="App">
-     <UserForm/>
+     {/* <UserForm/> */}
+     <Uploads/>
     </div>
   );
 }

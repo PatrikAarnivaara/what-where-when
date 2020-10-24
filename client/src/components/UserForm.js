@@ -11,7 +11,6 @@ class UserForm extends Component {
   }
 
   onChange = (e) => {
-    console.log(e)
     switch (e.target.name) {
       case 'selectedFile':
         this.setState({ selectedFile: e.target.files[0] });
@@ -25,6 +24,7 @@ class UserForm extends Component {
     e.preventDefault();
     const { description, selectedFile } = this.state;
     let formData = new FormData();
+    console.log(selectedFile)
 
     formData.append('description', description);
     formData.append('selectedFile', selectedFile);
