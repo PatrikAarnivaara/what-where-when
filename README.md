@@ -1,9 +1,22 @@
-what-where-when (Work-in-progress...)
+## General info
+What Where When
 
-Goals: 
--upload images with title and description
--render list of images and info
--edit and delete image posts
--add MaterialUI
--get predictions from TensorFlow
+## Goals
+* Upload images with title and description
+* Render list of images and info
+* Edit and delete image posts
+* Add MaterialUI
+* Get predictions from TensorFlow
+
+## Technologies
+* React
+* NodeJS
+* MongoDB Atlas
+* Cloudinary
+* TensorFlow
+
+
+
+
+
 
