@@ -1,61 +1,48 @@
-import React, { Component } from 'react';
-import axios from 'axios';
+import React, { useState } from "react";
+import axios from "axios";
 
-class UserForm extends Component {
-  constructor() {
-    super();
-    this.state = {
-      description: '',
-      selectedFile: '',
-    };
-  }
+const UserForm = () => {
+  const [description, setDescription] = useState("");
+  const [selectedFile, setSelectedFile] = useState("");
 
   onChange = (e) => {
     switch (e.target.name) {
-      case 'selectedFile':
-        this.setState({ selectedFile: e.target.files[0] });
+      case "selectedFile":
+        setSelectedFile({ selectedFile: e.target.files[0] });
         break;
       default:
         this.setState({ [e.target.name]: e.target.value });
     }
-  }
+  };
 
   onSubmit = (e) => {
     e.preventDefault();
     const { description, selectedFile } = this.state;
     let formData = new FormData();
-    console.log(selectedFile)
+    console.log(selectedFile);
 
-    formData.append('description', description);
-    formData.append('selectedFile', selectedFile);
+    formData.append("description", description);
+    formData.append("selectedFile", selectedFile);
 
-    console.log(formData)
+    console.log(formData);
 
-    axios.post('/', formData)
-      .then((result) => {
-        // access results...
-      });
-  }
+    axios.post("/", formData).then((result) => {
+      // access results...
+    });
+  };
 
-  render() {
-    const { description, selectedFile } = this.state;
-    return (
-      <form onSubmit={this.onSubmit}>
-        <input
-          type="text"
-          name="description"
-          value={description}
-          onChange={this.onChange}
-        />
-        <input
-          type="file"
-          name="selectedFile"
-          onChange={this.onChange}
-        />
-        <button type="submit">Submit</button>
-      </form>
-    );
-  }
-}
+  return (
+    <form onSubmit={this.onSubmit}>
+      <input
+        type="text"
+        name="description"
+        value={description}
+        onChange={this.onChange}
+      />
+      <input type="file" name="selectedFile" onChange={this.onChange} />
+      <button type="submit">Submit</button>
+    </form>
+  );
+};
 
-export default UserForm
+export default UserForm;

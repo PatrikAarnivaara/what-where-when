@@ -1,10 +1,10 @@
 import React, { useState } from "react";
-/* import { post } from "axios"; */
+/* import axios from "axios"; */
 
 const Upload = () => {
   const [fileInputState, setFileInputState] = useState("");
-  const [selectedFile, setSelectedFile] = useState("");
-  const [previewSource, setPreviewSource] = useState("");
+  /*   const [selectedFile, setSelectedFile] = useState("");
+   */ const [previewSource, setPreviewSource] = useState("");
 
   const handleFileInputChange = (e) => {
     /* To grab file from input, for multiupload use for-loop */
@@ -13,7 +13,7 @@ const Upload = () => {
   };
 
   /* Function to preview images that are uploaded */
-  const previewFile = (file) => {
+  const previewFile = async (file) => {
     const reader = new FileReader();
     reader.readAsDataURL(file);
     reader.onloadend = () => {
@@ -34,9 +34,6 @@ const Upload = () => {
   };
 
   const uploadImage = async (base64EncodedImage) => {
-    console.log(base64EncodedImage)
-    /* STOPS HERE */
-    
     try {
       await fetch("/api/upload", {
         method: "POST",
