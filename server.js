@@ -21,6 +21,12 @@ mongoose.connection.on("error", (err) => {
   console.log("Mongoose Connection Error : " + err);
 });
 
+app.get("/api/buildings", function (req, res) {
+  Building.find(function (err, buildings) {
+    res.json(buildings);
+  });
+});
+
 app.get("/api/images", async (req, res) => {
   const { resources } = await cloudinary.search
     .expression("folder:arch-style")
@@ -37,6 +43,8 @@ app.post("/api/upload", async (req, res) => {
   /* Save the response in variable and include it
   in mongoDB request to be able to separate into two
   try/catch blocks */
+
+  const requestFile = {}
   try {
     const fileStr = req.body.file;
     const uploadResponse = await cloudinary.uploader.upload(fileStr, {
@@ -45,15 +53,12 @@ app.post("/api/upload", async (req, res) => {
     console.log("Server", uploadResponse);
     /* res.json({ msg: "HI CLOUDINARY!" }); */
 
-    //POST to MongoDB
-
     let building = new Building({
-      url: uploadResponse.public_id,
+      url: uploadResponse.url,
       title: req.body.title,
       description: req.body.description,
       date: req.body.date,
     });
-
     building
       .save()
       .then((building) => {
