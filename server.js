@@ -34,6 +34,9 @@ app.get("/api/images", async (req, res) => {
 
 app.post("/api/upload", async (req, res) => {
   /* console.log("Server: ", req.body.file); */
+  /* Save the response in variable and include it
+  in mongoDB request to be able to separate into two
+  try/catch blocks */
   try {
     const fileStr = req.body.file;
     const uploadResponse = await cloudinary.uploader.upload(fileStr, {
@@ -47,7 +50,8 @@ app.post("/api/upload", async (req, res) => {
     let building = new Building({
       url: uploadResponse.public_id,
       title: req.body.title,
-      description: req.body.desc,
+      description: req.body.description,
+      date: req.body.date,
     });
 
     building
