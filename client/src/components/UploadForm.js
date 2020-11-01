@@ -19,7 +19,7 @@ const UploadForm = () => {
       title: title,
       file: await toBase64(file),
       description: description,
-      date: Date.now(),
+      date: new Date().toLocaleString(),
     };
 
     submitForm("application/json", data, (msg) =>
