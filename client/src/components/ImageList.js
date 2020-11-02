@@ -23,7 +23,7 @@ function BuildingList() {
       {buildings.map((building, index) => {
         return (
           <div key={building._id}>
-            {/*  <h4><Link to={`/buildings/${building._id}`}>{building.title}</Link></h4> */}
+            {/* <h4><Link to={`/buildings/${building._id}`}>{building.title}</Link></h4> */}
             <small>_id: {building._id}</small>
             <small>date: {building.date}</small>
             {/* <img src={building.url} alt={building.title} /> */}
