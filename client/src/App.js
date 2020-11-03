@@ -17,8 +17,8 @@ import ImageList from "../src/components/ImageList";
 /* import UserForm from "../src/components/UserForm" */
 
 function App() {
-  const prefersDarkMode = useMediaQuery("(prefers-color-scheme: dark)");
-  const [darkMode, setDarkMode] = useState(false);
+  /* const prefersDarkMode = useMediaQuery("(prefers-color-scheme: dark)"); */
+  const [darkMode, setDarkMode] = useState(true);
 
   const theme = createMuiTheme({
     palette: {
@@ -26,12 +26,15 @@ function App() {
     },
   });
 
+  const changeTheme = () => {
+    setDarkMode(!darkMode);
+  };
+
   return (
     <ThemeProvider theme={theme}>
       <CssBaseline />
       <div className="App">
-        <Header />
-        <Switch checked={darkMode} onChange={() => setDarkMode(!darkMode)} />
+        <Header darkMode={darkMode} changeTheme={changeTheme} />
         <UploadForm />
         <ImageList />
       </div>

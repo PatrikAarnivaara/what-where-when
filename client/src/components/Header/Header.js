@@ -2,13 +2,17 @@ import React from "react";
 import AppBar from "@material-ui/core/AppBar";
 import Toolbar from "@material-ui/core/Toolbar";
 import Typography from "@material-ui/core/Typography";
-import Button from "@material-ui/core/Button";
 import IconButton from "@material-ui/core/IconButton";
 import MenuIcon from "@material-ui/icons/Menu";
+import { Switch } from "@material-ui/core/";
 import useStyles from "./useStyle";
 
-const Header = () => {
+const Header = ({ changeTheme, darkMode }) => {
   const classes = useStyles();
+
+  const switchTheme = () => {
+    changeTheme();
+  };
 
   return (
     <div className={classes.root}>
@@ -23,9 +27,9 @@ const Header = () => {
             <MenuIcon />
           </IconButton>
           <Typography variant="h6" className={classes.title}>
-            WhatWhereWhen
+            WwW
           </Typography>
-          {/* <Button color="inherit">Login</Button> */}
+          <Switch checked={darkMode} onChange={switchTheme} />
         </Toolbar>
       </AppBar>
     </div>
