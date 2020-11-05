@@ -4,7 +4,7 @@ import Link from "@material-ui/core/Link";
 import IconButton from "@material-ui/core/IconButton";
 import Brightness7Icon from "@material-ui/icons/Brightness7";
 import Brightness4Icon from "@material-ui/icons/Brightness4";
-import { Button, Switch } from "@material-ui/core/";
+import { Button, Box } from "@material-ui/core/";
 import useStyles from "./useStyle";
 
 const HeaderTest = ({ changeTheme, darkMode }) => {
@@ -20,16 +20,16 @@ const HeaderTest = ({ changeTheme, darkMode }) => {
   };
 
   return (
-    <Breadcrumbs aria-label="breadcrumb">
+    <Breadcrumbs aria-label="breadcrumb" className={classes.root}>
       <Link color="inherit" href="/" onClick={handleClick}>
-        Images
+        Predict
       </Link>
       <Link
         color="inherit"
         href="/getting-started/installation/"
         onClick={handleClick}
       >
-        Core
+        Images
       </Link>
       <Link
         color="textPrimary"
@@ -37,12 +37,16 @@ const HeaderTest = ({ changeTheme, darkMode }) => {
         onClick={handleClick}
         aria-current="page"
       >
-        Breadcrumb
+        Edit
       </Link>
+      <Box>
       <Button onClick={switchTheme}>
         {darkMode ? <Brightness7Icon /> : <Brightness4Icon />}
       </Button>
+      <Box borderBottom={1} className={classes.border}/>
+      </Box>
     </Breadcrumbs>
+    
   );
 };
 
