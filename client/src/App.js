@@ -11,6 +11,7 @@ import { createMuiTheme, ThemeProvider } from "@material-ui/core/styles";
 import CssBaseline from "@material-ui/core/CssBaseline";
 /* import Uploads from "../src/components/Uploads" */
 import Header from "../src/components/Header/Header";
+import HeaderTest from "../src/components/Header/HeaderTest";
 import Gallery from "../src/components/Gallery";
 import UploadForm from "../src/components/UploadForm";
 import ImageList from "../src/components/ImageList";
@@ -34,7 +35,8 @@ function App() {
     <ThemeProvider theme={theme}>
       <CssBaseline />
       <div className="App">
-        <Header darkMode={darkMode} changeTheme={changeTheme} />
+        {/* <Header darkMode={darkMode} changeTheme={changeTheme} /> */}
+        <HeaderTest darkMode={darkMode} changeTheme={changeTheme}/>
         <UploadForm />
         <ImageList />
       </div>
