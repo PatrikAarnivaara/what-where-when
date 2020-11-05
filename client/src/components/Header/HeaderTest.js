@@ -1,10 +1,11 @@
 import React from "react";
 import Breadcrumbs from "@material-ui/core/Breadcrumbs";
 import Link from "@material-ui/core/Link";
-import IconButton from "@material-ui/core/IconButton";
+import TrackChangesIcon from "@material-ui/icons/TrackChanges";
+import CropLandscapeIcon from "@material-ui/icons/CropLandscape";
 import Brightness7Icon from "@material-ui/icons/Brightness7";
 import Brightness4Icon from "@material-ui/icons/Brightness4";
-import { Button, Box } from "@material-ui/core/";
+import { Button, Box, Typography } from "@material-ui/core/";
 import useStyles from "./useStyle";
 
 const HeaderTest = ({ changeTheme, darkMode }) => {
@@ -21,32 +22,35 @@ const HeaderTest = ({ changeTheme, darkMode }) => {
 
   return (
     <Breadcrumbs aria-label="breadcrumb" className={classes.root}>
-      <Link color="inherit" href="/" onClick={handleClick}>
+      <Link
+        color="inherit"
+        href="/"
+        onClick={handleClick}
+        className={classes.link}
+      >
+        <TrackChangesIcon className={classes.icon} />
         Predict
       </Link>
       <Link
         color="inherit"
         href="/getting-started/installation/"
         onClick={handleClick}
+        className={classes.link}
       >
+        <TrackChangesIcon className={classes.icon} />
+        Core
+      </Link>
+      <Typography color="textPrimary" className={classes.link}>
+        <CropLandscapeIcon className={classes.icon} />
         Images
-      </Link>
-      <Link
-        color="textPrimary"
-        href="/components/breadcrumbs/"
-        onClick={handleClick}
-        aria-current="page"
-      >
-        Edit
-      </Link>
+      </Typography>
       <Box>
-      <Button onClick={switchTheme}>
-        {darkMode ? <Brightness7Icon /> : <Brightness4Icon />}
-      </Button>
-      <Box borderBottom={1} className={classes.border}/>
+        <Button onClick={switchTheme}>
+          {darkMode ? <Brightness7Icon /> : <Brightness4Icon />}
+        </Button>
+        <Box borderBottom={1} className={classes.border} />
       </Box>
     </Breadcrumbs>
-    
   );
 };
 
