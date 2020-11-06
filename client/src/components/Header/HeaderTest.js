@@ -6,6 +6,7 @@ import CropLandscapeIcon from "@material-ui/icons/CropLandscape";
 import Brightness7Icon from "@material-ui/icons/Brightness7";
 import Brightness4Icon from "@material-ui/icons/Brightness4";
 import { Button, Box, Typography } from "@material-ui/core/";
+import VisibilityIcon from '@material-ui/icons/Visibility';
 import useStyles from "./useStyle";
 
 const HeaderTest = ({ changeTheme, darkMode }) => {
@@ -28,10 +29,10 @@ const HeaderTest = ({ changeTheme, darkMode }) => {
         onClick={handleClick}
         className={classes.link}
       >
-        <TrackChangesIcon className={classes.icon} />
+        <VisibilityIcon className={classes.icon} />
         Predict
       </Link>
-      <Link
+      {/* <Link
         color="inherit"
         href="/getting-started/installation/"
         onClick={handleClick}
@@ -39,16 +40,23 @@ const HeaderTest = ({ changeTheme, darkMode }) => {
       >
         <TrackChangesIcon className={classes.icon} />
         Core
+      </Link> */}
+      <Link
+        color="inherit"
+        href="/getting-started/installation/"
+        onClick={handleClick}
+        className={classes.link}
+      >
+        {/* <Typography color="textPrimary" className={classes.link}> */}
+          <CropLandscapeIcon className={classes.icon} />
+          Images
+        {/* </Typography> */}
       </Link>
-      <Typography color="textPrimary" className={classes.link}>
-        <CropLandscapeIcon className={classes.icon} />
-        Images
-      </Typography>
       <Box>
         <Button onClick={switchTheme}>
           {darkMode ? <Brightness7Icon /> : <Brightness4Icon />}
         </Button>
-        <Box borderBottom={1} className={classes.border} />
+        {/* <Box borderBottom={1} className={classes.border} /> */}
       </Box>
     </Breadcrumbs>
   );
