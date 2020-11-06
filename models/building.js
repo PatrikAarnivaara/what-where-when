@@ -13,6 +13,10 @@ const buildingSchema = new mongoose.Schema({
     type: String,
     required: [true, "Prediction is required"],
   },
+  date: {
+    type: String,
+    required: [true, "Prediction is required"],
+  }
 });
 
 module.exports = mongoose.model("Building", buildingSchema);

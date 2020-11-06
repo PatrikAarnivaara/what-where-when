@@ -4,9 +4,9 @@ import { submitForm } from "../api/submitForm";
 const UploadForm = () => {
   const [title, setTitle] = useState("");
   const [file, setFile] = useState(null);
-  const [desc, setDesc] = useState("");
+  const [description, setDescription] = useState("");
 
-  async function uploadWithJSON() {
+  const uploadWithJSON = async () => {
     const toBase64 = (file) =>
       new Promise((resolve, reject) => {
         const reader = new FileReader();
@@ -18,15 +18,14 @@ const UploadForm = () => {
     const data = {
       title: title,
       file: await toBase64(file),
-      desc: desc,
+      description: description,
+      date: new Date().toLocaleString(),
     };
-
-    console.log("Data JSON", data.file);
 
     submitForm("application/json", data, (msg) =>
       console.log("Upload SUBMIT JSON", msg)
     );
-  }
+  };
 
   return (
     <div>
@@ -56,8 +55,8 @@ const UploadForm = () => {
         <label>
           Description
           <textarea
-            value={desc}
-            onChange={(e) => setDesc(e.target.value)}
+            value={description}
+            onChange={(e) => setDescription(e.target.value)}
           ></textarea>
         </label>
 
