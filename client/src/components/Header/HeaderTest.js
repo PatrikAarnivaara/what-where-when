@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import Breadcrumbs from "@material-ui/core/Breadcrumbs";
 import Link from "@material-ui/core/Link";
 import TrackChangesIcon from "@material-ui/icons/TrackChanges";
@@ -6,11 +6,14 @@ import CropLandscapeIcon from "@material-ui/icons/CropLandscape";
 import Brightness7Icon from "@material-ui/icons/Brightness7";
 import Brightness4Icon from "@material-ui/icons/Brightness4";
 import { Button, Box, Typography } from "@material-ui/core/";
-import VisibilityIcon from '@material-ui/icons/Visibility';
+import VisibilityIcon from "@material-ui/icons/Visibility";
+import LockIcon from "@material-ui/icons/Lock";
+import LockOpenIcon from "@material-ui/icons/LockOpen";
 import useStyles from "./useStyle";
 
 const HeaderTest = ({ changeTheme, darkMode }) => {
   const classes = useStyles();
+  const [login, setLogin] = useState(false);
 
   const handleClick = (event) => {
     event.preventDefault();
@@ -23,6 +26,14 @@ const HeaderTest = ({ changeTheme, darkMode }) => {
 
   return (
     <Breadcrumbs aria-label="breadcrumb" className={classes.root}>
+      <Button
+        className={classes.login}
+        onClick={() => {
+          setLogin(!login);
+        }}
+      >
+        {login ? <LockIcon /> : <LockOpenIcon />}
+      </Button>
       <Link
         color="inherit"
         href="/"
@@ -32,7 +43,7 @@ const HeaderTest = ({ changeTheme, darkMode }) => {
         <VisibilityIcon className={classes.icon} />
         Predict
       </Link>
-      {/* <Link
+      <Link
         color="inherit"
         href="/getting-started/installation/"
         onClick={handleClick}
@@ -40,20 +51,18 @@ const HeaderTest = ({ changeTheme, darkMode }) => {
       >
         <TrackChangesIcon className={classes.icon} />
         Core
-      </Link> */}
+      </Link>
       <Link
         color="inherit"
         href="/getting-started/installation/"
         onClick={handleClick}
         className={classes.link}
       >
-        {/* <Typography color="textPrimary" className={classes.link}> */}
-          <CropLandscapeIcon className={classes.icon} />
-          Images
-        {/* </Typography> */}
+        <CropLandscapeIcon className={classes.icon} />
+        Images
       </Link>
       <Box>
-        <Button onClick={switchTheme}>
+        <Button className={classes.mode} onClick={switchTheme}>
           {darkMode ? <Brightness7Icon /> : <Brightness4Icon />}
         </Button>
         {/* <Box borderBottom={1} className={classes.border} /> */}
