@@ -20,7 +20,7 @@ function BuildingList() {
 
   return (
     <div>
-      {buildings.map((building, index) => {
+      {buildings.reverse().map((building, index) => {
         return (
           <div key={building._id}>
             {/* <h4><Link to={`/buildings/${building._id}`}>{building.title}</Link></h4> */}
