@@ -1,7 +1,16 @@
 import React, { useState } from "react";
+import {
+  Box,
+  FormControl,
+  TextField,
+  TextareaAutosize,
+  Button,
+} from "@material-ui/core/";
+import useStyles from "./useStyles";
 import { submitForm } from "../api/submitForm";
 
 const UploadForm = () => {
+  const classes = useStyles();
   const [title, setTitle] = useState("");
   const [file, setFile] = useState(null);
   const [description, setDescription] = useState("");
@@ -9,8 +18,7 @@ const UploadForm = () => {
 
   const handleFileInputChange = (e) => {
     setFile(e.target.files[0]);
-    const previewFileInput = e.target.files[0];
-    previewFile(previewFileInput);
+    previewFile(e.target.files[0]);
   };
 
   const previewFile = async (file) => {
@@ -44,38 +52,67 @@ const UploadForm = () => {
     );
   };
 
+  const clearFields = () => {
+    setFile("");
+    setPreviewSource("");
+    setTitle("");
+    setDescription("");
+  };
+
   return (
-    <div>
-      <h2>Upload Form</h2>
-      <form>
-        <label>
-          File Title
-          <input
+    <Box className={classes.root}>
+      <Box className={classes.box}>
+        <Box className={classes.previewContainer}>
+          {previewSource && <img src={previewSource} alt="chosen" className={classes.preview} />}
+        </Box>
+        <form>
+          <TextField
+            required
+            id="outlined-basic"
+            variant="outlined"
+            label="Title"
+            color="secondary"
             type="text"
-            vaue={title}
+            value={title}
             onChange={(e) => {
               setTitle(e.target.value);
             }}
-            placeholder="Give a title to your upload"
+            className={classes.textFieldTop}
           />
-        </label>
-        <label>
-          Preview File
-          <input type="file" name="file" onChange={handleFileInputChange} />
-        </label>
-        <label>
-          Description
-          <textarea
+          <TextField
+            required
+            id="outlined-basic"
+            variant="outlined"
+            label="Short description"
+            color="secondary"
+            type="text"
             value={description}
             onChange={(e) => setDescription(e.target.value)}
-          ></textarea>
-        </label>
-        <input type="button" value="Upload as JSON" onClick={uploadWithJSON} />
-      </form>
-      {previewSource && (
-        <img src={previewSource} alt="chosen" style={{ height: "300px" }} />
-      )}
-    </div>
+            className={classes.textFieldBottom}
+          />
+          <input
+            className={classes.fileUpload}
+            type="file"
+            name="file"
+            onChange={handleFileInputChange}
+          />
+          <Box className={classes.buttonWrap}>
+            <Button
+              variant="outlined"
+              color="secondary"
+              type="button"
+              value="Upload"
+              onClick={uploadWithJSON}
+            >
+              UPLOAD
+            </Button>
+            <Button variant="outlined" onClick={clearFields}>
+              CLEAR
+            </Button>
+          </Box>
+        </form>
+      </Box>
+    </Box>
   );
 };
 

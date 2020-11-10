@@ -31,7 +31,7 @@ function App() {
       <div className="App">
         <Header darkMode={darkMode} changeTheme={changeTheme} />
         <UploadForm />
-        <PredictionList />
+        {/* <PredictionList /> */}
       </div>
     </ThemeProvider>
   );

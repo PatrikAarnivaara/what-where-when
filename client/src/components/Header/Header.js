@@ -9,7 +9,7 @@ import { Button, Box, Typography } from "@material-ui/core/";
 import VisibilityIcon from "@material-ui/icons/Visibility";
 import LockIcon from "@material-ui/icons/Lock";
 import LockOpenIcon from "@material-ui/icons/LockOpen";
-import useStyles from "./useStyle";
+import useStyles from "./useStyles";
 
 const HeaderTest = ({ changeTheme, darkMode }) => {
   const classes = useStyles();
