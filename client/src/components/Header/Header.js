@@ -1,5 +1,4 @@
 import React, { useState } from "react";
-import Breadcrumbs from "@material-ui/core/Breadcrumbs";
 import Link from "@material-ui/core/Link";
 import TrackChangesIcon from "@material-ui/icons/TrackChanges";
 import CropLandscapeIcon from "@material-ui/icons/CropLandscape";
@@ -16,10 +15,10 @@ const HeaderTest = ({ changeTheme, darkMode }) => {
 
   const [login, setLogin] = useState(false);
 
-  const handleClick = (event) => {
+  /* const handleClick = (event) => {
     event.preventDefault();
     console.info("You clicked a breadcrumb.");
-  };
+  }; */
 
   const switchTheme = () => {
     changeTheme();
@@ -39,7 +38,7 @@ const HeaderTest = ({ changeTheme, darkMode }) => {
       <Link
         color="inherit"
         href="/"
-        onClick={handleClick}
+        /* onClick={handleClick} */
         className={classes.link}
       >
         <VisibilityIcon className={classes.icon} />
@@ -47,8 +46,8 @@ const HeaderTest = ({ changeTheme, darkMode }) => {
       </Link>
       <Link
         color="inherit"
-        href="/getting-started/installation/"
-        onClick={handleClick}
+        href="/upload"
+        /* onClick={handleClick} */
         className={classes.link}
       >
         <TrackChangesIcon className={classes.icon} />
@@ -56,8 +55,8 @@ const HeaderTest = ({ changeTheme, darkMode }) => {
       </Link>
       <Link
         color="inherit"
-        href="/getting-started/installation/"
-        onClick={handleClick}
+        href="/predictions"
+        /* onClick={handleClick} */
         className={classes.link}
       >
         <CropLandscapeIcon className={classes.icon} />

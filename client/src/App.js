@@ -2,12 +2,18 @@ import React, { useState } from "react";
 import {
   BrowserRouter as Router,
   Route,
-  NavLink,
-  Switch
+  /* NavLink, */
+  Switch,
 } from "react-router-dom";
-import { createMuiTheme, ThemeProvider, useMediaQuery } from "@material-ui/core/styles";
+import {
+  createMuiTheme,
+  ThemeProvider,
+  useMediaQuery,
+} from "@material-ui/core/styles";
 import CssBaseline from "@material-ui/core/CssBaseline";
+
 import Header from "../src/components/Header/Header";
+import LandingPage from "../src/components/LandingPage/LandingPage";
 import UploadForm from "../src/components/UploadForm";
 import PredictionList from "./components/predictions/PredictionList";
 
@@ -29,9 +35,14 @@ function App() {
     <ThemeProvider theme={theme}>
       <CssBaseline />
       <div className="App">
-        <Header darkMode={darkMode} changeTheme={changeTheme} />
-        <UploadForm />
-        {/* <PredictionList /> */}
+        <Router>
+          <Header darkMode={darkMode} changeTheme={changeTheme} />
+          <Switch>
+          <Route exact path="/" component={LandingPage} />
+            <Route exact path="/upload" component={UploadForm} />
+            <Route exact path="/predictions" component={PredictionList} />
+          </Switch>
+        </Router>
       </div>
     </ThemeProvider>
   );

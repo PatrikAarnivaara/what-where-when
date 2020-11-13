@@ -44,9 +44,9 @@ const UploadForm = () => {
       description: description,
       date: new Date().toLocaleString(),
     };
-
+    /* Clear up more fields? */
     setPreviewSource("");
-
+    /* Try/Catch, add Spinner? */
     submitForm("application/json", data, (msg) =>
       console.log("Upload SUBMIT JSON", msg)
     );
@@ -83,7 +83,7 @@ const UploadForm = () => {
             required
             id="outlined-basic"
             variant="outlined"
-            label="Short description"
+            label="#meta tag"
             color="secondary"
             type="text"
             value={description}
