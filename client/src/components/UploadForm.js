@@ -1,11 +1,34 @@
 import React, { useState } from "react";
+import {
+  Box,
+  FormControl,
+  TextField,
+  TextareaAutosize,
+  Button,
+} from "@material-ui/core/";
+import useStyles from "./useStyles";
 import { submitForm } from "../api/submitForm";
 
 const UploadForm = () => {
+  const classes = useStyles();
   const [title, setTitle] = useState("");
   const [file, setFile] = useState(null);
   const [description, setDescription] = useState("");
+  const [previewSource, setPreviewSource] = useState("");
 
+  const handleFileInputChange = (e) => {
+    setFile(e.target.files[0]);
+    previewFile(e.target.files[0]);
+  };
+
+  const previewFile = async (file) => {
+    const reader = new FileReader();
+    reader.readAsDataURL(file);
+    reader.onloadend = () => {
+      setPreviewSource(reader.result);
+    };
+  };
+  /* kanske måste skicka in previewSource här? */
   const uploadWithJSON = async () => {
     const toBase64 = (file) =>
       new Promise((resolve, reject) => {
@@ -21,48 +44,75 @@ const UploadForm = () => {
       description: description,
       date: new Date().toLocaleString(),
     };
-
+    /* Clear up more fields? */
+    setPreviewSource("");
+    /* Try/Catch, add Spinner? */
     submitForm("application/json", data, (msg) =>
       console.log("Upload SUBMIT JSON", msg)
     );
   };
 
+  const clearFields = () => {
+    setFile("");
+    setPreviewSource("");
+    setTitle("");
+    setDescription("");
+  };
+
   return (
-    <div>
-      <h2>Upload Form</h2>
-      <form>
-        <label>
-          File Title
-          <input
+    <Box className={classes.root}>
+      <Box className={classes.box}>
+        <Box className={classes.previewContainer}>
+          {previewSource && <img src={previewSource} alt="chosen" className={classes.preview} />}
+        </Box>
+        <form>
+          <TextField
+            required
+            id="outlined-basic"
+            variant="outlined"
+            label="Title"
+            color="secondary"
             type="text"
-            vaue={title}
+            value={title}
             onChange={(e) => {
               setTitle(e.target.value);
             }}
-            placeholder="Give a title to your upload"
+            className={classes.textFieldTop}
           />
-        </label>
-
-        <label>
-          File
-          <input
-            type="file"
-            name="file"
-            onChange={(e) => setFile(e.target.files[0])}
-          />
-        </label>
-
-        <label>
-          Description
-          <textarea
+          <TextField
+            required
+            id="outlined-basic"
+            variant="outlined"
+            label="#meta tag"
+            color="secondary"
+            type="text"
             value={description}
             onChange={(e) => setDescription(e.target.value)}
-          ></textarea>
-        </label>
-
-        <input type="button" value="Upload as JSON" onClick={uploadWithJSON} />
-      </form>
-    </div>
+            className={classes.textFieldBottom}
+          />
+          <input
+            className={classes.fileUpload}
+            type="file"
+            name="file"
+            onChange={handleFileInputChange}
+          />
+          <Box className={classes.buttonWrap}>
+            <Button
+              variant="outlined"
+              color="secondary"
+              type="button"
+              value="Upload"
+              onClick={uploadWithJSON}
+            >
+              UPLOAD
+            </Button>
+            <Button variant="outlined" onClick={clearFields}>
+              CLEAR
+            </Button>
+          </Box>
+        </form>
+      </Box>
+    </Box>
   );
 };
 

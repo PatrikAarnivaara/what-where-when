@@ -1,44 +1,74 @@
-import React from "react";
-import AppBar from "@material-ui/core/AppBar";
-import Toolbar from "@material-ui/core/Toolbar";
-import Typography from "@material-ui/core/Typography";
-import IconButton from "@material-ui/core/IconButton";
+import React, { useState } from "react";
+import Link from "@material-ui/core/Link";
+import TrackChangesIcon from "@material-ui/icons/TrackChanges";
+import CropLandscapeIcon from "@material-ui/icons/CropLandscape";
 import Brightness7Icon from "@material-ui/icons/Brightness7";
 import Brightness4Icon from "@material-ui/icons/Brightness4";
-import MenuIcon from "@material-ui/icons/Menu";
-import { Button, Switch } from "@material-ui/core/";
-import useStyles from "./useStyle";
+import { Button, Box, Typography } from "@material-ui/core/";
+import VisibilityIcon from "@material-ui/icons/Visibility";
+import LockIcon from "@material-ui/icons/Lock";
+import LockOpenIcon from "@material-ui/icons/LockOpen";
+import useStyles from "./useStyles";
 
-const Header = ({ changeTheme, darkMode }) => {
+const HeaderTest = ({ changeTheme, darkMode }) => {
   const classes = useStyles();
+
+  const [login, setLogin] = useState(false);
+
+  /* const handleClick = (event) => {
+    event.preventDefault();
+    console.info("You clicked a breadcrumb.");
+  }; */
 
   const switchTheme = () => {
     changeTheme();
   };
 
   return (
-    <div className={classes.root}>
-      <AppBar position="static">
-        <Toolbar>
-          <IconButton
-            edge="start"
-            className={classes.menuButton}
-            color="inherit"
-            aria-label="menu"
-          >
-            <MenuIcon />
-          </IconButton>
-          <Typography variant="h6" className={classes.title}>
-            WwW
-          </Typography>
-          {/* <Switch checked={darkMode} onChange={switchTheme} /> */}
-          <Button onClick={switchTheme}>
-            {darkMode ? <Brightness7Icon /> : <Brightness4Icon />}
-          </Button>
-        </Toolbar>
-      </AppBar>
-    </div>
+    <Box aria-label="breadcrumb" className={classes.root}>
+      <Button
+        className={classes.login}
+        onClick={() => {
+          setLogin(!login);
+        }}
+      >
+        {login ? <LockIcon /> : <LockOpenIcon />}
+      </Button>
+      <Box className={classes.linkWrapper}>
+      <Link
+        color="inherit"
+        href="/"
+        /* onClick={handleClick} */
+        className={classes.link}
+      >
+        <VisibilityIcon className={classes.icon} />
+        Predict
+      </Link>
+      <Link
+        color="inherit"
+        href="/upload"
+        /* onClick={handleClick} */
+        className={classes.link}
+      >
+        <TrackChangesIcon className={classes.icon} />
+        Core
+      </Link>
+      <Link
+        color="inherit"
+        href="/predictions"
+        /* onClick={handleClick} */
+        className={classes.link}
+      >
+        <CropLandscapeIcon className={classes.icon} />
+        Images
+      </Link>
+      </Box>
+      <Button className={classes.mode} onClick={switchTheme}>
+        {darkMode ? <Brightness7Icon /> : <Brightness4Icon />}
+      </Button>
+      {/* <Box borderBottom={1} className={classes.border} /> */}
+    </Box>
   );
 };
 
-export default Header;
+export default HeaderTest;
