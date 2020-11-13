@@ -2,10 +2,8 @@ import { makeStyles } from "@material-ui/core/styles";
 
 const useStyles = makeStyles((theme) => ({
   root: {
-    height: "8vh",
+    height: "9vh",
     width: "100%",
-    /* position: "fixed", */
-
     boxShadow: "0px 10px 24px 0px rgba(0,0,0,0.25)",
     top: 0,
     display: "flex",
@@ -19,12 +17,23 @@ const useStyles = makeStyles((theme) => ({
   },
   link: {
     display: "flex",
+    fontSize: "1.5em",
+    
+  },
+  linkWrapper: {
+    position: "absolute",
+    top: "calc(5% - 1.5rem)",
+    display: "flex",
+    justifyItems: "space-between"
+    /* alignContent: "center",
+    justifyContent: "space-between" */
   },
   icon: {
     marginRight: theme.spacing(0.5),
     width: 20,
     height: 20,
     color: "#ff9800",
+    fontSize: "1.5em",
   },
   login: {
     position: "absolute",
