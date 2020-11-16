@@ -5,8 +5,8 @@ const { cloudinary } = require("./utils/cloudinary");
 const cors = require("cors");
 const Building = require("./models/building");
 
-app.use(express.json({ limit: "10mb" }));
-app.use(express.urlencoded({ limit: "10mb", extended: true }));
+app.use(express.json({ limit: "5mb" }));
+app.use(express.urlencoded({ limit: "5mb", extended: true }));
 app.use(cors());
 
 mongoose.connect(process.env.MONGODB_URI, {
@@ -27,16 +27,15 @@ app.get("/api/buildings", function (req, res) {
   });
 });
 
-app.get("/api/images", async (req, res) => {
+/* app.get("/api/images", async (req, res) => {
   const { resources } = await cloudinary.search
     .expression("folder:arch-style")
     .sort_by("public_id", "desc")
     .max_results(30)
     .execute();
-  /* console.log("Upload response:", resources.public_id); */
   const publicIds = resources.map((file) => file.public_id);
   res.send(publicIds);
-});
+}); */
 
 app.post("/api/upload", async (req, res) => {
   /* console.log("Server: ", req.body.file); */
@@ -48,7 +47,7 @@ app.post("/api/upload", async (req, res) => {
   try {
     const fileStr = req.body.file;
     const uploadResponse = await cloudinary.uploader.upload(fileStr, {
-      upload_preset: "dev_setups",
+      upload_preset: "ml_default",
     });
     console.log("Server", uploadResponse);
     /* res.json({ msg: "HI CLOUDINARY!" }); */

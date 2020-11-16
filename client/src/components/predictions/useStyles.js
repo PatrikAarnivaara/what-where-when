@@ -5,29 +5,21 @@ const useStyles = makeStyles((theme) => ({
     display: "flex",
     flexWrap: "wrap",
     justifyContent: "space-around",
-    alignItems: "center",
     overflow: "hidden",
     backgroundColor: theme.palette.background.paper,
   },
   gridList: {
-    display: "flex",
-    flexWrap: "wrap",
-    justifyContent: "space-around",
-    alignItems: "center",
+    width: 500,
+    height: 450,
   },
   gridListTile: {
-    height: "auto",
-    display: "flex",
-    flexWrap: "wrap",
-    justifyContent: "space-around",
-    alignItems: "center",
+    cursor: "pointer",
   },
   icon: {
     color: "rgba(255, 255, 255, 0.54)",
   },
   subHeader: {
     fontSize: "1.5em",
-    
   },
 }));
 
