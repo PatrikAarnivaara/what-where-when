@@ -1,42 +1,49 @@
 import React from "react";
-import GridListTile from "@material-ui/core/GridListTile";
-import GridListTileBar from "@material-ui/core/GridListTileBar";
-import ListSubheader from "@material-ui/core/ListSubheader";
+import { GridListTile, GridListTileBar, Typography } from "@material-ui/core/";
+/* import ListSubheader from "@material-ui/core/ListSubheader"; */
 import IconButton from "@material-ui/core/IconButton";
 import useStyles from "./useStyles";
 import InfoIcon from "@material-ui/icons/Info";
-import CircularProgress from "@material-ui/core/CircularProgress";
 import { Image } from "cloudinary-react";
 
-const PredictionListItem = ({ index, building }) => {
+const PredictionListItem = ({
+  index,
+  url,
+  title,
+  description,
+  date,
+  showPredictionDetail,
+}) => {
   const classes = useStyles();
 
-  /* const handleOnClickItem = () => {
-    showChatDialogue(userName, avatar, chat, online);
-  }; */
+  const handleOnClickItem = () => {
+    showPredictionDetail(url, title, description, date);
+  };
 
   const renderGridListItem = () => (
     <GridListTile
-      className={classes.gridListTile} /* onClick={handleOnClickItem} */
+      className={classes.gridListTile}
+      onClick={handleOnClickItem}
       cols={3}
     >
       <Image
         key={index}
         cloudName={process.env.REACT_APP_CLOUDINARY_NAME}
-        publicId={building.url}
+        publicId={url}
         width="300"
         crop="scale"
       />
       {
         <GridListTileBar
-          title={building.title}
-          subtitle={<span>Predicition: {building.description}</span>}
+          title={title}
+          subtitle={<span>Prediction: {description}</span>}
           actionIcon={
             <IconButton
-              aria-label={`info about ${building.title}`}
+              aria-label={`info about ${title}`}
               className={classes.icon}
             >
               <InfoIcon />
+              <Typography>{date}</Typography>
             </IconButton>
           }
         />
@@ -44,7 +51,7 @@ const PredictionListItem = ({ index, building }) => {
     </GridListTile>
   );
 
-  return building ? renderGridListItem() : <CircularProgress />;
+  return renderGridListItem();
 };
 
 export default PredictionListItem;

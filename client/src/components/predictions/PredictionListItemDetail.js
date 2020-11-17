@@ -1,15 +1,15 @@
 import React from "react";
-import { Avatar, /* CircularProgress */ } from "@material-ui/core/";
+import { Typography } from "@material-ui/core/";
 
 const PredictionListItemDetail = ({
-  chatContent: { avatar, userName, chat /* online */ },
+  predictionDetailData: { url, title, description, date },
 }) => {
   return (
     <div>
-      {avatar && <Avatar src={avatar} alt={userName} /> /* : <CircularProgress /> */}
-      <h1>{userName}</h1>
-      <p>{chat}</p>
-      {/* <h2>{online}</h2> */}
+      <img src={url} alt={title} />
+      <Typography>Title: {title}</Typography>
+      <Typography>Description: {description}</Typography>
+      <Typography>Date: {date}</Typography>
     </div>
   );
 };

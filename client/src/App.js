@@ -15,7 +15,7 @@ import CssBaseline from "@material-ui/core/CssBaseline";
 import Header from "../src/components/Header/Header";
 import LandingPage from "../src/components/LandingPage/LandingPage";
 import UploadForm from "../src/components/UploadForm";
-import PredictionList from "./components/predictions/PredictionList";
+import Prediction from "./components/predictions/Prediction";
 
 function App() {
   /* const prefersDarkMode = useMediaQuery("(prefers-color-scheme: dark)"); */
@@ -40,7 +40,7 @@ function App() {
           <Switch>
           <Route exact path="/" component={LandingPage} />
             <Route exact path="/upload" component={UploadForm} />
-            <Route exact path="/predictions" component={PredictionList} />
+            <Route exact path="/predictions" component={Prediction} />
           </Switch>
         </Router>
       </div>
