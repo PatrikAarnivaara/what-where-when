@@ -29,7 +29,6 @@ app.get("/api/predictions", function (req, res) {
 
 app.get("/api/predictions/:id", function (req, res) {
   Building.findById(req.params.id, function (err, building) {
-    console.log(building);
     if (!building) {
       res.status(404).send("No result found");
     } else {
@@ -50,7 +49,6 @@ app.post("/api/upload", async (req, res) => {
     const uploadResponse = await cloudinary.uploader.upload(fileStr, {
       upload_preset: "ml_default",
     });
-    console.log("Server", uploadResponse);
     /* res.json({ msg: "HI CLOUDINARY!" }); */
 
     let building = new Building({
@@ -58,6 +56,7 @@ app.post("/api/upload", async (req, res) => {
       title: req.body.title,
       description: req.body.description,
       date: req.body.date,
+      publicId: uploadResponse.public_id,
     });
     building
       .save()
@@ -74,11 +73,11 @@ app.post("/api/upload", async (req, res) => {
 });
 
 app.delete("/api/predictions/:id", function (req, res) {
-  console.log(req);
   Building.findById(req.params.id, function (err, building) {
     if (!building) {
       res.status(404).send("Building not found");
     } else {
+      cloudinary.uploader.destroy(building.publicId);
       Building.findByIdAndRemove(req.params.id)
         .then(function () {
           res.status(200).json("Building deleted");
@@ -88,6 +87,8 @@ app.delete("/api/predictions/:id", function (req, res) {
         });
     }
   });
+  /* console.log(publicId)
+  cloudinary.uploader.destroy(publicId); */
 });
 
 const PORT = process.env.PORT || 3001;
