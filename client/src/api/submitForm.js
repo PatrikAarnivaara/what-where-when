@@ -1,5 +1,7 @@
 import axios from "axios";
 
+/* Check export of this function */
+
 export const submitForm = (contentType, data, setResponse) => {
   console.log("Submit form: ", data);
   axios({

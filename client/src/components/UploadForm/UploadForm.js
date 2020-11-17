@@ -3,11 +3,10 @@ import {
   Box,
   FormControl,
   TextField,
-  TextareaAutosize,
   Button,
 } from "@material-ui/core/";
 import useStyles from "./useStyles";
-import { submitForm } from "../api/submitForm";
+import { submitForm } from "../../api/submitForm";
 
 const UploadForm = () => {
   const classes = useStyles();
@@ -17,6 +16,7 @@ const UploadForm = () => {
   const [previewSource, setPreviewSource] = useState("");
 
   const handleFileInputChange = (e) => {
+    e.preventDefault();
     setFile(e.target.files[0]);
     previewFile(e.target.files[0]);
   };

@@ -6,6 +6,7 @@ import PredictionListItem from "./PredictionListItem";
 
 const PredictionList = ({ predictions, showPredictionDetail }) => {
   const classes = useStyles();
+  console.log(predictions)
 
   return (
     <div className={classes.root}>
@@ -13,6 +14,7 @@ const PredictionList = ({ predictions, showPredictionDetail }) => {
         {predictions.map((prediction, index) => (
           <PredictionListItem
             key={index}
+            id={prediction._id}
             url={prediction.url}
             title={prediction.title}
             description={prediction.description}

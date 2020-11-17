@@ -1,8 +1,10 @@
 import React from "react";
-import { Typography } from "@material-ui/core/";
+import { ButtonGroup, Typography } from "@material-ui/core/";
+import DeleteButton from "../../UI/DeleteButton";
+import EditButton from "../../UI/EditButton";
 
 const PredictionListItemDetail = ({
-  predictionDetailData: { url, title, description, date },
+  predictionDetailData: { id, url, title, description, date },
 }) => {
   return (
     <div>
@@ -10,6 +12,11 @@ const PredictionListItemDetail = ({
       <Typography>Title: {title}</Typography>
       <Typography>Description: {description}</Typography>
       <Typography>Date: {date}</Typography>
+      <Typography>Id: {id}</Typography>
+      {/* <ButtonGroup color="secondary" aria-label="outlined primary button group"> */}
+        <EditButton />
+        <DeleteButton />
+      {/* </ButtonGroup> */}
     </div>
   );
 };

@@ -7,15 +7,17 @@ const Prediction = () => {
   const [predictions, setPredictions] = useState([]);
 
   const [predictionDetailData, setPredictionDetailData] = useState({
+    id: "",
     url: "",
     title: "",
     description: "",
     date: "",
   });
 
-  const showPredictionDetail = (url, title, description, date) => {
+  const showPredictionDetail = (id, url, title, description, date) => {
     setPredictionDetailData({
       ...predictionDetailData,
+      id: id,
       url: url,
       title: title,
       description: description,

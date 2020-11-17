@@ -12,9 +12,9 @@ import {
 } from "@material-ui/core/styles";
 import CssBaseline from "@material-ui/core/CssBaseline";
 
-import Header from "../src/components/Header/Header";
-import LandingPage from "../src/components/LandingPage/LandingPage";
-import UploadForm from "../src/components/UploadForm";
+import Header from "./components/containers/Header/Header";
+import LandingPage from "./components/pages/LandingPage/LandingPage";
+import UploadForm from "./components/UploadForm/UploadForm";
 import Prediction from "./components/predictions/Prediction";
 
 function App() {

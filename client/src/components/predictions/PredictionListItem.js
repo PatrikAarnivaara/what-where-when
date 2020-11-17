@@ -8,6 +8,7 @@ import { Image } from "cloudinary-react";
 
 const PredictionListItem = ({
   index,
+  id,
   url,
   title,
   description,
@@ -17,10 +18,10 @@ const PredictionListItem = ({
   const classes = useStyles();
 
   const handleOnClickItem = () => {
-    showPredictionDetail(url, title, description, date);
+    showPredictionDetail(id, url, title, description, date);
   };
 
-  const renderGridListItem = () => (
+  return (
     <GridListTile
       className={classes.gridListTile}
       onClick={handleOnClickItem}
@@ -50,8 +51,6 @@ const PredictionListItem = ({
       }
     </GridListTile>
   );
-
-  return renderGridListItem();
 };
 
 export default PredictionListItem;
