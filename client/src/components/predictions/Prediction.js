@@ -7,7 +7,7 @@ const Prediction = () => {
   const [predictions, setPredictions] = useState([]);
 
   const [predictionDetailData, setPredictionDetailData] = useState({
-    id: "",
+    _id: "",
     url: "",
     title: "",
     description: "",
@@ -17,7 +17,7 @@ const Prediction = () => {
   const showPredictionDetail = (id, url, title, description, date) => {
     setPredictionDetailData({
       ...predictionDetailData,
-      id: id,
+      _id: id,
       url: url,
       title: title,
       description: description,
@@ -28,7 +28,7 @@ const Prediction = () => {
   useEffect(() => {
     const getPredictions = async () => {
       try {
-        const response = await axios.get("/api/buildings");
+        const response = await axios.get("/api/predictions");
         console.log(response.data);
         setPredictions(response.data);
       } catch (error) {

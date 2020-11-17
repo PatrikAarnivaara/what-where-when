@@ -21,9 +21,20 @@ mongoose.connection.on("error", (err) => {
   console.log("Mongoose Connection Error : " + err);
 });
 
-app.get("/api/buildings", function (req, res) {
+app.get("/api/predictions", function (req, res) {
   Building.find(function (err, buildings) {
     res.json(buildings);
+  });
+});
+
+app.get("/api/predictions/:id", function (req, res) {
+  Building.findById(req.params.id, function (err, building) {
+    console.log(building);
+    if (!building) {
+      res.status(404).send("No result found");
+    } else {
+      res.json(building);
+    }
   });
 });
 
@@ -33,7 +44,7 @@ app.post("/api/upload", async (req, res) => {
   in mongoDB request to be able to separate into two
   try/catch blocks */
 
-  const requestFile = {}
+  const requestFile = {};
   try {
     const fileStr = req.body.file;
     const uploadResponse = await cloudinary.uploader.upload(fileStr, {
@@ -60,6 +71,23 @@ app.post("/api/upload", async (req, res) => {
     console.error(err);
     res.status(500).json({ err: "Something went wrong" });
   }
+});
+
+app.delete("/api/predictions/:id", function (req, res) {
+  console.log(req);
+  Building.findById(req.params.id, function (err, building) {
+    if (!building) {
+      res.status(404).send("Building not found");
+    } else {
+      Building.findByIdAndRemove(req.params.id)
+        .then(function () {
+          res.status(200).json("Building deleted");
+        })
+        .catch(function (err) {
+          res.status(400).send("Building delete failed.");
+        });
+    }
+  });
 });
 
 const PORT = process.env.PORT || 3001;
