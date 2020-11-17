@@ -10,13 +10,16 @@ import { Image } from "cloudinary-react";
 
 const PredictionListItem = ({ index, building }) => {
   const classes = useStyles();
-  
+
   /* const handleOnClickItem = () => {
     showChatDialogue(userName, avatar, chat, online);
   }; */
 
-  const renderGridListItem = () =>(
-    <GridListTile className={classes.gridListTile} /* onClick={handleOnClickItem} */>
+  const renderGridListItem = () => (
+    <GridListTile
+      className={classes.gridListTile} /* onClick={handleOnClickItem} */
+      cols={3}
+    >
       <Image
         key={index}
         cloudName={process.env.REACT_APP_CLOUDINARY_NAME}

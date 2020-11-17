@@ -27,16 +27,6 @@ app.get("/api/buildings", function (req, res) {
   });
 });
 
-/* app.get("/api/images", async (req, res) => {
-  const { resources } = await cloudinary.search
-    .expression("folder:arch-style")
-    .sort_by("public_id", "desc")
-    .max_results(30)
-    .execute();
-  const publicIds = resources.map((file) => file.public_id);
-  res.send(publicIds);
-}); */
-
 app.post("/api/upload", async (req, res) => {
   /* console.log("Server: ", req.body.file); */
   /* Save the response in variable and include it
