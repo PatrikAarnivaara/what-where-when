@@ -3,6 +3,7 @@ import axios from "axios";
 import { Typography } from "@material-ui/core/";
 import { Link } from "react-router-dom";
 import DeleteButton from "../../UI/DeleteButton";
+import EditButton from "../../UI/EditButton"
 
 const PredictionInfo = (props) => {
   const [prediction, setPrediction] = useState({});
@@ -35,6 +36,7 @@ const PredictionInfo = (props) => {
       <Typography>Description: {prediction.description}</Typography>
       <Typography>Date: {prediction.date}</Typography>
       <DeleteButton {...props}/>
+      <EditButton id={prediction._id}/>
     </div>
   );
 };

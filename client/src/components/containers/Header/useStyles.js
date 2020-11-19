@@ -19,16 +19,19 @@ const useStyles = makeStyles((theme) => ({
   link: {
     display: "flex",
     fontSize: "1.5em",
-    color: "#f50057"
+    color: "#ffffff",
+    /* color: "#f50057", */
+    /* marginLeft: "2em",
+    marginRight: "2em" */
     
   },
   linkWrapper: {
     /* position: "absolute",
     top: "calc(5% - 1.5rem)", */
-    display: "flex",
-    flexDirection: "row",
-    alignContent: "center",
-    justifyContent: "center",
+    /* display: "flex",
+    flexDirection: "row", */
+    /* alignContent: "center",
+    justifyContent: "center", */
     /* alignContent: "center",
     justifyContent: "space-between" */
   },
@@ -40,13 +43,14 @@ const useStyles = makeStyles((theme) => ({
     fontSize: "1.5em",
   },
   login: {
-    /* flexGrow: "1" */
+    position: "absolute",
+    left: "calc(5% - 2rem)",
+    top: "calc(5% - 1.5rem)",
   },
   mode: {
-    
-    /* position: "absolute",
-    right: "calc(5% - 3rem)",
-    top: "calc(5% - 1.5rem)", */
+    position: "absolute",
+    right: "calc(5% - 2rem)",
+    top: "calc(5% - 1.5rem)",
   },
 }));
 

@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 /* import Link from "@material-ui/core/Link"; */
 import { Link } from "react-router-dom";
-import TrackChangesIcon from "@material-ui/icons/TrackChanges";
+import PhotoLibraryIcon from "@material-ui/icons/PhotoLibrary";
 import CropLandscapeIcon from "@material-ui/icons/CropLandscape";
 import Brightness7Icon from "@material-ui/icons/Brightness7";
 import Brightness4Icon from "@material-ui/icons/Brightness4";
@@ -35,20 +35,18 @@ const HeaderTest = ({ changeTheme, darkMode }) => {
       >
         {login ? <LockIcon /> : <LockOpenIcon />}
       </Button>
-      <Box className={classes.linkWrapper}>
+      {/* <Box className={classes.linkWrapper}> */}
+      <Button>
         <Link to="/" className={classes.link}>
-          {/* <VisibilityIcon className={classes.icon} /> */}
-          Core
+          <VisibilityIcon />
         </Link>
-        <Link to="/upload" className={classes.link}>
-          {/* <TrackChangesIcon className={classes.icon} /> */}
-          Predict
-        </Link>
+      </Button>
+      <Button>
         <Link to="/predictions" className={classes.link}>
-          {/* <CropLandscapeIcon className={classes.icon} /> */}
-          Images
+          <PhotoLibraryIcon />
         </Link>
-      </Box>
+      </Button>
+      {/* </Box> */}
       <Button className={classes.mode} onClick={switchTheme}>
         {darkMode ? <Brightness7Icon /> : <Brightness4Icon />}
       </Button>

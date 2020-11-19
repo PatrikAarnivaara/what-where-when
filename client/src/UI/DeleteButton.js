@@ -8,7 +8,6 @@ const DeleteButton = (props) => {
 
   const handleDelete = async () => {
     try {
-      /* await axios.delete("/api/predictions/", { params: { id: id } }); */
       await axios.delete(`/api/predictions/${props.match.params._id}`);
       props.history.push("/predictions");
     } catch (error) {
@@ -16,11 +15,11 @@ const DeleteButton = (props) => {
     }
   };
   return (
-    <div>
+    <React.Fragment>
       <Button onClick={handleDelete} variant="outlined" color="secondary">
         DELETE
       </Button>
-    </div>
+    </React.Fragment>
   );
 };
 
