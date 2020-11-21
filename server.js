@@ -88,7 +88,7 @@ app.patch("/api/edit/:id", async (req, res) => {
   });
    /* console.log(building) */
 
-  Building.updateOne(req.params.id, req.body)
+  Building.updateOne(req.params.id, building)
     .then(function () {
       res.json("Prediction updated");
       consol.log(res.json(done))

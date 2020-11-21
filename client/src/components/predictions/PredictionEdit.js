@@ -1,79 +1,91 @@
 import React, { useEffect, useState } from "react";
-import axios from "axios";
+import { get, patch } from "axios";
 import { Box, FormControl, TextField, Button } from "@material-ui/core/";
 import useStyles from "../UploadForm/useStyles";
 import { editForm } from "../../api/editForm";
 
 const PredictionEdit = (props) => {
   const classes = useStyles();
-  /* const initialState = { title: "", description: "", file: "" };
-  { initialState } */
-  const [prediction, setPrediction] = useState("");
-  const [title, setTitle] = useState("");
-  const [file, setFile] = useState(null);
-  const [description, setDescription] = useState("");
-  const [previewSource, setPreviewSource] = useState(prediction.url);
+  const initialState = { title: "", description: ""};
+  const [prediction, setPrediction] = useState(initialState);
+  const [previewSource, setPreviewSource] = useState("");
+  const[previewInitialFile, setPreviewInitialFile] =useState(prediction.url)
+  console.log(prediction.url)
 
   useEffect(
     function () {
       async function getPrediction() {
         try {
-          const response = await axios.get(
+          const response = await get(
             `/api/predictions/${props.match.params._id}`
           );
           setPrediction(response.data);
+          setPreviewInitialFile(response.data.url)
         } catch (error) {
           console.log("error", error);
         }
       }
       getPrediction();
+      
     },
     [props]
   );
 
   const handleFileInputChange = (e) => {
     e.preventDefault();
-    setFile(e.target.files[0]);
-    previewFile(e.target.files[0]);
+    setPrediction({ ...prediction, [e.target.name]: e.target.value });
+    previewFile(e.target.files[0])
   };
 
-  const previewFile = async (file) => {
+  const previewFile = async (previewSource) => {
     const reader = new FileReader();
-    reader.readAsDataURL(file);
+    reader.readAsDataURL(previewSource);
     reader.onloadend = () => {
       setPreviewSource(reader.result);
     };
   };
-  /* kanske måste skicka in previewSource här? */
+
   const uploadWithJSON = async () => {
-    const toBase64 = (file) =>
+    const toBase64 = (previewSource) =>
       new Promise((resolve, reject) => {
         const reader = new FileReader();
-        reader.readAsDataURL(file);
+        reader.readAsDataURL(previewSource);
         reader.onload = () => resolve(reader.result);
         reader.onerror = (error) => reject(error);
       });
 
-    const data = {
+    /* const data = {
       title: title,
       file: await toBase64(file),
       description: description,
       date: new Date().toLocaleString(),
-      _id: props.match.params._id
-    };
-    /* Clear up more fields? */
+      _id: props.match.params._id,
+    }; */
+
     setPreviewSource("");
-    /* Try/Catch, add Spinner? */
-    editForm("application/json", data, (msg) =>
+
+    /* e.preventDefault(); */
+
+    async function updatePrediction() {
+      try {
+        await patch(`/api/edit/${prediction._id}`, prediction);
+        props.history.push(`/predictions/${prediction._id}`);
+      } catch (error) {
+        console.log(error);
+      }
+    }
+    updatePrediction();
+
+    /*  editForm("application/json", data, (msg) =>
       console.log("Upload SUBMIT JSON", msg)
-    );
+    ); */
   };
 
   const clearFields = () => {
-    setFile("");
+    /* setFile("");
     setPreviewSource("");
     setTitle("");
-    setDescription("");
+    setDescription(""); */
   };
 
   /* function handleSubmit(event) {
@@ -101,33 +113,32 @@ const PredictionEdit = (props) => {
     <Box className={classes.root}>
       <Box className={classes.box}>
         <Box className={classes.previewContainer}>
+            {!previewSource && <img src={previewInitialFile} alt="incoming file" style={{width:"300"}}/>}
           {previewSource && (
             <img src={previewSource} alt="chosen" className={classes.preview} />
           )}
         </Box>
         <form>
           <TextField
-            required
             id="outlined-basic"
             variant="outlined"
-            label={prediction.title}
+            label="title"
             color="secondary"
             type="text"
-            value={title}
-            onChange={(e) => {
-              setTitle(e.target.value);
-            }}
+            name="title"
+            value={prediction.title}
+            onChange={handleFileInputChange}
             className={classes.textFieldTop}
           />
           <TextField
-            required
             id="outlined-basic"
             variant="outlined"
-            label={prediction.description}
+            label="description"
             color="secondary"
             type="text"
-            value={description}
-            onChange={(e) => setDescription(e.target.value)}
+            name="description"
+            value={prediction.description}
+            onChange={handleFileInputChange}
             className={classes.textFieldBottom}
           />
           <input
