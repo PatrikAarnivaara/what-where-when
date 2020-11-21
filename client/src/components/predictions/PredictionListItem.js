@@ -1,5 +1,4 @@
 import React from "react";
-import { Link } from 'react-router-dom';
 import { GridListTile, GridListTileBar, Typography } from "@material-ui/core/";
 /* import ListSubheader from "@material-ui/core/ListSubheader"; */
 import IconButton from "@material-ui/core/IconButton";
@@ -34,6 +33,7 @@ const PredictionListItem = ({
         publicId={url}
         width="300"
         crop="scale"
+        quality="auto"
       />
       {
         <GridListTileBar

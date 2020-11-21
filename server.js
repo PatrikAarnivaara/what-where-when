@@ -42,8 +42,6 @@ app.post("/api/upload", async (req, res) => {
   /* Save the response in variable and include it
   in mongoDB request to be able to separate into two
   try/catch blocks */
-
-  const requestFile = {};
   try {
     const fileStr = req.body.file;
     const uploadResponse = await cloudinary.uploader.upload(fileStr, {
@@ -58,6 +56,7 @@ app.post("/api/upload", async (req, res) => {
       date: req.body.date,
       publicId: uploadResponse.public_id,
     });
+
     building
       .save()
       .then((building) => {
@@ -70,6 +69,34 @@ app.post("/api/upload", async (req, res) => {
     console.error(err);
     res.status(500).json({ err: "Something went wrong" });
   }
+});
+
+app.patch("/api/edit/:id", async (req, res) => {
+  /* console.log(req.body) */
+  const fileStr = req.body.file;
+  const uploadResponse = await cloudinary.uploader.upload(fileStr, {
+    upload_preset: "ml_default",
+  });
+
+  /* const { firstName, lastName, password, email, dateCreated } = req.body */
+  let building = new Building({
+    url: uploadResponse.url,
+    title: req.body.title,
+    description: req.body.description,
+    date: req.body.date,
+    publicId: uploadResponse.public_id,
+  });
+   /* console.log(building) */
+
+  Building.updateOne(req.params.id, req.body)
+    .then(function () {
+      res.json("Prediction updated");
+      consol.log(res.json(done))
+    })
+    .catch(function (err) {
+      res.status(422).send("Prediction update failed.");
+      console.log(res.status(422).send("Prediction update failed."));
+    });
 });
 
 app.delete("/api/predictions/:id", function (req, res) {
@@ -87,8 +114,6 @@ app.delete("/api/predictions/:id", function (req, res) {
         });
     }
   });
-  /* console.log(publicId)
-  cloudinary.uploader.destroy(publicId); */
 });
 
 const PORT = process.env.PORT || 3001;
