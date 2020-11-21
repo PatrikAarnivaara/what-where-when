@@ -6,11 +6,9 @@ import { editForm } from "../../api/editForm";
 
 const PredictionEdit = (props) => {
   const classes = useStyles();
-  const initialState = { title: "", description: ""};
+  const initialState = { title: "", description: "" };
   const [prediction, setPrediction] = useState(initialState);
   const [previewSource, setPreviewSource] = useState("");
-  const[previewInitialFile, setPreviewInitialFile] =useState(prediction.url)
-  console.log(prediction.url)
 
   useEffect(
     function () {
@@ -20,13 +18,12 @@ const PredictionEdit = (props) => {
             `/api/predictions/${props.match.params._id}`
           );
           setPrediction(response.data);
-          setPreviewInitialFile(response.data.url)
+          setPreviewSource(response.data.url);
         } catch (error) {
           console.log("error", error);
         }
       }
       getPrediction();
-      
     },
     [props]
   );
@@ -34,7 +31,7 @@ const PredictionEdit = (props) => {
   const handleFileInputChange = (e) => {
     e.preventDefault();
     setPrediction({ ...prediction, [e.target.name]: e.target.value });
-    previewFile(e.target.files[0])
+    previewFile(e.target.files[0]);
   };
 
   const previewFile = async (previewSource) => {
@@ -113,7 +110,6 @@ const PredictionEdit = (props) => {
     <Box className={classes.root}>
       <Box className={classes.box}>
         <Box className={classes.previewContainer}>
-            {!previewSource && <img src={previewInitialFile} alt="incoming file" style={{width:"300"}}/>}
           {previewSource && (
             <img src={previewSource} alt="chosen" className={classes.preview} />
           )}
