@@ -8,7 +8,9 @@ const PredictionEdit = (props) => {
   const classes = useStyles();
   const initialState = { title: "", description: "" };
   const [prediction, setPrediction] = useState(initialState);
+  const [file, setFile] = useState("");
   const [previewSource, setPreviewSource] = useState("");
+  
 
   useEffect(
     function () {
@@ -28,10 +30,14 @@ const PredictionEdit = (props) => {
     [props]
   );
 
-  const handleFileInputChange = (e) => {
+  const handleInputChange = (e) => {
     e.preventDefault();
     setPrediction({ ...prediction, [e.target.name]: e.target.value });
+  };
+
+  const handeFileInputChange = (e) => {
     previewFile(e.target.files[0]);
+    setFile(e.target.files[0])
   };
 
   const previewFile = async (previewSource) => {
@@ -43,10 +49,10 @@ const PredictionEdit = (props) => {
   };
 
   const uploadWithJSON = async () => {
-    const toBase64 = (previewSource) =>
+    const toBase64 = (file) =>
       new Promise((resolve, reject) => {
         const reader = new FileReader();
-        reader.readAsDataURL(previewSource);
+        reader.readAsDataURL(file);
         reader.onload = () => resolve(reader.result);
         reader.onerror = (error) => reject(error);
       });
@@ -59,9 +65,18 @@ const PredictionEdit = (props) => {
       _id: props.match.params._id,
     }; */
 
-    setPreviewSource("");
+    setPrediction({
+      ...prediction,
+      file: await toBase64(file),
+      date: new Date().toLocaleString(),
+    });
+
+    /* setPreviewSource(""); */
 
     /* e.preventDefault(); */
+
+    console.log(prediction);
+    console.log(previewSource);
 
     async function updatePrediction() {
       try {
@@ -104,6 +119,7 @@ const PredictionEdit = (props) => {
 
   function handleCancel() {
     props.history.push(`/articles/${article._id}`);
+    previewFile(e.target.files[0]);
   } */
 
   return (
@@ -123,7 +139,7 @@ const PredictionEdit = (props) => {
             type="text"
             name="title"
             value={prediction.title}
-            onChange={handleFileInputChange}
+            onChange={handleInputChange}
             className={classes.textFieldTop}
           />
           <TextField
@@ -134,14 +150,14 @@ const PredictionEdit = (props) => {
             type="text"
             name="description"
             value={prediction.description}
-            onChange={handleFileInputChange}
+            onChange={handleInputChange}
             className={classes.textFieldBottom}
           />
           <input
             className={classes.fileUpload}
             type="file"
             name="file"
-            onChange={handleFileInputChange}
+            onChange={handeFileInputChange}
           />
           <Box className={classes.buttonWrap}>
             <Button

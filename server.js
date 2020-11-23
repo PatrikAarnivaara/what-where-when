@@ -71,32 +71,69 @@ app.post("/api/upload", async (req, res) => {
   }
 });
 
+// PATCH
+/* app.patch("/api/streams/:id", requireLogin, async (req, res) => {
+  console.log("REQ DATA: ",req.data)
+  
+  const { title, description } = req.body;
+  console.log("Object: ", title, description)
+  res.status(404).send("Sorry can't find that!")
+
+  const stream = new Stream({
+    title,
+    description,
+  });
+
+  console.log("STREAM",stream)
+  
+  //------> OK ------> ERROR
+
+  try {
+    await Stream.findByIdAndUpdate(req.params.id, stream);
+    await Stream.save();
+    //res.send(stream);
+  } catch (err) {
+    res.status(500).send(err);
+  }
+  
+}); */
+
 app.patch("/api/edit/:id", async (req, res) => {
   /* console.log(req.body) */
-  const fileStr = req.body.file;
-  const uploadResponse = await cloudinary.uploader.upload(fileStr, {
-    upload_preset: "ml_default",
-  });
 
-  /* const { firstName, lastName, password, email, dateCreated } = req.body */
-  let building = new Building({
-    url: uploadResponse.url,
-    title: req.body.title,
-    description: req.body.description,
-    date: req.body.date,
-    publicId: uploadResponse.public_id,
-  });
-   /* console.log(building) */
+  /*  const { url, title, description, date, publicId } = req.body; */
+  try {
+    const fileStr = req.body.file;
+    const uploadResponse = await cloudinary.uploader.upload(fileStr, {
+      upload_preset: "ml_default",
+    });
 
-  Building.updateOne(req.params.id, building)
+    const building = new Building({
+      url: uploadResponse.url,
+      title: req.body.title,
+      description: req.body.description,
+      date: req.body.date,
+      publicId: uploadResponse.public_id,
+    });
+
+    console.log(req.params.id)
+
+    await Building.findByIdAndUpdate(req.params.id, building);
+    await Building.save();
+    /* res.send(building); */
+  } catch (err) {
+    res.status(500).send(err);
+  }
+
+  /* Building.updateOne(req.params.id, building)
     .then(function () {
       res.json("Prediction updated");
-      consol.log(res.json(done))
+      consol.log(res.json(done));
     })
     .catch(function (err) {
       res.status(422).send("Prediction update failed.");
       console.log(res.status(422).send("Prediction update failed."));
-    });
+    }); */
 });
 
 app.delete("/api/predictions/:id", function (req, res) {
