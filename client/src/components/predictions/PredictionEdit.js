@@ -49,13 +49,13 @@ const PredictionEdit = (props) => {
   };
 
   const uploadWithJSON = async () => {
-    const toBase64 = (file) =>
+    /* const toBase64 = (file) =>
       new Promise((resolve, reject) => {
         const reader = new FileReader();
         reader.readAsDataURL(file);
         reader.onload = () => resolve(reader.result);
         reader.onerror = (error) => reject(error);
-      });
+      }); */
 
     /* const data = {
       title: title,
@@ -65,23 +65,23 @@ const PredictionEdit = (props) => {
       _id: props.match.params._id,
     }; */
 
-    setPrediction({
+   /*  setPrediction({
       ...prediction,
       file: await toBase64(file),
       date: new Date().toLocaleString(),
-    });
+    }); */
 
     /* setPreviewSource(""); */
 
     /* e.preventDefault(); */
 
-    console.log(prediction);
-    console.log(previewSource);
+    console.log(prediction._id);
+    /* console.log(previewSource); */
 
     async function updatePrediction() {
       try {
-        await patch(`/api/edit/${prediction._id}`, prediction);
-        props.history.push(`/predictions/${prediction._id}`);
+        await patch(`/api/edit/${props.match.params._id}`, prediction);
+        props.history.push(`/predictions/`);
       } catch (error) {
         console.log(error);
       }

@@ -99,33 +99,40 @@ app.post("/api/upload", async (req, res) => {
 }); */
 
 app.patch("/api/edit/:id", async (req, res) => {
-  /* console.log(req.body) */
+  /* console.log(req.params.id)*/
+  /* console.log(req.params.id);
+  
+  const { title, description } = req.body;
 
-  /*  const { url, title, description, date, publicId } = req.body; */
-  try {
+  const building = new Building({
+    title,
+    description,
+  }); */
+
+  /* 
     const fileStr = req.body.file;
     const uploadResponse = await cloudinary.uploader.upload(fileStr, {
       upload_preset: "ml_default",
-    });
+    }); */
 
-    const building = new Building({
+  /* Change to localDate... so it updates. */
+  /* const building = new Building({
       url: uploadResponse.url,
       title: req.body.title,
       description: req.body.description,
       date: req.body.date,
       publicId: uploadResponse.public_id,
-    });
+    }); */
 
-    console.log(req.params.id)
-
-    await Building.findByIdAndUpdate(req.params.id, building);
+  try {
+    await Building.findOneAndUpdate(req.params.id, req.body);
     await Building.save();
-    /* res.send(building); */
+    res.send(building);
   } catch (err) {
     res.status(500).send(err);
   }
 
-  /* Building.updateOne(req.params.id, building)
+  /* Building.updateOne(req.params.id, req.body)
     .then(function () {
       res.json("Prediction updated");
       consol.log(res.json(done));
