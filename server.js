@@ -122,10 +122,11 @@ app.patch("/api/edit/:id", async (req, res) => {
       description: req.body.description,
       date: req.body.date,
       publicId: uploadResponse.public_id,
+      {_id  : ObjectId(id)}, {$set: updateObject}
     }); */
 
   try {
-    await Building.findOneAndUpdate(req.params.id, req.body);
+    await Building.findOneAndUpdate({ _id: req.params.id }, { $set: req.body });
     await Building.save();
     res.send(building);
   } catch (err) {
