@@ -16,6 +16,10 @@ const buildingSchema = new mongoose.Schema({
   date: {
     type: String,
     required: [true, "Prediction is required"],
+  },
+  publicId: {
+    type: String,
+    required: [true, "Prediction is required"],
   }
 });
 
