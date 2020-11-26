@@ -3,11 +3,13 @@ const app = express();
 const mongoose = require("mongoose");
 const { cloudinary } = require("./utils/cloudinary");
 const cors = require("cors");
+const bodyParser = require('body-parser');
 const Building = require("./models/building");
 
 app.use(express.json({ limit: "5mb" }));
 app.use(express.urlencoded({ limit: "5mb", extended: true }));
 app.use(cors());
+app.use(bodyParser.json());
 
 mongoose.connect(process.env.MONGODB_URI, {
   useNewUrlParser: true,
@@ -38,10 +40,6 @@ app.get("/api/predictions/:id", function (req, res) {
 });
 
 app.post("/api/upload", async (req, res) => {
-  /* console.log("Server: ", req.body.file); */
-  /* Save the response in variable and include it
-  in mongoDB request to be able to separate into two
-  try/catch blocks */
   try {
     const fileStr = req.body.file;
     const uploadResponse = await cloudinary.uploader.upload(fileStr, {
@@ -98,7 +96,7 @@ app.post("/api/upload", async (req, res) => {
   
 }); */
 
-app.patch("/api/edit/:id", async (req, res) => {
+app.patch("/api/edit/:id", async (req, res, next) => {
   /* console.log(req.params.id)*/
   /* console.log(req.params.id);
   
@@ -122,15 +120,13 @@ app.patch("/api/edit/:id", async (req, res) => {
       description: req.body.description,
       date: req.body.date,
       publicId: uploadResponse.public_id,
-      {_id  : ObjectId(id)}, {$set: updateObject}
     }); */
 
   try {
     await Building.findOneAndUpdate({ _id: req.params.id }, { $set: req.body });
-    await Building.save();
-    res.send(building);
-  } catch (err) {
-    res.status(500).send(err);
+    res.send(console.log("Prediction updated."));
+  } catch (error) {
+    next(error.message);
   }
 
   /* Building.updateOne(req.params.id, req.body)

@@ -153,12 +153,12 @@ const PredictionEdit = (props) => {
             onChange={handleInputChange}
             className={classes.textFieldBottom}
           />
-          <input
+          {/* <input
             className={classes.fileUpload}
             type="file"
             name="file"
             onChange={handeFileInputChange}
-          />
+          /> */}
           <Box className={classes.buttonWrap}>
             <Button
               variant="outlined"
