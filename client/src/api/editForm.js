@@ -2,11 +2,11 @@ import axios from "axios";
 
 /* Check export of this function */
 
-export const submitForm = (contentType, data, setResponse) => {
-  
+export const editForm = (contentType, data, setResponse) => {
+ 
   axios({
-    url: "/api/upload",
-    method: "POST",
+    url: `/api/edit/${data._id}`,
+    method: "PATCH",
     data: data,
     headers: {
       "Content-Type": contentType,

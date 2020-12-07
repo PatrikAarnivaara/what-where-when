@@ -1,6 +1,7 @@
 import React, { useState } from "react";
-import Link from "@material-ui/core/Link";
-import TrackChangesIcon from "@material-ui/icons/TrackChanges";
+/* import Link from "@material-ui/core/Link"; */
+import { Link } from "react-router-dom";
+import PhotoLibraryIcon from "@material-ui/icons/PhotoLibrary";
 import CropLandscapeIcon from "@material-ui/icons/CropLandscape";
 import Brightness7Icon from "@material-ui/icons/Brightness7";
 import Brightness4Icon from "@material-ui/icons/Brightness4";
@@ -25,7 +26,7 @@ const HeaderTest = ({ changeTheme, darkMode }) => {
   };
 
   return (
-    <Box aria-label="breadcrumb" className={classes.root}>
+    <Box className={classes.root}>
       <Button
         className={classes.login}
         onClick={() => {
@@ -34,39 +35,21 @@ const HeaderTest = ({ changeTheme, darkMode }) => {
       >
         {login ? <LockIcon /> : <LockOpenIcon />}
       </Button>
-      <Box className={classes.linkWrapper}>
-      <Link
-        color="inherit"
-        href="/"
-        /* onClick={handleClick} */
-        className={classes.link}
-      >
-        <VisibilityIcon className={classes.icon} />
-        Predict
-      </Link>
-      <Link
-        color="inherit"
-        href="/upload"
-        /* onClick={handleClick} */
-        className={classes.link}
-      >
-        <TrackChangesIcon className={classes.icon} />
-        Core
-      </Link>
-      <Link
-        color="inherit"
-        href="/predictions"
-        /* onClick={handleClick} */
-        className={classes.link}
-      >
-        <CropLandscapeIcon className={classes.icon} />
-        Images
-      </Link>
-      </Box>
+      {/* <Box className={classes.linkWrapper}> */}
+      <Button>
+        <Link to="/" className={classes.link}>
+          <VisibilityIcon />
+        </Link>
+      </Button>
+      <Button>
+        <Link to="/predictions" className={classes.link}>
+          <PhotoLibraryIcon />
+        </Link>
+      </Button>
+      {/* </Box> */}
       <Button className={classes.mode} onClick={switchTheme}>
         {darkMode ? <Brightness7Icon /> : <Brightness4Icon />}
       </Button>
-      {/* <Box borderBottom={1} className={classes.border} /> */}
     </Box>
   );
 };
