@@ -23,7 +23,7 @@ const UploadForm = () => {
 		reader.onload = () => {
 			setPreviewSource(reader.result);
 			saveUrlToLocalFile(reader.result);
-			classifyImage();
+			/* classifyImage(); */
 		};
 	};
 
@@ -124,8 +124,11 @@ const UploadForm = () => {
 						>
 							UPLOAD
 						</Button>
-						<Button variant="outlined" onClick={clearFields}>
+						{/* <Button variant="outlined" onClick={clearFields}>
 							CLEAR
+						</Button> */}
+						<Button variant="outlined" onClick={classifyImage}>
+							PREDICT
 						</Button>
 					</Box>
 				</form>
