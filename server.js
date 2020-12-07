@@ -55,8 +55,8 @@ app.post('/api/cloudinary', async (req, res, next) => {
 		const request = http.get(urlFromCloudinary, function (response) {
 			response.pipe(file);
 		});
-
 		console.log(request.path);
+		res.json(request.path);
 	} catch (error) {
 		next(error.message);
 	}
@@ -81,6 +81,7 @@ app.post('/api/tensorflow', async (req, res, next) => {
 			// Classify the image.
 			const predictions = await mobilenetModel.classify(image);
 			console.log('Classification Results:', predictions);
+			res.json(predictions);
 		};
 
 		imageClassification(req.body.file);

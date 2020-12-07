@@ -22,22 +22,33 @@ const UploadForm = () => {
 		reader.readAsDataURL(file);
 		reader.onload = () => {
 			setPreviewSource(reader.result);
-			classifyImage(reader.result);
-			/* console.log(reader.result); */
+			saveUrlToLocalFile(reader.result);
+			classifyImage();
 		};
 	};
 
-	const classifyImage = async (baseSixtyFourImage) => {
-		console.log(baseSixtyFourImage);
+	const saveUrlToLocalFile = async (baseSixtyFourImage) => {
+		try {
+			const imageToUrlCloudinary = {
+				image: baseSixtyFourImage,
+			};
 
-		const imageTest = {
+			const cloudinaryResponse = await post('/api/cloudinary', imageToUrlCloudinary);
+			console.log(cloudinaryResponse);
+		} catch (error) {
+			console.log('error', error);
+		}
+	};
+
+	const classifyImage = async () => {
+		const filePath = {
 			file: '/Users/patrik/what-where-when/image.jpg',
-			image: baseSixtyFourImage,
 		};
 
 		try {
-			const res = await post('/api/tensorflow', imageTest);
-			console.log(res);
+			const predictionResponse = await post('/api/tensorflow', filePath);
+			console.log(predictionResponse);
+			/* setPrediction(predictionResponse) */
 		} catch (error) {
 			console.log('error', error);
 		}
