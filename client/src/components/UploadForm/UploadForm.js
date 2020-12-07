@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { post } from 'axios';
-import { Box, TextField, Button } from '@material-ui/core/';
+import { Box, TextField, Button, ListItem, Typography } from '@material-ui/core/';
 import useStyles from './useStyles';
 import { submitForm } from '../../api/submitForm';
 
@@ -10,6 +10,8 @@ const UploadForm = () => {
 	const [file, setFile] = useState(null);
 	const [description, setDescription] = useState('');
 	const [previewSource, setPreviewSource] = useState('');
+	const [predictions, setPredictions] = useState();
+	const [test, setTest] = useState("");
 
 	const handleFileInputChange = (e) => {
 		e.preventDefault();
@@ -23,7 +25,6 @@ const UploadForm = () => {
 		reader.onload = () => {
 			setPreviewSource(reader.result);
 			saveUrlToLocalFile(reader.result);
-			/* classifyImage(); */
 		};
 	};
 
@@ -47,8 +48,8 @@ const UploadForm = () => {
 
 		try {
 			const predictionResponse = await post('/api/tensorflow', filePath);
-			console.log(predictionResponse);
-			/* setPrediction(predictionResponse) */
+			console.log('Here it is: ', predictionResponse /* .data[0].className */);
+			setPredictions(predictionResponse);
 		} catch (error) {
 			console.log('error', error);
 		}
@@ -66,13 +67,17 @@ const UploadForm = () => {
 		const data = {
 			title: title,
 			file: await toBase64(file),
-			description: description,
+			description: predictions.data[0].className,
 			date: new Date().toLocaleString(),
 		};
 		/* Clear up more fields? */
 		setPreviewSource('');
 		/* Try/Catch, add Spinner? */
 		submitForm('application/json', data, (msg) => console.log('Upload SUBMIT JSON', msg));
+	};
+
+	const showPredictions = () => {
+		return setTest(predictions.data[1].probability * 100);
 	};
 
 	const clearFields = () => {
@@ -93,7 +98,7 @@ const UploadForm = () => {
 						required
 						id="outlined-basic"
 						variant="outlined"
-						label="Title"
+						label="Your title"
 						color="secondary"
 						type="text"
 						value={title}
@@ -102,7 +107,7 @@ const UploadForm = () => {
 						}}
 						className={classes.textFieldTop}
 					/>
-					<TextField
+					{/* <TextField
 						required
 						id="outlined-basic"
 						variant="outlined"
@@ -112,8 +117,19 @@ const UploadForm = () => {
 						value={description}
 						onChange={(e) => setDescription(e.target.value)}
 						className={classes.textFieldBottom}
-					/>
+					/> */}
+					{/* <div>
+						{predictions.map((prediction, index) => (
+							<p key={index}>{prediction.className.data}</p>
+						))}
+					</div> */}
 					<input className={classes.fileUpload} type="file" name="file" onChange={handleFileInputChange} />
+					<p>Prediction: {test}</p>
+					{/* <div>
+						{predictions.map((prediction, index) => (
+							<Typography key={index}>{prediction}</Typography>
+						))}
+					</div> */}
 					<Box className={classes.buttonWrap}>
 						<Button
 							variant="outlined"
@@ -129,6 +145,9 @@ const UploadForm = () => {
 						</Button> */}
 						<Button variant="outlined" onClick={classifyImage}>
 							PREDICT
+						</Button>
+						<Button variant="outlined" onClick={showPredictions}>
+							TEST
 						</Button>
 					</Box>
 				</form>
