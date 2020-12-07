@@ -1,8 +1,9 @@
 import React, { useState } from 'react';
 import { post } from 'axios';
-import { Box, TextField, Button } from '@material-ui/core/';
+import { Box, TextField, Button, Typography } from '@material-ui/core/';
 import useStyles from './useStyles';
 import { submitForm } from '../../api/submitForm';
+import ClassificationProbabilityList from '../../UI/ClassificationProbability/ClassificationProbabilityList';
 
 const UploadForm = () => {
 	const classes = useStyles();
@@ -10,6 +11,7 @@ const UploadForm = () => {
 	const [file, setFile] = useState(null);
 	const [description, setDescription] = useState('');
 	const [previewSource, setPreviewSource] = useState('');
+	const [predictions, setPredictions] = useState([]);
 
 	const handleFileInputChange = (e) => {
 		e.preventDefault();
@@ -23,7 +25,6 @@ const UploadForm = () => {
 		reader.onload = () => {
 			setPreviewSource(reader.result);
 			saveUrlToLocalFile(reader.result);
-			/* classifyImage(); */
 		};
 	};
 
@@ -47,8 +48,8 @@ const UploadForm = () => {
 
 		try {
 			const predictionResponse = await post('/api/tensorflow', filePath);
-			console.log(predictionResponse);
-			/* setPrediction(predictionResponse) */
+			console.log('Here it is: ', predictionResponse /* .data[0].className */);
+			setPredictions(predictionResponse.data);
 		} catch (error) {
 			console.log('error', error);
 		}
@@ -66,7 +67,7 @@ const UploadForm = () => {
 		const data = {
 			title: title,
 			file: await toBase64(file),
-			description: description,
+			description: predictions.data[0].className,
 			date: new Date().toLocaleString(),
 		};
 		/* Clear up more fields? */
@@ -93,7 +94,7 @@ const UploadForm = () => {
 						required
 						id="outlined-basic"
 						variant="outlined"
-						label="Title"
+						label="Your title"
 						color="secondary"
 						type="text"
 						value={title}
@@ -102,18 +103,9 @@ const UploadForm = () => {
 						}}
 						className={classes.textFieldTop}
 					/>
-					<TextField
-						required
-						id="outlined-basic"
-						variant="outlined"
-						label="#meta tag"
-						color="secondary"
-						type="text"
-						value={description}
-						onChange={(e) => setDescription(e.target.value)}
-						className={classes.textFieldBottom}
-					/>
 					<input className={classes.fileUpload} type="file" name="file" onChange={handleFileInputChange} />
+					<Typography>Prediction:</Typography>
+					{predictions.length > 0 && <ClassificationProbabilityList predictions={predictions} />}
 					<Box className={classes.buttonWrap}>
 						<Button
 							variant="outlined"
