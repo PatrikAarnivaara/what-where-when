@@ -1,8 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { get, patch } from "axios";
-import { Box, FormControl, TextField, Button } from "@material-ui/core/";
+import { Box, TextField, Button } from "@material-ui/core/";
 import useStyles from "../UploadForm/useStyles";
-import { editForm } from "../../api/editForm";
 
 const PredictionEdit = (props) => {
   const classes = useStyles();
