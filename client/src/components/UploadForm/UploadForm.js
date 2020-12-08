@@ -4,7 +4,8 @@ import { Box, CircularProgress, TextField, Button, IconButton } from '@material-
 import useStyles from './useStyles';
 import { submitForm } from '../../api/submitForm';
 import PhotoCamera from '@material-ui/icons/PhotoCamera';
-import PhotoCameraOutlinedIcon from '@material-ui/icons/PhotoCameraOutlined';
+import ClearIcon from '@material-ui/icons/Clear';
+import BackspaceIcon from '@material-ui/icons/Backspace';
 import ClassificationProbabilityList from '../../UI/ClassificationProbability/ClassificationProbabilityList';
 
 const UploadForm = () => {
@@ -96,19 +97,27 @@ const UploadForm = () => {
 					{previewSource && <img src={previewSource} alt="chosen" className={classes.preview} />}
 				</Box>
 				<form>
-					<TextField
-						required
-						id="outlined-basic"
-						variant="outlined"
-						label="Your prediction"
-						color="secondary"
-						type="text"
-						value={title}
-						onChange={(e) => {
-							setTitle(e.target.value);
-						}}
-						className={classes.textFieldTop}
-					/>
+					<Box className={classes.textInputAndBackspaceiconWrapper}>
+						<TextField
+							required
+							id="outlined-basic"
+							variant="outlined"
+							label="Your prediction"
+							color="secondary"
+							type="text"
+							value={title}
+							onChange={(e) => {
+								setTitle(e.target.value);
+							}}
+							className={classes.textFieldTop}
+						/>
+						<BackspaceIcon
+							className={classes.BackspaceIcon}
+							onClick={() => {
+								setTitle('');
+							}}
+						/>
+					</Box>
 					<Box className={classes.fileZoneWrapper}>
 						<input
 							className={classes.fileUpload}
@@ -118,12 +127,13 @@ const UploadForm = () => {
 							onChange={handleFileInputChange}
 						/>
 						<label htmlFor="icon-button-file">
-							<IconButton color="secondary"  aria-label="upload picture" component="span">
-								<PhotoCamera fontSize="large"/>
+							<IconButton color="secondary" aria-label="upload picture" component="span">
+								{!spinner && <PhotoCamera fontSize="large" />}
 							</IconButton>
 						</label>
+						{spinner && <CircularProgress color="secondary" />}
 					</Box>
-					{spinner && <CircularProgress color="secondary" />}
+
 					{predictions.length > 0 && <ClassificationProbabilityList predictions={predictions} />}
 					<Box className={classes.buttonWrap}>
 						<Button
@@ -135,9 +145,9 @@ const UploadForm = () => {
 						>
 							UPLOAD
 						</Button>
-						{/* <Button variant="outlined" onClick={clearFields}>
-							CLEAR
-						</Button> */}
+						<Button variant="outlined" onClick={clearFields}>
+							<ClearIcon />
+						</Button>
 						<Button variant="outlined" onClick={classifyImage}>
 							PREDICT
 						</Button>
