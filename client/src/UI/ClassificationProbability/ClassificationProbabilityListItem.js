@@ -4,8 +4,8 @@ import { Typography } from '@material-ui/core/';
 const ClassificationProbabilityListItem = ({ classification, probability }) => {
 	return (
 		<div>
-			<Typography>{classification}</Typography>
-            <Typography>{probability}</Typography>
+			<Typography>Classification: {classification}</Typography>
+			<Typography>Probability: {probability * 100/10}%</Typography>
 		</div>
 	);
 };
