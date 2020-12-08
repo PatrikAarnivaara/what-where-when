@@ -19,6 +19,7 @@
     "@tensorflow/tfjs-converter": "^1.2.11",
     "@tensorflow/tfjs-core": "^1.2.11",
     "@tensorflow/tfjs-node": "^2.7.0",
+    "@tensorflow/tfjs-node-gpu": "^1.7.4",
     "base64-to-uint8array": "^1.0.0",
     "cloudinary": "^1.23.0",
     "cors": "^2.8.5",
