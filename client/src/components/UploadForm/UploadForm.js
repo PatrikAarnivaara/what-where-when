@@ -1,8 +1,11 @@
 import React, { useState } from 'react';
 import { post } from 'axios';
-import { Box, CircularProgress, TextField, Button, Typography } from '@material-ui/core/';
+import { Box, CircularProgress, TextField, Button, IconButton } from '@material-ui/core/';
 import useStyles from './useStyles';
 import { submitForm } from '../../api/submitForm';
+import PhotoCamera from '@material-ui/icons/PhotoCamera';
+import ClearIcon from '@material-ui/icons/Clear';
+import BackspaceIcon from '@material-ui/icons/Backspace';
 import ClassificationProbabilityList from '../../UI/ClassificationProbability/ClassificationProbabilityList';
 
 const UploadForm = () => {
@@ -13,6 +16,7 @@ const UploadForm = () => {
 	const [previewSource, setPreviewSource] = useState('');
 	const [predictions, setPredictions] = useState([]);
 	const [spinner, setSpinner] = useState(false);
+	const [classification, setClassification] = useState('');
 
 	const handleFileInputChange = (e) => {
 		e.preventDefault();
@@ -71,10 +75,9 @@ const UploadForm = () => {
 		const data = {
 			title: title,
 			file: await toBase64(file),
-			description: predictions.data[0].className,
+			description: classification,
 			date: new Date().toLocaleString(),
 		};
-		/* Clear up more fields? */
 		setPreviewSource('');
 		/* Try/Catch, add Spinner? */
 		submitForm('application/json', data, (msg) => console.log('Upload SUBMIT JSON', msg));
@@ -94,22 +97,43 @@ const UploadForm = () => {
 					{previewSource && <img src={previewSource} alt="chosen" className={classes.preview} />}
 				</Box>
 				<form>
-					<TextField
-						required
-						id="outlined-basic"
-						variant="outlined"
-						label="Your title"
-						color="secondary"
-						type="text"
-						value={title}
-						onChange={(e) => {
-							setTitle(e.target.value);
-						}}
-						className={classes.textFieldTop}
-					/>
-					<input className={classes.fileUpload} type="file" name="file" onChange={handleFileInputChange} />
-					<Typography>Predictions:</Typography>
-					{spinner && <CircularProgress color="secondary" />}
+					<Box className={classes.textInputAndBackspaceiconWrapper}>
+						<TextField
+							required
+							id="outlined-basic"
+							variant="outlined"
+							label="Your prediction"
+							color="secondary"
+							type="text"
+							value={title}
+							onChange={(e) => {
+								setTitle(e.target.value);
+							}}
+							className={classes.textFieldTop}
+						/>
+						<BackspaceIcon
+							className={classes.BackspaceIcon}
+							onClick={() => {
+								setTitle('');
+							}}
+						/>
+					</Box>
+					<Box className={classes.fileZoneWrapper}>
+						<input
+							className={classes.fileUpload}
+							accept="image/*"
+							id="icon-button-file"
+							type="file"
+							onChange={handleFileInputChange}
+						/>
+						<label htmlFor="icon-button-file">
+							<IconButton color="secondary" aria-label="upload picture" component="span">
+								{!spinner && <PhotoCamera fontSize="large" />}
+							</IconButton>
+						</label>
+						{spinner && <CircularProgress color="secondary" />}
+					</Box>
+
 					{predictions.length > 0 && <ClassificationProbabilityList predictions={predictions} />}
 					<Box className={classes.buttonWrap}>
 						<Button
@@ -121,9 +145,9 @@ const UploadForm = () => {
 						>
 							UPLOAD
 						</Button>
-						{/* <Button variant="outlined" onClick={clearFields}>
-							CLEAR
-						</Button> */}
+						<Button variant="outlined" onClick={clearFields}>
+							<ClearIcon />
+						</Button>
 						<Button variant="outlined" onClick={classifyImage}>
 							PREDICT
 						</Button>
