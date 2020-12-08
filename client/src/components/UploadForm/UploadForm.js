@@ -1,8 +1,10 @@
 import React, { useState } from 'react';
 import { post } from 'axios';
-import { Box, CircularProgress, TextField, Button, Typography } from '@material-ui/core/';
+import { Box, CircularProgress, TextField, Button, IconButton } from '@material-ui/core/';
 import useStyles from './useStyles';
 import { submitForm } from '../../api/submitForm';
+import PhotoCamera from '@material-ui/icons/PhotoCamera';
+import PhotoCameraOutlinedIcon from '@material-ui/icons/PhotoCameraOutlined';
 import ClassificationProbabilityList from '../../UI/ClassificationProbability/ClassificationProbabilityList';
 
 const UploadForm = () => {
@@ -107,8 +109,20 @@ const UploadForm = () => {
 						}}
 						className={classes.textFieldTop}
 					/>
-					<input className={classes.fileUpload} type="file" name="file" onChange={handleFileInputChange} />
-					{/* <Typography className={classes.predictionsLabel}>Predictions:</Typography> */}
+					<Box className={classes.fileZoneWrapper}>
+						<input
+							className={classes.fileUpload}
+							accept="image/*"
+							id="icon-button-file"
+							type="file"
+							onChange={handleFileInputChange}
+						/>
+						<label htmlFor="icon-button-file">
+							<IconButton color="secondary"  aria-label="upload picture" component="span">
+								<PhotoCamera fontSize="large"/>
+							</IconButton>
+						</label>
+					</Box>
 					{spinner && <CircularProgress color="secondary" />}
 					{predictions.length > 0 && <ClassificationProbabilityList predictions={predictions} />}
 					<Box className={classes.buttonWrap}>

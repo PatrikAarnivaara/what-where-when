@@ -31,19 +31,21 @@ const useStyles = makeStyles((theme) => ({
   textFieldBottom: {
     marginBottom: "4vh",
   },
+  fileZoneWrapper: {
+    display: "flex",
+    justifyContent: "center",
+    marginTop: "1em",
+    marginBottom: "2em"
+  },
   fileUpload: {
     marginBottom: "4vh",
+    display: 'none',
+    fontSize: "large"
   },
   buttonWrap: {
     display: "flex",
     justifyContent: "space-between",
   },
-  predictionsLabel: {
-    marginTop: "1em",
-    marginBottom: "1em",
-    fontSize: "1rem",
-    color: "gray"
-  }
 }));
 
 export default useStyles;
