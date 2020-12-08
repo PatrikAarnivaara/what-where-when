@@ -27,6 +27,7 @@
     "http-proxy": "^1.18.1",
     "mongoose": "^5.10.9",
     "nodemon": "^2.0.6",
+    "sanitize-filename": "^1.6.3",
     "uuid": "^8.3.1",
     "uuidv4": "^6.2.4"
   },
