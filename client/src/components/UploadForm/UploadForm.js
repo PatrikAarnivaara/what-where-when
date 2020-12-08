@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { post } from 'axios';
-import { Box, TextField, Button, Typography } from '@material-ui/core/';
+import { Box, CircularProgress, TextField, Button, Typography } from '@material-ui/core/';
 import useStyles from './useStyles';
 import { submitForm } from '../../api/submitForm';
 import ClassificationProbabilityList from '../../UI/ClassificationProbability/ClassificationProbabilityList';
@@ -12,6 +12,7 @@ const UploadForm = () => {
 	const [description, setDescription] = useState('');
 	const [previewSource, setPreviewSource] = useState('');
 	const [predictions, setPredictions] = useState([]);
+	const [spinner, setSpinner] = useState(false);
 
 	const handleFileInputChange = (e) => {
 		e.preventDefault();
@@ -42,6 +43,8 @@ const UploadForm = () => {
 	};
 
 	const classifyImage = async () => {
+		setSpinner(true);
+
 		const filePath = {
 			file: '/Users/patrik/what-where-when/image.jpg',
 		};
@@ -50,6 +53,7 @@ const UploadForm = () => {
 			const predictionResponse = await post('/api/tensorflow', filePath);
 			console.log('Here it is: ', predictionResponse /* .data[0].className */);
 			setPredictions(predictionResponse.data);
+			if (predictionResponse) setSpinner(false);
 		} catch (error) {
 			console.log('error', error);
 		}
@@ -104,7 +108,8 @@ const UploadForm = () => {
 						className={classes.textFieldTop}
 					/>
 					<input className={classes.fileUpload} type="file" name="file" onChange={handleFileInputChange} />
-					<Typography>Prediction:</Typography>
+					<Typography>Predictions:</Typography>
+					{spinner && <CircularProgress color="secondary" />}
 					{predictions.length > 0 && <ClassificationProbabilityList predictions={predictions} />}
 					<Box className={classes.buttonWrap}>
 						<Button

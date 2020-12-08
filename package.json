@@ -16,6 +16,7 @@
     "@tensorflow-models/mobilenet": "^2.0.4",
     "@tensorflow/tfjs": "^2.7.0",
     "@tensorflow/tfjs-node": "^2.7.0",
+    "@tensorflow/tfjs-node-gpu": "^1.7.4",
     "base64-to-uint8array": "^1.0.0",
     "cloudinary": "^1.23.0",
     "cors": "^2.8.5",

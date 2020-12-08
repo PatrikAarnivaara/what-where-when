@@ -9,13 +9,14 @@ const useStyles = makeStyles((theme) => ({
     /* alignItems: "center", */
   },
   box: {
-    width: "16vw",
+    width: "30vw",
     flexDirection: "column",
     flexWrap: "wrap",
   },
   previewContainer: {
     position: "relative",
     overflow: "hidden",
+    width: "50%"
   },
   preview: {
     justifyContent: "center",
@@ -25,6 +26,7 @@ const useStyles = makeStyles((theme) => ({
   textFieldTop: {
     marginTop: "2vh",
     marginBottom: "4vh",
+    width: "30vw"
   },
   textFieldBottom: {
     marginBottom: "4vh",
