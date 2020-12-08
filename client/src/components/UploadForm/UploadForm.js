@@ -17,6 +17,10 @@ const UploadForm = () => {
 	const [predictions, setPredictions] = useState([]);
 	const [spinner, setSpinner] = useState(false);
 	const [classification, setClassification] = useState('');
+	const [disableUpload, setDisableUpload] = useState(true);
+	const [disablePrediction, setDisablePrediction] = useState(true);
+
+	console.log(description);
 
 	const handleFileInputChange = (e) => {
 		e.preventDefault();
@@ -40,7 +44,7 @@ const UploadForm = () => {
 			};
 
 			const cloudinaryResponse = await post('/api/cloudinary', imageToUrlCloudinary);
-			console.log(cloudinaryResponse);
+			if (cloudinaryResponse) setDisablePrediction(false);
 		} catch (error) {
 			console.log('error', error);
 		}
@@ -48,7 +52,6 @@ const UploadForm = () => {
 
 	const classifyImage = async () => {
 		setSpinner(true);
-
 		const filePath = {
 			file: '/Users/patrik/what-where-when/image.jpg',
 		};
@@ -57,7 +60,9 @@ const UploadForm = () => {
 			const predictionResponse = await post('/api/tensorflow', filePath);
 			console.log('Here it is: ', predictionResponse /* .data[0].className */);
 			setPredictions(predictionResponse.data);
-			if (predictionResponse) setSpinner(false);
+			if (predictionResponse) {
+				setSpinner(false);
+			}
 		} catch (error) {
 			console.log('error', error);
 		}
@@ -75,7 +80,7 @@ const UploadForm = () => {
 		const data = {
 			title: title,
 			file: await toBase64(file),
-			description: classification,
+			description: description,
 			date: new Date().toLocaleString(),
 		};
 		setPreviewSource('');
@@ -88,6 +93,7 @@ const UploadForm = () => {
 		setPreviewSource('');
 		setTitle('');
 		setDescription('');
+		setPredictions([])
 	};
 
 	return (
@@ -133,8 +139,12 @@ const UploadForm = () => {
 						</label>
 						{spinner && <CircularProgress color="secondary" />}
 					</Box>
-
-					{predictions.length > 0 && <ClassificationProbabilityList predictions={predictions} />}
+					{predictions.length > 0 && (
+						<ClassificationProbabilityList
+							predictions={predictions}
+							setDescription={setDescription}
+						/>
+					)}
 					<Box className={classes.buttonWrap}>
 						<Button
 							variant="outlined"
@@ -142,13 +152,14 @@ const UploadForm = () => {
 							type="button"
 							value="Upload"
 							onClick={uploadWithJSON}
+							disabled={disableUpload}
 						>
 							UPLOAD
 						</Button>
 						<Button variant="outlined" onClick={clearFields}>
 							<ClearIcon />
 						</Button>
-						<Button variant="outlined" onClick={classifyImage}>
+						<Button variant="outlined" onClick={classifyImage} disabled={disablePrediction}>
 							PREDICT
 						</Button>
 					</Box>

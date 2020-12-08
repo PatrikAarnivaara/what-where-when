@@ -9,6 +9,10 @@ const useStyles = makeStyles((theme) => ({
 		alignItems: "center",
 		/* justifyContent: "center", */
 	},
+	checkBoxPredictionWrapper: {
+		display: 'flex',
+		flexDirection: "row",
+	},
 	text: {
 		marginTop: '1em',
 		marginBottom: '1em',

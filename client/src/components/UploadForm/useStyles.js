@@ -24,7 +24,8 @@ const useStyles = makeStyles((theme) => ({
   },
   textInputAndBackspaceiconWrapper: {
     display: "flex",
-    alignItems: "center"
+    alignItems: "center",
+    marginTop: "1em"
   },
   textFieldTop: {
     /* marginTop: "2vh",
