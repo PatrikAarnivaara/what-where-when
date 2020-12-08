@@ -1,17 +1,45 @@
-import React from 'react';
-import Uploads from "../src/components/Uploads"
-import Gallery from "../src/components/Gallery"
-import UploadForm from "../src/components/UploadForm"
-/* import UserForm from "../src/components/UserForm" */
+import React, { useState } from "react";
+import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
+import { createMuiTheme, ThemeProvider } from "@material-ui/core/styles";
+import CssBaseline from "@material-ui/core/CssBaseline";
 
+import Header from "./components/containers/Header/Header";
+import LandingPage from "./components/pages/LandingPage/LandingPage";
+import UploadForm from "./components/UploadForm/UploadForm";
+import Prediction from "./components/predictions/Prediction";
+import PredictionInfo from "./components/predictions/PredictionInfo";
+import PredictionEdit from "./components/predictions/PredictionEdit";
 
 function App() {
+  const [darkMode, setDarkMode] = useState(true);
+
+  const theme = createMuiTheme({
+    palette: {
+      type: darkMode ? "dark" : "light",
+    },
+  });
+
+  const changeTheme = () => {
+    setDarkMode(!darkMode);
+  };
+
   return (
-    <div className="App">
-     <UploadForm/>
-     <Uploads/>
-     <Gallery/>
-    </div>
+    <ThemeProvider theme={theme}>
+      <CssBaseline />
+      <div className="App">
+        <Router>
+          <Header darkMode={darkMode} changeTheme={changeTheme} />
+          <Switch>
+            <Route exact path="/" component={UploadForm} />
+            <Route exact path="/landing" component={LandingPage} />
+            <Route exact path="/predictions" component={Prediction} />
+            <Route exact path="/predictions/:_id" component={PredictionInfo} />
+            <Route exact path="/predictions/:_id/edit" component={PredictionEdit} />
+          </Switch>
+        </Router>
+      </div>
+      <p>FOOTER</p>
+    </ThemeProvider>
   );
 }
 
