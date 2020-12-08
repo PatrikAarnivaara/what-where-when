@@ -38,6 +38,12 @@ const useStyles = makeStyles((theme) => ({
     display: "flex",
     justifyContent: "space-between",
   },
+  predictionsLabel: {
+    marginTop: "1em",
+    marginBottom: "1em",
+    fontSize: "1rem",
+    color: "gray"
+  }
 }));
 
 export default useStyles;

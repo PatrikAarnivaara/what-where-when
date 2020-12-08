@@ -13,6 +13,7 @@ const UploadForm = () => {
 	const [previewSource, setPreviewSource] = useState('');
 	const [predictions, setPredictions] = useState([]);
 	const [spinner, setSpinner] = useState(false);
+	const [classification, setClassification] = useState('');
 
 	const handleFileInputChange = (e) => {
 		e.preventDefault();
@@ -71,10 +72,9 @@ const UploadForm = () => {
 		const data = {
 			title: title,
 			file: await toBase64(file),
-			description: predictions.data[0].className,
+			description: classification,
 			date: new Date().toLocaleString(),
 		};
-		/* Clear up more fields? */
 		setPreviewSource('');
 		/* Try/Catch, add Spinner? */
 		submitForm('application/json', data, (msg) => console.log('Upload SUBMIT JSON', msg));
@@ -98,7 +98,7 @@ const UploadForm = () => {
 						required
 						id="outlined-basic"
 						variant="outlined"
-						label="Your title"
+						label="Your prediction"
 						color="secondary"
 						type="text"
 						value={title}
@@ -108,7 +108,7 @@ const UploadForm = () => {
 						className={classes.textFieldTop}
 					/>
 					<input className={classes.fileUpload} type="file" name="file" onChange={handleFileInputChange} />
-					<Typography>Predictions:</Typography>
+					{/* <Typography className={classes.predictionsLabel}>Predictions:</Typography> */}
 					{spinner && <CircularProgress color="secondary" />}
 					{predictions.length > 0 && <ClassificationProbabilityList predictions={predictions} />}
 					<Box className={classes.buttonWrap}>
