@@ -15,9 +15,10 @@ const ClassificationProbabilityListItem = ({ classification, probability, setDes
 
 	return (
 		<div>
-			<Box className={classes.radioButtonPredictionData}>
+			<Box className={classes.radioButtonPredictionDataWrapper}>
 				{
 					<Radio
+						className={classes.radioButton}
 						checked={selectedValue === probability}
 						color="default"
 						onChange={handleChange}
