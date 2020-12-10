@@ -4,19 +4,28 @@ const useStyles = makeStyles((theme) => ({
 	root: {
 		display: 'flex',
 		marginTop: '1em',
-		marginBottom: '2em',
+		marginBottom: '3em',
 		flexDirection: "column",
-		alignItems: "center",
-		/* justifyContent: "center", */
+		maxWidth: "80vw"
 	},
 	checkBoxPredictionWrapper: {
 		display: 'flex',
 		flexDirection: "row",
+		maxWidth: "80vw",
+		marginLeft: "1em"
 	},
 	text: {
-		marginTop: '1em',
-		marginBottom: '1em',
+		marginTop: '0.5em',
+		marginBottom: '0.5em',
+		marginLeft: "1.5em"
 	},
+	radioButton: {
+		marginTop: '0.5em',
+		marginBottom: '0.5em',
+		height: "2em",
+		width: "2em"
+
+	}
 }));
 
 export default useStyles;

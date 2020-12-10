@@ -28,8 +28,6 @@ const useStyles = makeStyles((theme) => ({
     marginTop: "1em"
   },
   textFieldTop: {
-    /* marginTop: "2vh",
-    marginBottom: "4vh", */
     width: "30vw"
   },
   textFieldBottom: {

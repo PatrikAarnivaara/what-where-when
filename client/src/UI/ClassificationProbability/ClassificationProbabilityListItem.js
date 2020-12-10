@@ -3,8 +3,6 @@ import { Box, Typography } from '@material-ui/core/';
 import Radio from '@material-ui/core/Radio';
 import useStyles from './useStyles';
 
-
-
 const ClassificationProbabilityListItem = ({ classification, probability, setDescription }) => {
 	const classes = useStyles();
 
@@ -18,7 +16,13 @@ const ClassificationProbabilityListItem = ({ classification, probability, setDes
 	return (
 		<div>
 			<Box className={classes.checkBoxPredictionWrapper}>
-				<Radio checked={selectedValue === probability} color="default" onChange={handleChange} value={probability} />
+				<Radio
+                className={classes.radioButton}
+					checked={selectedValue === probability}
+					color="default"
+					onChange={handleChange}
+					value={probability}
+				/>
 				<Box className={classes.text}>
 					<Typography>Classification: {classification}</Typography>
 					<Typography>Probability: {probability * 100}%</Typography>
