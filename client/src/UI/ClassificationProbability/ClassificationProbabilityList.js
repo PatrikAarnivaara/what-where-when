@@ -9,7 +9,6 @@ const ClassificationProbabilityList = ({ predictions, setDescription }) => {
 			{predictions.map((prediction, index) => (
 				<ClassificationProbabilityListItem
 					key={index}
-					test={index}
 					classification={prediction.className}
 					probability={prediction.probability}
 					setDescription={setDescription}

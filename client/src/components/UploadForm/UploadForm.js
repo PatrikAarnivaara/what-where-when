@@ -69,6 +69,8 @@ const UploadForm = () => {
 	};
 
 	const uploadWithJSON = async () => {
+		/* Remove toBase64 and change file to url from preview req */
+
 		const toBase64 = (file) =>
 			new Promise((resolve, reject) => {
 				const reader = new FileReader();
@@ -89,11 +91,12 @@ const UploadForm = () => {
 	};
 
 	const clearFields = () => {
+		/* Add cloudinary delete image request */
 		setFile('');
 		setPreviewSource('');
 		setTitle('');
 		setDescription('');
-		setPredictions([])
+		setPredictions([]);
 	};
 
 	return (
@@ -140,10 +143,7 @@ const UploadForm = () => {
 						{spinner && <CircularProgress color="secondary" />}
 					</Box>
 					{predictions.length > 0 && (
-						<ClassificationProbabilityList
-							predictions={predictions}
-							setDescription={setDescription}
-						/>
+						<ClassificationProbabilityList predictions={predictions} setDescription={setDescription} />
 					)}
 					<Box className={classes.buttonWrap}>
 						<Button

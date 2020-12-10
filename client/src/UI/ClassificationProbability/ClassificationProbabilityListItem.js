@@ -6,24 +6,25 @@ import useStyles from './useStyles';
 const ClassificationProbabilityListItem = ({ classification, probability, setDescription }) => {
 	const classes = useStyles();
 
-	const [selectedValue, setSelectedValue] = useState(probability);
+	const [selectedValue, setSelectedValue] = useState();
 
-	const handleChange = (event) => {
-		setSelectedValue(event.target.value);
+	const handleChange = (e) => {
+		setSelectedValue(e.target.value);
 		setDescription(classification);
 	};
 
 	return (
 		<div>
-			<Box className={classes.checkBoxPredictionWrapper}>
-				<Radio
-                className={classes.radioButton}
-					checked={selectedValue === probability}
-					color="default"
-					onChange={handleChange}
-					value={probability}
-				/>
-				<Box className={classes.text}>
+			<Box className={classes.radioButtonPredictionData}>
+				{
+					<Radio
+						checked={selectedValue === probability}
+						color="default"
+						onChange={handleChange}
+						value={probability}
+					/>
+				}
+				<Box className={classes.predictionData}>
 					<Typography>Classification: {classification}</Typography>
 					<Typography>Probability: {probability * 100}%</Typography>
 				</Box>

@@ -6,6 +6,9 @@ const cors = require('cors');
 const bodyParser = require('body-parser');
 const Building = require('./models/building');
 
+/* TODO: move all routes to separate files in routes folder and
+simplify req/res call to endpoint with cleaner async/await syntax */
+
 //TensorFlow.js is an open-source hardware-accelerated JavaScript library
 //for training and deploying machine learning models.
 const tf = require('@tensorflow/tfjs');
