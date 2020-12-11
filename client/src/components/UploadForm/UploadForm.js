@@ -58,7 +58,7 @@ const UploadForm = () => {
 
 		try {
 			const predictionResponse = await post('/api/tensorflow', filePath);
-			console.log('Here it is: ', predictionResponse /* .data[0].className */);
+			console.log('Here it is: ', predictionResponse);
 			setPredictions(predictionResponse.data);
 			if (predictionResponse) {
 				setSpinner(false);

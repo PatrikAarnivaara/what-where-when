@@ -3,12 +3,12 @@ import { Box, Typography } from '@material-ui/core/';
 import Radio from '@material-ui/core/Radio';
 import useStyles from './useStyles';
 
-const ClassificationProbabilityListItem = ({ classification, probability, setDescription }) => {
+const ClassificationProbabilityListItem = ({ classification, probability, setDescription, test }) => {
 	const classes = useStyles();
-
 	const [selectedValue, setSelectedValue] = useState();
 
 	const handleChange = (e) => {
+		console.log(test.toString());
 		setSelectedValue(e.target.value);
 		setDescription(classification);
 	};
@@ -19,10 +19,10 @@ const ClassificationProbabilityListItem = ({ classification, probability, setDes
 				{
 					<Radio
 						className={classes.radioButton}
-						checked={selectedValue === probability}
+						checked={selectedValue === test.toString()}
 						color="default"
+						value={test.toString()}
 						onChange={handleChange}
-						value={probability}
 					/>
 				}
 				<Box className={classes.predictionData}>

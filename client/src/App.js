@@ -36,7 +36,6 @@ function App() {
           </Switch>
         </Router>
       </div>
-      <p>FOOTER</p>
     </ThemeProvider>
   );
 }
