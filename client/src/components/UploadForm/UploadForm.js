@@ -37,6 +37,9 @@ const UploadForm = () => {
 
 	const saveUrlToLocalFile = async (base64Image) => {
 		try {
+			if (status) {
+				setStatus('');
+			}
 			const imageToUrlCloudinary = {
 				image: base64Image,
 			};
