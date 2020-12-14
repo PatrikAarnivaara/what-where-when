@@ -90,7 +90,8 @@ const UploadForm = () => {
 
 				/* TSpinner? */
 				submitForm('application/json', data, (msg) => console.log('Upload SUBMIT JSON', msg));
-				setStatus('Upload successfull');
+				setStatus('Upload successfull.');
+				clearFields();
 			} catch (error) {
 				console.log('error', error);
 			}
@@ -170,7 +171,9 @@ const UploadForm = () => {
 							PREDICT
 						</Button>
 					</Box>
-					<Typography className={classes.status}>Status: {status}</Typography>
+					<Box className={classes.statusMessageWrapper}>
+						<Typography className={classes.status}>{status}</Typography>
+					</Box>
 				</form>
 			</Box>
 		</Box>

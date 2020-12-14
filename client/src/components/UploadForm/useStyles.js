@@ -5,7 +5,7 @@ const useStyles = makeStyles((theme) => ({
 		display: 'flex',
 		justifyContent: 'center',
 		minHeight: '120vh',
-		marginTop: '10vh',
+		marginTop: '2em',
 		marginBottom: '10vh',
 	},
 	box: {
@@ -14,7 +14,7 @@ const useStyles = makeStyles((theme) => ({
 		flexWrap: 'wrap',
 	},
 	previewWrapper: {
-    display: 'flex',
+		display: 'flex',
 		justifyContent: 'center',
 		position: 'relative',
 		overflow: 'hidden',
@@ -25,10 +25,9 @@ const useStyles = makeStyles((theme) => ({
 		borderRadius: '5px',
 	},
 	preview: {
-		
 		position: 'relative',
-		maxWidth: '20vw',
-		maxHeight: '15vw',
+		maxHeight: '20vw',
+		maxWidth: 'auto',
 	},
 	uploadTextInputAndBackspaceiconWrapper: {
 		display: 'flex',
@@ -56,6 +55,16 @@ const useStyles = makeStyles((theme) => ({
 	uploadButtonWrapper: {
 		display: 'flex',
 		justifyContent: 'space-between',
+	},
+	statusMessageWrapper: {
+		display: 'flex',
+		justifyContent: 'left',
+		marginLeft: '1em',
+		marginTop: '3px',
+		color: 'rgba(255, 255, 255, 0.7)',
+	},
+	status: {
+		fontSize: '0.75rem',
 	},
 }));
 
