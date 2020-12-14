@@ -4,37 +4,48 @@ const useStyles = makeStyles((theme) => ({
   root: {
     display: "flex",
     justifyContent: "center",
-    minHeight: "100vh",
+    minHeight: "120vh",
     marginTop: "10vh",
-    /* alignItems: "center", */
+    marginBottom: "10vh"
   },
   box: {
-    width: "16vw",
+    width: "30vw",
     flexDirection: "column",
     flexWrap: "wrap",
   },
   previewContainer: {
     position: "relative",
     overflow: "hidden",
+    width: "50%"
   },
   preview: {
     justifyContent: "center",
     position: "relative",
     width: "100%",
   },
-  textFieldTop: {
-    marginTop: "2vh",
-    marginBottom: "4vh",
+  textInputAndBackspaceiconWrapper: {
+    display: "flex",
+    alignItems: "center",
+    marginTop: "1em"
   },
+ 
   textFieldBottom: {
     marginBottom: "4vh",
   },
+  BackspaceIcon: {
+    marginLeft: "1em",
+    cursor: "pointer"
+  },
+  fileZoneWrapper: {
+    display: "flex",
+    justifyContent: "center",
+    marginTop: "1em",
+    marginBottom: "2em",
+  },
   fileUpload: {
     marginBottom: "4vh",
-  },
-  buttonWrap: {
-    display: "flex",
-    justifyContent: "space-between",
+    display: 'none',
+    fontSize: "large"
   },
 }));
 
