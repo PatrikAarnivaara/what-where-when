@@ -6,7 +6,6 @@ const useStyles = makeStyles((theme) => ({
 		flexWrap: 'wrap',
 		justifyContent: 'space-around',
 		overflow: 'hidden',
-		/* backgroundColor: theme.palette.background.paper, */
 		marginBottom: '2em',
 		marginLeft: '2em',
 	},
@@ -17,8 +16,8 @@ const useStyles = makeStyles((theme) => ({
 	itemDetailWrapper: {
 		marginLeft: '1em',
 		marginRight: '2em',
-    maxWidth: '30vw',
-    minWidth: "240px"
+		maxWidth: '30vw',
+		minWidth: '280px',
 	},
 	gridList: {},
 	gridListTile: {

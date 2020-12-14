@@ -48,7 +48,7 @@ const Prediction = () => {
         predictions={predictions}
         showPredictionDetail={showPredictionDetail}
       />
-      <PredictionListItemDetail predictionDetailData={predictionDetailData} />
+      {<PredictionListItemDetail predictionDetailData={predictionDetailData} />}
     </div>
   );
 };

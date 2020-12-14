@@ -1,6 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { Typography } from '@material-ui/core/';
+import { Button, Typography } from '@material-ui/core/';
 import { Image } from 'cloudinary-react';
 import EditOutlinedIcon from '@material-ui/icons/EditOutlined';
 import useStyles from './useStyles';
@@ -13,19 +13,21 @@ const PredictionListItemDetail = ({ predictionDetailData: { _id, url, title, des
 			<Image
 				cloudName={process.env.REACT_APP_CLOUDINARY_NAME}
 				publicId={url}
-				width="180"
+				width="280"
 				crop="scale"
 				quality="auto"
 			/>
-			
-			{/* <img src={url} alt={title} /> */}
-			<Typography>Your prediction: {title}</Typography>
-			<Typography>Classification: {description}</Typography>
-			<Typography>Probability: {probability * 100}%</Typography>
-			<Typography>Date: {date}</Typography>
-			<Link to={`/predictions/${_id}`}>
-				<EditOutlinedIcon style={{ cursor: 'pointer' }} />
-			</Link>
+			{url && <div>
+				<Typography>Your prediction: {title}</Typography>
+				<Typography>Classification: {description}</Typography>
+				<Typography>Probability: {probability * 100}%</Typography>
+				<Typography>Date: {date}</Typography>
+				<Link to={`/predictions/${_id}`}>
+					<Button variant="outlined">
+						<EditOutlinedIcon style={{ cursor: 'pointer' }} />
+					</Button>
+				</Link>
+			</div>}
 		</div>
 	);
 };

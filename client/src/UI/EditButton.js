@@ -5,8 +5,8 @@ import { Link } from "react-router-dom";
 const EditButton = ({ id }) => {
   return (
     <React.Fragment>
-      <Button variant="outlined" color="secondary">
-        <Link to={`/predictions/${id}/edit`}>EDIT</Link>
+      <Button variant="outlined" >
+        <Link to={`/predictions/${id}/edit`} style={{textDecoration: "none"}}>EDIT</Link>
       </Button>
     </React.Fragment>
   );
