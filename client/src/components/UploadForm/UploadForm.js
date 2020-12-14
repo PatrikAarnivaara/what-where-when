@@ -109,7 +109,7 @@ const UploadForm = () => {
 					{previewSource && <img src={previewSource} alt="chosen" className={classes.preview} />}
 				</Box>
 				<form>
-					<Box className={classes.textInputAndBackspaceiconWrapper}>
+					<Box className={classes.uploadTextInputAndBackspaceiconWrapper}>
 						<TextField
 							required
 							id="outlined-basic"
@@ -122,7 +122,7 @@ const UploadForm = () => {
 							onChange={(e) => {
 								setTitle(e.target.value);
 							}}
-							className={classes.textFieldTop}
+							className={classes.uploadTextField}
 							helperText={title ? 'Thanks!' : 'Required.'}
 						/>
 						<BackspaceIcon
@@ -132,7 +132,7 @@ const UploadForm = () => {
 							}}
 						/>
 					</Box>
-					<Box className={classes.fileZoneWrapper}>
+					<Box className={classes.uploadFileZoneWrapper}>
 						<input
 							className={classes.fileUpload}
 							accept="image/*"
@@ -154,7 +154,7 @@ const UploadForm = () => {
 							setProbability={setProbability}
 						/>
 					)}
-					<Box className={classes.buttonWrap}>
+					<Box className={classes.uploadButtonWrapper}>
 						<Button
 							variant="outlined"
 							color="secondary"

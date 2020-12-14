@@ -23,20 +23,19 @@ const useStyles = makeStyles((theme) => ({
     position: "relative",
     width: "100%",
   },
-  textInputAndBackspaceiconWrapper: {
+  uploadTextInputAndBackspaceiconWrapper: {
     display: "flex",
     alignItems: "center",
     marginTop: "1em"
   },
- 
-  textFieldBottom: {
-    marginBottom: "4vh",
+  uploadTextField: {
+    width: "30vw"
   },
   BackspaceIcon: {
     marginLeft: "1em",
     cursor: "pointer"
   },
-  fileZoneWrapper: {
+  uploadFileZoneWrapper: {
     display: "flex",
     justifyContent: "center",
     marginTop: "1em",
@@ -46,6 +45,10 @@ const useStyles = makeStyles((theme) => ({
     marginBottom: "4vh",
     display: 'none',
     fontSize: "large"
+  },
+  uploadButtonWrapper: {
+    display: "flex",
+    justifyContent: "space-between",
   },
 }));
 
