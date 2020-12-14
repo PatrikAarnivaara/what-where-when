@@ -12,13 +12,14 @@ const PredictionListItem = ({
   url,
   title,
   description,
+  probability,
   date,
   showPredictionDetail,
 }) => {
   const classes = useStyles();
 
   const handleOnClickItem = () => {
-    showPredictionDetail(id, url, title, description, date);
+    showPredictionDetail(id, url, title, description, probability, date);
   };
 
   return (
@@ -31,25 +32,11 @@ const PredictionListItem = ({
         key={index}
         cloudName={process.env.REACT_APP_CLOUDINARY_NAME}
         publicId={url}
-        width="300"
+        width="180"
         crop="scale"
         quality="auto"
       />
-      {
-        <GridListTileBar
-          title={title}
-          subtitle={<span>Prediction: {description}</span>}
-          actionIcon={
-            <IconButton
-              aria-label={`info about ${title}`}
-              className={classes.icon}
-            >
-              <InfoIcon />
-              <Typography>{date}</Typography>
-            </IconButton>
-          }
-        />
-      }
+      
     </GridListTile>
   );
 };

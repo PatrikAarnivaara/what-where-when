@@ -13,6 +13,10 @@ const buildingSchema = new mongoose.Schema({
     type: String,
     required: [true, "Prediction is required"],
   },
+  probability: {
+    type: String,
+    required: [true, "Probability is required"],
+  },
   date: {
     type: String,
     required: [true, "Prediction is required"],

@@ -111,7 +111,6 @@ app.get('/api/predictions/:id', function (req, res) {
 });
 
 app.post('/api/upload', async (req, res) => {
-	console.log(req.body);
 
 	try {
 		const fileStr = req.body.file;
@@ -124,6 +123,7 @@ app.post('/api/upload', async (req, res) => {
 			url: uploadResponse.url,
 			title: req.body.title,
 			description: req.body.description,
+			probability: req.body.probability,
 			date: req.body.date,
 			publicId: uploadResponse.public_id,
 		});

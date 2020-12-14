@@ -4,28 +4,30 @@ import { Box, Typography } from '@material-ui/core/';
 import Radio from '@material-ui/core/Radio';
 import useStyles from './useStyles';
 
-const ClassificationProbabilityList = ({ predictions, setDescription }) => {
+const ClassificationProbabilityList = ({ predictions, setDescription, setProbability }) => {
 	const classes = useStyles();
 
-	const [selectedValue, setSelectedValue] = useState('a');
-
+	/* Set highest probability as default */
+	const [selectedValue, setSelectedValue] = useState();
+	/* Change to dynamic radio buttons */
 	const handleChange = (e) => {
-
+		setSelectedValue(e.target.value);
 		switch (e.target.value) {
 			case 'a':
 				setDescription(predictions[0].className);
+				setProbability(predictions[0].probability);
 				break;
 			case 'b':
 				setDescription(predictions[1].className);
+				setProbability(predictions[1].probability);
 				break;
 			case 'c':
 				setDescription(predictions[2].className);
+				setProbability(predictions[2].probability);
 				break;
 			default:
 				return;
 		}
-
-		setSelectedValue(e.target.value);
 	};
 
 	return (

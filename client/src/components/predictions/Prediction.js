@@ -2,8 +2,10 @@ import React, { useState, useEffect } from "react";
 import axios from "axios";
 import PredictionList from "./PredictionList";
 import PredictionListItemDetail from "./PredictionListItemDetail";
+import useStyles from './useStyles';
 
 const Prediction = () => {
+  const classes = useStyles();
   const [predictions, setPredictions] = useState([]);
 
   const [predictionDetailData, setPredictionDetailData] = useState({
@@ -11,16 +13,18 @@ const Prediction = () => {
     url: "",
     title: "",
     description: "",
+    probability: "",
     date: "",
   });
 
-  const showPredictionDetail = (id, url, title, description, date) => {
+  const showPredictionDetail = (id, url, title, description, probability, date) => {
     setPredictionDetailData({
       ...predictionDetailData,
       _id: id,
       url: url,
       title: title,
       description: description,
+      probability: probability,
       date: date,
     });
   };
@@ -39,7 +43,7 @@ const Prediction = () => {
   }, []);
 
   return (
-    <div>
+    <div className={classes.predictionWrapper}>
       <PredictionList
         predictions={predictions}
         showPredictionDetail={showPredictionDetail}

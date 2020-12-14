@@ -12,15 +12,17 @@ const UploadForm = () => {
 	const classes = useStyles();
 	const [title, setTitle] = useState('');
 	const [file, setFile] = useState(null);
+	/* Chnage description to probability */
 	const [description, setDescription] = useState('');
 	const [previewSource, setPreviewSource] = useState('');
 	const [predictions, setPredictions] = useState([]);
 	const [spinner, setSpinner] = useState(false);
-	const [classification, setClassification] = useState('');
+	const [probability, setProbability] = useState('');
 	const [disableUpload, setDisableUpload] = useState(true);
 	const [disablePrediction, setDisablePrediction] = useState(true);
 
 	console.log(description);
+	console.log(probability);
 
 	const handleFileInputChange = (e) => {
 		e.preventDefault();
@@ -53,6 +55,7 @@ const UploadForm = () => {
 	const classifyImage = async () => {
 		setSpinner(true);
 		const filePath = {
+			/* TODO: this has to be fixed! */
 			file: '/Users/patrik/what-where-when/image.jpg',
 		};
 
@@ -70,7 +73,6 @@ const UploadForm = () => {
 
 	const uploadWithJSON = async () => {
 		/* Remove toBase64 and change file to url from preview req */
-
 		const toBase64 = (file) =>
 			new Promise((resolve, reject) => {
 				const reader = new FileReader();
@@ -83,6 +85,7 @@ const UploadForm = () => {
 			title: title,
 			file: await toBase64(file),
 			description: description,
+			probability: probability,
 			date: new Date().toLocaleString(),
 		};
 		setPreviewSource('');
@@ -96,6 +99,7 @@ const UploadForm = () => {
 		setPreviewSource('');
 		setTitle('');
 		setDescription('');
+		setProbability('');
 		setPredictions([]);
 	};
 
@@ -143,7 +147,11 @@ const UploadForm = () => {
 						{spinner && <CircularProgress color="secondary" />}
 					</Box>
 					{predictions.length > 0 && (
-						<ClassificationProbabilityList predictions={predictions} setDescription={setDescription} />
+						<ClassificationProbabilityList
+							predictions={predictions}
+							setDescription={setDescription}
+							setProbability={setProbability}
+						/>
 					)}
 					<Box className={classes.buttonWrap}>
 						<Button
@@ -152,7 +160,7 @@ const UploadForm = () => {
 							type="button"
 							value="Upload"
 							onClick={uploadWithJSON}
-							disabled={disableUpload}
+							/* disabled={disableUpload} */
 						>
 							UPLOAD
 						</Button>
