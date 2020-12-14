@@ -34,14 +34,17 @@ const useStyles = makeStyles((theme) => ({
 		fontSize: '1.5em',
 	},
 	login: {
+		display: 'flex',
 		position: 'absolute',
 		left: 'calc(5% - 2rem)',
-		top: 'calc(5% - 1.5rem)',
+		marginTop: "0.7em"
+		/* top: 'calc(5% - 1.5rem)', */
 	},
 	mode: {
 		position: 'absolute',
 		right: 'calc(5% - 2rem)',
-		top: 'calc(5% - 1.5rem)',
+		marginTop: "0.7em"
+		/* top: 'calc(5% - 1rem)', */
 	},
 }));
 
