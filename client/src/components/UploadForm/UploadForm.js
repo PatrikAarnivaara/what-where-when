@@ -6,6 +6,7 @@ import { submitForm } from '../../api/submitForm';
 import PhotoCamera from '@material-ui/icons/PhotoCamera';
 import ClearIcon from '@material-ui/icons/Clear';
 import BackspaceIcon from '@material-ui/icons/Backspace';
+import { Image } from 'cloudinary-react';
 import ClassificationProbabilityList from '../../UI/ClassificationProbability/ClassificationProbabilityList';
 
 const UploadForm = () => {
@@ -170,8 +171,8 @@ const UploadForm = () => {
 							PREDICT
 						</Button>
 					</Box>
+					<Typography className={classes.status}>Status: {status}</Typography>
 				</form>
-				<Typography>Status: {status}</Typography>
 			</Box>
 		</Box>
 	);
