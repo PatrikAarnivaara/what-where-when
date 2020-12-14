@@ -14,13 +14,13 @@ const useStyles = makeStyles((theme) => ({
 		flexDirection: 'row',
 	},
 	itemDetailWrapper: {
-		marginLeft: '1em',
+		/* marginLeft: '2em', */
 		marginRight: '2em',
 		maxWidth: '30vw',
 		minWidth: '280px',
 	},
-	gridList: {},
 	gridListTile: {
+		padding: "1em",
 		cursor: 'pointer',
 	},
 	icon: {

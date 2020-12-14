@@ -9,7 +9,7 @@ const PredictionList = ({ predictions, showPredictionDetail }) => {
 
   return (
     <div className={classes.root}>
-      <GridList cellHeight={100} className={classes.gridList} cols={1}>
+      <GridList cellHeight={100} cols={1}>
         {predictions.map((prediction, index) => (
           <PredictionListItem
             key={index}
