@@ -6,6 +6,9 @@ const cors = require('cors');
 const bodyParser = require('body-parser');
 const Building = require('./models/building');
 
+/* TODO: move all routes to separate files in routes folder and
+simplify req/res call to endpoint with cleaner async/await syntax */
+
 //TensorFlow.js is an open-source hardware-accelerated JavaScript library
 //for training and deploying machine learning models.
 const tf = require('@tensorflow/tfjs');
@@ -55,8 +58,8 @@ app.post('/api/cloudinary', async (req, res, next) => {
 		const request = http.get(urlFromCloudinary, function (response) {
 			response.pipe(file);
 		});
-		console.log(request.path);
-		res.json(request.path);
+		const url = { url: urlFromCloudinary, publicId: uploadResponse.public_id };
+		res.json(url);
 	} catch (error) {
 		next(error.message);
 	}
@@ -108,8 +111,6 @@ app.get('/api/predictions/:id', function (req, res) {
 });
 
 app.post('/api/upload', async (req, res) => {
-	console.log(req.body);
-
 	try {
 		const fileStr = req.body.file;
 		const uploadResponse = await cloudinary.uploader.upload(fileStr, {
@@ -121,6 +122,7 @@ app.post('/api/upload', async (req, res) => {
 			url: uploadResponse.url,
 			title: req.body.title,
 			description: req.body.description,
+			probability: req.body.probability,
 			date: req.body.date,
 			publicId: uploadResponse.public_id,
 		});

@@ -4,14 +4,23 @@ const useStyles = makeStyles((theme) => ({
 	root: {
 		display: 'flex',
 		marginTop: '1em',
-		marginBottom: '2em',
-		flexDirection: "column",
-		alignItems: "center",
-		/* justifyContent: "center", */
+		marginBottom: '3em',
+		flexDirection: 'column',
+		maxWidth: '200vw',
 	},
-	text: {
-		marginTop: '1em',
-		marginBottom: '1em',
+	radioButtonPredictionDataWrapper: {
+		display: "flex",
+		flexDirection: 'row',
+		maxWidth: '180vw',
+	},
+	radioButton: {
+		height: '2em',
+		width: '2em',
+		marginRight: "1em"
+	},
+	predictionData: {
+		marginTop: '0.5em',
+		marginBottom: '0.5em',
 	},
 }));
 

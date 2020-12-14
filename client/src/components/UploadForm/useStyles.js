@@ -4,8 +4,9 @@ const useStyles = makeStyles((theme) => ({
   root: {
     display: "flex",
     justifyContent: "center",
-    minHeight: "100vh",
+    minHeight: "120vh",
     marginTop: "10vh",
+    marginBottom: "10vh"
   },
   box: {
     width: "30vw",
@@ -24,13 +25,10 @@ const useStyles = makeStyles((theme) => ({
   },
   textInputAndBackspaceiconWrapper: {
     display: "flex",
-    alignItems: "center"
+    alignItems: "center",
+    marginTop: "1em"
   },
-  textFieldTop: {
-    /* marginTop: "2vh",
-    marginBottom: "4vh", */
-    width: "30vw"
-  },
+ 
   textFieldBottom: {
     marginBottom: "4vh",
   },
@@ -48,10 +46,6 @@ const useStyles = makeStyles((theme) => ({
     marginBottom: "4vh",
     display: 'none',
     fontSize: "large"
-  },
-  buttonWrap: {
-    display: "flex",
-    justifyContent: "space-between",
   },
 }));
 
