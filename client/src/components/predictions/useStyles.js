@@ -47,6 +47,16 @@ const useStyles = makeStyles((theme) => ({
 	editButton: {
 		marginTop: '1em',
 	},
+	clickImageInfoWrapper: {
+		display: 'flex',
+		justifyContent: 'center',
+		alignItems: 'center',
+		flexDirection: 'column',
+		marginTop: '3em',
+	},
+	touchAppIcon: {
+		marginBottom: '1em',
+	},
 	date: {
 		marginBottom: '1em',
 	},
