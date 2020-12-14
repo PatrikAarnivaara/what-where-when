@@ -1,7 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import { get, patch } from 'axios';
 import { Box, TextField, Button } from '@material-ui/core/';
-import useStyles from '../UploadForm/useStyles';
+import { Image } from 'cloudinary-react';
+import useStyles from './useStyles';
 
 const PredictionEdit = (props) => {
 	const classes = useStyles();
@@ -56,43 +57,41 @@ const PredictionEdit = (props) => {
 	return (
 		<Box className={classes.root}>
 			<Box className={classes.box}>
-				<Box className={classes.previewContainer}>
-					{previewSource && <img src={previewSource} alt="chosen" className={classes.preview} />}
+				<Box className={classes.editContentWrapper}>
+					{previewSource && (
+						<Image
+							cloudName={process.env.REACT_APP_CLOUDINARY_NAME}
+							publicId={previewSource}
+							width="300"
+							crop="scale"
+							quality="auto"
+						/>
+					)}
 				</Box>
 				<form>
 					<TextField
 						id="outlined-basic"
 						variant="outlined"
-						label="title"
+						label="Edit title"
 						color="secondary"
 						type="text"
 						name="title"
 						value={prediction.title}
 						onChange={handleInputChange}
-						className={classes.textFieldTop}
+						className={classes.editTextField}
 					/>
-					<TextField
-						id="outlined-basic"
-						variant="outlined"
-						label="description"
-						color="secondary"
-						type="text"
-						name="description"
-						value={prediction.description}
-						onChange={handleInputChange}
-						className={classes.textFieldBottom}
-					/>
-					<Box className={classes.buttonWrap}>
+					<Box className={classes.editButtonWrapper}>
 						<Button
 							variant="outlined"
 							color="secondary"
 							type="button"
 							value="Upload"
+							className={classes.editUploadButton}
 							onClick={uploadWithJSON}
 						>
 							UPLOAD
 						</Button>
-						<Button variant="outlined" onClick={clearFields}>
+						<Button variant="outlined" className={classes.editClearButton} onClick={clearFields}>
 							CLEAR
 						</Button>
 					</Box>

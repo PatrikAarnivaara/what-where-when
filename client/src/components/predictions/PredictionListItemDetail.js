@@ -18,13 +18,13 @@ const PredictionListItemDetail = ({ predictionDetailData: { _id, url, title, des
 				quality="auto"
 			/>
 			{url && <div>
-				<Typography>Your prediction: {title}</Typography>
-				<Typography>Classification: {description}</Typography>
+				<Typography>User: {title}</Typography>
+				<Typography>TensorFlow: {description}</Typography>
 				<Typography>Probability: {probability * 100}%</Typography>
 				<Typography>Date: {date}</Typography>
 				<Link to={`/predictions/${_id}`}>
-					<Button variant="outlined">
-						<EditOutlinedIcon style={{ cursor: 'pointer' }} />
+					<Button variant="outlined" className={classes.editButton}>
+						<EditOutlinedIcon />
 					</Button>
 				</Link>
 			</div>}

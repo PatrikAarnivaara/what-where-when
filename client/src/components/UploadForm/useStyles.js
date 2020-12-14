@@ -28,9 +28,7 @@ const useStyles = makeStyles((theme) => ({
     alignItems: "center",
     marginTop: "1em"
   },
-  textFieldTop: {
-    width: "30vw"
-  },
+ 
   textFieldBottom: {
     marginBottom: "4vh",
   },
@@ -48,10 +46,6 @@ const useStyles = makeStyles((theme) => ({
     marginBottom: "4vh",
     display: 'none',
     fontSize: "large"
-  },
-  buttonWrap: {
-    display: "flex",
-    justifyContent: "space-between",
   },
 }));
 

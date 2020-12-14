@@ -13,14 +13,29 @@ const useStyles = makeStyles((theme) => ({
 		display: 'flex',
 		flexDirection: 'row',
 	},
+	infoWrapper: {
+		display: 'flex',
+		justifyContent: 'center',
+		minHeight: '120vh',
+		marginTop: '10vh',
+		marginBottom: '10vh',
+	},
+	infoContentWrapper: {
+		minWidth: '300',
+		flexDirection: 'column',
+		flexWrap: 'wrap',
+	},
+	infoButtonWrapper: {
+		display: 'flex',
+		justifyContent: 'space-between',
+	},
 	itemDetailWrapper: {
-		/* marginLeft: '2em', */
 		marginRight: '2em',
 		maxWidth: '30vw',
 		minWidth: '280px',
 	},
 	gridListTile: {
-		padding: "1em",
+		padding: '1em',
 		cursor: 'pointer',
 	},
 	icon: {
@@ -28,6 +43,29 @@ const useStyles = makeStyles((theme) => ({
 	},
 	subHeader: {
 		fontSize: '1.5em',
+	},
+	editButton: {
+		marginTop: '1em',
+	},
+	date: {
+		marginBottom: '1em',
+	},
+	editContentWrapper: {
+		minWidth: '300px',
+	},
+	editTextField: {
+		marginTop: '1em',
+		minWidth: '300px',
+	},
+	editButtonWrapper: {
+		display: 'flex',
+		justifyContent: 'space-between',
+	},
+	editUploadButton: {
+		marginTop: '1em',
+	},
+	editClearButton: {
+		marginTop: '1em',
 	},
 }));
 
