@@ -14,7 +14,6 @@ const PredictionListItemDetail = ({ predictionDetailData: { _id, url, title, des
 			<Typography>Classification: {description}</Typography>
 			<Typography>Probability: {probability * 100}%</Typography>
 			<Typography>Date: {date}</Typography>
-			{/* <Typography>Id: {_id}</Typography> */}
 			<Link to={`/predictions/${_id}`}>
 				<EditOutlinedIcon style={{ cursor: 'pointer' }} />
 			</Link>

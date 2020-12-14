@@ -32,7 +32,7 @@ const ClassificationProbabilityList = ({ predictions, setDescription, setProbabi
 
 	return (
 		<div className={classes.root}>
-			<Box /* className={classes.radioButtonPredictionDataWrapper} */>
+			<Box className={classes.radioButtonPredictionDataWrapper}>
 				{
 					<Radio
 						className={classes.radioButton}
@@ -46,6 +46,8 @@ const ClassificationProbabilityList = ({ predictions, setDescription, setProbabi
 					<Typography>Classification: {predictions[0].className}</Typography>
 					<Typography>Probability: {predictions[0].probability * 100}%</Typography>
 				</Box>
+			</Box>
+			<Box className={classes.radioButtonPredictionDataWrapper}>
 				{
 					<Radio
 						className={classes.radioButton}
@@ -59,6 +61,8 @@ const ClassificationProbabilityList = ({ predictions, setDescription, setProbabi
 					<Typography>Classification: {predictions[1].className}</Typography>
 					<Typography>Probability: {predictions[1].probability * 100}%</Typography>
 				</Box>
+			</Box>
+			<Box className={classes.radioButtonPredictionDataWrapper}>
 				{
 					<Radio
 						className={classes.radioButton}

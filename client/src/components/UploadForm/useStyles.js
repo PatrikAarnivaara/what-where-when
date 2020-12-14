@@ -4,8 +4,9 @@ const useStyles = makeStyles((theme) => ({
   root: {
     display: "flex",
     justifyContent: "center",
-    minHeight: "100vh",
+    minHeight: "120vh",
     marginTop: "10vh",
+    marginBottom: "10vh"
   },
   box: {
     width: "30vw",

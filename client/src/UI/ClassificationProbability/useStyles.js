@@ -6,26 +6,21 @@ const useStyles = makeStyles((theme) => ({
 		marginTop: '1em',
 		marginBottom: '3em',
 		flexDirection: 'column',
-		maxWidth: '80vw',
+		maxWidth: '200vw',
 	},
 	radioButtonPredictionDataWrapper: {
-		display: 'flex',
+		display: "flex",
 		flexDirection: 'row',
-		maxWidth: '80vw',
-		marginLeft: '1em',
-		
+		maxWidth: '180vw',
 	},
 	radioButton: {
-		/* marginTop: '0.5em',
-		marginBottom: '0.5em', */
 		height: '2em',
 		width: '2em',
+		marginRight: "1em"
 	},
 	predictionData: {
 		marginTop: '0.5em',
 		marginBottom: '0.5em',
-		marginLeft: '1.5em',
-		cursor: "pointer",
 	},
 }));
 

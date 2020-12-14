@@ -58,8 +58,8 @@ app.post('/api/cloudinary', async (req, res, next) => {
 		const request = http.get(urlFromCloudinary, function (response) {
 			response.pipe(file);
 		});
-		console.log(request.path);
-		res.json(request.path);
+		const url = { url: urlFromCloudinary, publicId: uploadResponse.public_id };
+		res.json(url);
 	} catch (error) {
 		next(error.message);
 	}
@@ -111,7 +111,6 @@ app.get('/api/predictions/:id', function (req, res) {
 });
 
 app.post('/api/upload', async (req, res) => {
-
 	try {
 		const fileStr = req.body.file;
 		const uploadResponse = await cloudinary.uploader.upload(fileStr, {
