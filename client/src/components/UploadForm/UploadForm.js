@@ -6,7 +6,6 @@ import { submitForm } from '../../api/submitForm';
 import PhotoCamera from '@material-ui/icons/PhotoCamera';
 import ClearIcon from '@material-ui/icons/Clear';
 import BackspaceIcon from '@material-ui/icons/Backspace';
-import { Image } from 'cloudinary-react';
 import ClassificationProbabilityList from '../../UI/ClassificationProbability/ClassificationProbabilityList';
 
 const UploadForm = () => {
@@ -104,7 +103,7 @@ const UploadForm = () => {
 	return (
 		<Box className={classes.root}>
 			<Box className={classes.box}>
-				<Box className={classes.previewContainer}>
+				<Box className={classes.previewWrapper}>
 					{previewSource && <img src={previewSource} alt="chosen" className={classes.preview} />}
 				</Box>
 				<form>
