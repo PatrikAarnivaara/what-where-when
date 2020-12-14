@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { post } from 'axios';
-import { Box, CircularProgress, TextField, Button, IconButton } from '@material-ui/core/';
+import { Box, CircularProgress, TextField, Button, IconButton, Typography } from '@material-ui/core/';
 import useStyles from './useStyles';
 import { submitForm } from '../../api/submitForm';
 import PhotoCamera from '@material-ui/icons/PhotoCamera';
@@ -14,7 +14,7 @@ const UploadForm = () => {
 	const [description, setDescription] = useState('');
 	const [probability, setProbability] = useState('');
 	const [cloudinaryResponseUrl, setCloudinaryResponseUrl] = useState();
-
+	const [status, setStatus] = useState('');
 	const [previewSource, setPreviewSource] = useState('');
 	const [predictions, setPredictions] = useState([]);
 	const [spinner, setSpinner] = useState(false);
@@ -88,16 +88,14 @@ const UploadForm = () => {
 					date: new Date().toLocaleString(),
 				};
 
-				/* Try/Catch, add Spinner? */
+				/* TSpinner? */
 				submitForm('application/json', data, (msg) => console.log('Upload SUBMIT JSON', msg));
-
-				if (data) {
-					clearFields();
-				}
+				setStatus('Upload successfull');
 			} catch (error) {
 				console.log('error', error);
 			}
 		} else {
+			setStatus('You forgot something.');
 			return;
 		}
 	};
@@ -117,7 +115,7 @@ const UploadForm = () => {
 							label="Classification"
 							color="secondary"
 							type="text"
-							autoComplete='off'
+							autoComplete="off"
 							value={title}
 							onChange={(e) => {
 								setTitle(e.target.value);
@@ -173,6 +171,7 @@ const UploadForm = () => {
 						</Button>
 					</Box>
 				</form>
+				<Typography>Status: {status}</Typography>
 			</Box>
 		</Box>
 	);
