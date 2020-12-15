@@ -6,12 +6,10 @@ Simple app for storing images with possibility of image prediction.
 Current state of application.
 ![](screenshot.png)
 
-## Goals
-* Upload images with title and description
+## Functionality
+* Upload images and get classification and probability from TensorFlow
 * Render list of images and info
-* Edit and delete image posts
-* Add MaterialUI
-* Get predictions from TensorFlow
+* Edit and delete title
 
 ## Technologies
 * React
