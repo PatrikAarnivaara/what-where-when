@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 import { Button, Typography } from '@material-ui/core/';
 import { Image } from 'cloudinary-react';
 import EditOutlinedIcon from '@material-ui/icons/EditOutlined';
+import TouchAppIcon from '@material-ui/icons/TouchApp';
 import useStyles from './useStyles';
 
 const PredictionListItemDetail = ({ predictionDetailData: { _id, url, title, description, probability, date } }) => {
@@ -17,17 +18,24 @@ const PredictionListItemDetail = ({ predictionDetailData: { _id, url, title, des
 				crop="scale"
 				quality="auto"
 			/>
-			{url && <div>
-				<Typography>User: {title}</Typography>
-				<Typography>TensorFlow: {description}</Typography>
-				<Typography>Probability: {probability * 100}%</Typography>
-				<Typography>Date: {date}</Typography>
-				<Link to={`/predictions/${_id}`}>
-					<Button variant="outlined" className={classes.editButton}>
-						<EditOutlinedIcon />
-					</Button>
-				</Link>
-			</div>}
+			{url ? (
+				<div>
+					<Typography>User: {title}</Typography>
+					<Typography>TensorFlow: {description}</Typography>
+					<Typography>Probability: {probability * 100}%</Typography>
+					<Typography>Date: {date}</Typography>
+					<Link to={`/predictions/${_id}`}>
+						<Button variant="outlined" className={classes.editButton}>
+							<EditOutlinedIcon />
+						</Button>
+					</Link>
+				</div>
+			) : (
+				<div className={classes.clickImageInfoWrapper}>
+					<TouchAppIcon className={classes.touchAppIcon}/>
+					<Typography>Click an image to see info here.</Typography>
+				</div>
+			)}
 		</div>
 	);
 };

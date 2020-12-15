@@ -12,7 +12,7 @@ const useStyles = makeStyles((theme) => ({
 		alignContent: 'center',
 		justifyContent: 'center',
 		opacity: '1',
-		marginBottom: "2em"
+		marginBottom: "1em"
 	},
 	border: {
 		borderColor: 'red',

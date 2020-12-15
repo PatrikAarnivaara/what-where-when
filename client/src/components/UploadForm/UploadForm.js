@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { post } from 'axios';
-import { Box, CircularProgress, TextField, Button, IconButton } from '@material-ui/core/';
+import { Box, CircularProgress, TextField, Button, IconButton, Typography } from '@material-ui/core/';
 import useStyles from './useStyles';
 import { submitForm } from '../../api/submitForm';
 import PhotoCamera from '@material-ui/icons/PhotoCamera';
@@ -14,7 +14,7 @@ const UploadForm = () => {
 	const [description, setDescription] = useState('');
 	const [probability, setProbability] = useState('');
 	const [cloudinaryResponseUrl, setCloudinaryResponseUrl] = useState();
-
+	const [status, setStatus] = useState('');
 	const [previewSource, setPreviewSource] = useState('');
 	const [predictions, setPredictions] = useState([]);
 	const [spinner, setSpinner] = useState(false);
@@ -37,6 +37,9 @@ const UploadForm = () => {
 
 	const saveUrlToLocalFile = async (base64Image) => {
 		try {
+			if (status) {
+				setStatus('');
+			}
 			const imageToUrlCloudinary = {
 				image: base64Image,
 			};
@@ -88,16 +91,15 @@ const UploadForm = () => {
 					date: new Date().toLocaleString(),
 				};
 
-				/* Try/Catch, add Spinner? */
+				/* Spinner? */
 				submitForm('application/json', data, (msg) => console.log('Upload SUBMIT JSON', msg));
-
-				if (data) {
-					clearFields();
-				}
+				setStatus('Upload successfull.');
+				clearFields();
 			} catch (error) {
 				console.log('error', error);
 			}
 		} else {
+			setStatus('You forgot something.');
 			return;
 		}
 	};
@@ -105,11 +107,11 @@ const UploadForm = () => {
 	return (
 		<Box className={classes.root}>
 			<Box className={classes.box}>
-				<Box className={classes.previewContainer}>
+				<Box className={classes.previewWrapper}>
 					{previewSource && <img src={previewSource} alt="chosen" className={classes.preview} />}
 				</Box>
 				<form>
-					<Box className={classes.textInputAndBackspaceiconWrapper}>
+					<Box className={classes.uploadTextInputAndBackspaceiconWrapper}>
 						<TextField
 							required
 							id="outlined-basic"
@@ -117,12 +119,12 @@ const UploadForm = () => {
 							label="Classification"
 							color="secondary"
 							type="text"
-							autoComplete='off'
+							autoComplete="off"
 							value={title}
 							onChange={(e) => {
 								setTitle(e.target.value);
 							}}
-							className={classes.textFieldTop}
+							className={classes.uploadTextField}
 							helperText={title ? 'Thanks!' : 'Required.'}
 						/>
 						<BackspaceIcon
@@ -132,7 +134,7 @@ const UploadForm = () => {
 							}}
 						/>
 					</Box>
-					<Box className={classes.fileZoneWrapper}>
+					<Box className={classes.uploadFileZoneWrapper}>
 						<input
 							className={classes.fileUpload}
 							accept="image/*"
@@ -154,7 +156,7 @@ const UploadForm = () => {
 							setProbability={setProbability}
 						/>
 					)}
-					<Box className={classes.buttonWrap}>
+					<Box className={classes.uploadButtonWrapper}>
 						<Button
 							variant="outlined"
 							color="secondary"
@@ -171,6 +173,9 @@ const UploadForm = () => {
 						<Button variant="outlined" onClick={classifyImage} disabled={disablePrediction}>
 							PREDICT
 						</Button>
+					</Box>
+					<Box className={classes.statusMessageWrapper}>
+						<Typography className={classes.status}>{status}</Typography>
 					</Box>
 				</form>
 			</Box>
