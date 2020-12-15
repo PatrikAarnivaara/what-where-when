@@ -91,7 +91,7 @@ const UploadForm = () => {
 					date: new Date().toLocaleString(),
 				};
 
-				/* TSpinner? */
+				/* Spinner? */
 				submitForm('application/json', data, (msg) => console.log('Upload SUBMIT JSON', msg));
 				setStatus('Upload successfull.');
 				clearFields();

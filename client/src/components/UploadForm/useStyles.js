@@ -9,25 +9,23 @@ const useStyles = makeStyles((theme) => ({
 		marginBottom: '10vh',
 	},
 	box: {
-		width: '25vw',
-		flexDirection: 'column',
-		flexWrap: 'wrap',
+		width: '20vw',
 	},
 	previewWrapper: {
 		display: 'flex',
 		justifyContent: 'center',
 		position: 'relative',
-		overflow: 'hidden',
-		width: '25vw',
 		height: '20vw',
+		width: '20vw',
 		padding: '2em',
 		background: 'rgba(255, 255, 255, 0.04)',
 		borderRadius: '5px',
+		marginBottom: "2em"
 	},
 	preview: {
-		position: 'relative',
-		maxHeight: '20vw',
-		maxWidth: 'auto',
+		width: '100%',
+		height: 'auto',
+		objectFit: 'contain',
 	},
 	uploadTextInputAndBackspaceiconWrapper: {
 		display: 'flex',
