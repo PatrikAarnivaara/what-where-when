@@ -56,7 +56,7 @@ const UploadForm = () => {
 			setSpinner(true);
 			const filePath = {
 				/* TODO: this has to be fixed! */
-				file: '/Users/patrik/what-where-when/image.jpg',
+				file: 'image.jpg',
 			};
 			const predictionResponse = await post('/api/tensorflow', filePath);
 			setPredictions(predictionResponse.data);

@@ -70,6 +70,7 @@ app.post('/api/tensorflow', async (req, res, next) => {
 		const readImage = (path) => {
 			//reads the entire contents of a file.
 			//readFileSync() is synchronous and blocks execution until finished.
+			
 			const imageBuffer = fs.readFileSync(path);
 			//Given the encoded bytes of an image,
 			//it returns a 3D or 4D tensor of the decoded image. Supports BMP, GIF, JPEG and PNG formats.
