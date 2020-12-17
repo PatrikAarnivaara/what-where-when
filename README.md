@@ -1,6 +1,6 @@
 ## General info
 What Where When (Work-In-Progress)
-Simple app for storing images with possibility of image classification.
+Application for storing images with possibility of image classification.
 
 ## Screenshots
 Current state of application.
