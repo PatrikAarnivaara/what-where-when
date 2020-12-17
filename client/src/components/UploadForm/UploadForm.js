@@ -55,9 +55,11 @@ const UploadForm = () => {
 		try {
 			setSpinner(true);
 			const filePath = {
-				/* TODO: this has to be fixed! */
+				/* TODO: find alternative. */
 				file: 'image.jpg',
 			};
+
+			console.log(filePath)
 			const predictionResponse = await post('/api/tensorflow', filePath);
 			setPredictions(predictionResponse.data);
 			if (predictionResponse) {
@@ -93,7 +95,7 @@ const UploadForm = () => {
 
 				/* Spinner? */
 				submitForm('application/json', data, (msg) => console.log('Upload SUBMIT JSON', msg));
-				setStatus('Upload successfull.');
+				setStatus('Upload successful.');
 				clearFields();
 			} catch (error) {
 				console.log('error', error);
@@ -171,7 +173,7 @@ const UploadForm = () => {
 							<ClearIcon />
 						</Button>
 						<Button variant="outlined" onClick={classifyImage} disabled={disablePrediction}>
-							PREDICT
+							CLASSIFY
 						</Button>
 					</Box>
 					<Box className={classes.statusMessageWrapper}>

@@ -76,6 +76,7 @@ const PredictionEdit = (props) => {
 						color="secondary"
 						type="text"
 						name="title"
+						autoComplete="off"
 						value={prediction.title}
 						onChange={handleInputChange}
 						className={classes.editTextField}

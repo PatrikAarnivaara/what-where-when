@@ -5,22 +5,9 @@ const { cloudinary } = require('./utils/cloudinary');
 const cors = require('cors');
 const bodyParser = require('body-parser');
 const Building = require('./models/building');
-
-/* TODO: move all routes to separate files in routes folder and
-simplify req/res call to endpoint with cleaner async/await syntax */
-
-//TensorFlow.js is an open-source hardware-accelerated JavaScript library
-//for training and deploying machine learning models.
 const tf = require('@tensorflow/tfjs');
-
-//MobileNet : pre-trained model for TensorFlow.js
 const mobilenet = require('@tensorflow-models/mobilenet');
-
-//The module provides native TensorFlow execution
-//in backend JavaScript applications under the Node.js runtime.
 const tfnode = require('@tensorflow/tfjs-node');
-
-//The fs module provides an API for interacting with the file system.
 const fs = require('fs');
 const http = require('http');
 
@@ -30,6 +17,16 @@ app.use(cors());
 
 /* Is body parser necessary? */
 app.use(bodyParser.json());
+
+// set up rate limiter: maximum of five requests per minute
+const RateLimit = require('express-rate-limit');
+const limiter = new RateLimit({
+  windowMs: 1*60*1000, // 1 minute
+  max: 5
+});
+
+// apply rate limiter to all requests
+app.use(limiter);
 
 mongoose.connect(process.env.MONGODB_URI, {
 	useNewUrlParser: true,
@@ -68,21 +65,14 @@ app.post('/api/cloudinary', async (req, res, next) => {
 app.post('/api/tensorflow', async (req, res, next) => {
 	try {
 		const readImage = (path) => {
-			//reads the entire contents of a file.
-			//readFileSync() is synchronous and blocks execution until finished.
-			
 			const imageBuffer = fs.readFileSync(path);
-			//Given the encoded bytes of an image,
-			//it returns a 3D or 4D tensor of the decoded image. Supports BMP, GIF, JPEG and PNG formats.
 			const tfimage = tfnode.node.decodeImage(imageBuffer);
 			return tfimage;
 		};
 
 		const imageClassification = async (path) => {
 			const image = readImage(path);
-			// Load the model.
 			const mobilenetModel = await mobilenet.load();
-			// Classify the image.
 			const predictions = await mobilenetModel.classify(image);
 			console.log('Classification Results:', predictions);
 			res.json(predictions);
