@@ -68,21 +68,14 @@ app.post('/api/cloudinary', async (req, res, next) => {
 app.post('/api/tensorflow', async (req, res, next) => {
 	try {
 		const readImage = (path) => {
-			//reads the entire contents of a file.
-			//readFileSync() is synchronous and blocks execution until finished.
-			
 			const imageBuffer = fs.readFileSync(path);
-			//Given the encoded bytes of an image,
-			//it returns a 3D or 4D tensor of the decoded image. Supports BMP, GIF, JPEG and PNG formats.
 			const tfimage = tfnode.node.decodeImage(imageBuffer);
 			return tfimage;
 		};
 
 		const imageClassification = async (path) => {
 			const image = readImage(path);
-			// Load the model.
 			const mobilenetModel = await mobilenet.load();
-			// Classify the image.
 			const predictions = await mobilenetModel.classify(image);
 			console.log('Classification Results:', predictions);
 			res.json(predictions);
