@@ -5,22 +5,9 @@ const { cloudinary } = require('./utils/cloudinary');
 const cors = require('cors');
 const bodyParser = require('body-parser');
 const Building = require('./models/building');
-
-/* TODO: move all routes to separate files in routes folder and
-simplify req/res call to endpoint with cleaner async/await syntax */
-
-//TensorFlow.js is an open-source hardware-accelerated JavaScript library
-//for training and deploying machine learning models.
 const tf = require('@tensorflow/tfjs');
-
-//MobileNet : pre-trained model for TensorFlow.js
 const mobilenet = require('@tensorflow-models/mobilenet');
-
-//The module provides native TensorFlow execution
-//in backend JavaScript applications under the Node.js runtime.
 const tfnode = require('@tensorflow/tfjs-node');
-
-//The fs module provides an API for interacting with the file system.
 const fs = require('fs');
 const http = require('http');
 
