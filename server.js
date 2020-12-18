@@ -5,11 +5,11 @@ const { cloudinary } = require('./utils/cloudinary');
 const cors = require('cors');
 const bodyParser = require('body-parser');
 const Building = require('./models/building');
-/* const tf = require('@tensorflow/tfjs'); */
 const tfnode = require('@tensorflow/tfjs-node');
 const mobilenet = require('@tensorflow-models/mobilenet');
 const fs = require('fs');
 const http = require('http');
+const sanitize = require('sanitize-filename');
 
 app.use(express.json({ limit: '5mb' }));
 app.use(express.urlencoded({ limit: '5mb', extended: true }));
@@ -21,8 +21,8 @@ app.use(bodyParser.json());
 // set up rate limiter: maximum of five requests per minute
 const RateLimit = require('express-rate-limit');
 const limiter = new RateLimit({
-  windowMs: 1*60*1000, // 1 minute
-  max: 5
+	windowMs: 1 * 60 * 1000, // 1 minute
+	max: 5,
 });
 
 // apply rate limiter to all requests
@@ -77,8 +77,9 @@ app.post('/api/tensorflow', async (req, res, next) => {
 			console.log('Classification Results:', predictions);
 			res.json(predictions);
 		};
-
-		imageClassification(req.body.file);
+		// Sanitize the string to be safe for use as a filename.
+		let fileName = sanitize(req.body.file);
+		imageClassification(fileName);
 	} catch (error) {
 		next(error.message);
 	}
