@@ -5,9 +5,9 @@ const { cloudinary } = require('./utils/cloudinary');
 const cors = require('cors');
 const bodyParser = require('body-parser');
 const Building = require('./models/building');
-const tf = require('@tensorflow/tfjs');
-const mobilenet = require('@tensorflow-models/mobilenet');
+/* const tf = require('@tensorflow/tfjs'); */
 const tfnode = require('@tensorflow/tfjs-node');
+const mobilenet = require('@tensorflow-models/mobilenet');
 const fs = require('fs');
 const http = require('http');
 
