@@ -5,9 +5,9 @@ const { cloudinary } = require('./utils/cloudinary');
 const cors = require('cors');
 const bodyParser = require('body-parser');
 const Building = require('./models/building');
-const tf = require('@tensorflow/tfjs');
-const mobilenet = require('@tensorflow-models/mobilenet');
+/* const tf = require('@tensorflow/tfjs'); */
 const tfnode = require('@tensorflow/tfjs-node');
+const mobilenet = require('@tensorflow-models/mobilenet');
 const fs = require('fs');
 const http = require('http');
 
@@ -17,6 +17,16 @@ app.use(cors());
 
 /* Is body parser necessary? */
 app.use(bodyParser.json());
+
+// set up rate limiter: maximum of five requests per minute
+const RateLimit = require('express-rate-limit');
+const limiter = new RateLimit({
+  windowMs: 1*60*1000, // 1 minute
+  max: 5
+});
+
+// apply rate limiter to all requests
+app.use(limiter);
 
 mongoose.connect(process.env.MONGODB_URI, {
 	useNewUrlParser: true,
