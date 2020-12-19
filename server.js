@@ -136,7 +136,11 @@ app.post('/api/upload', async (req, res) => {
 app.patch('/api/edit/:id', async (req, res, next) => {
 	try {
 		console.log(req.body);
-		await Building.updateOne({ _id: req.params.id }, { $set: { title: req.body.title } });
+		await Building.updateOne(
+			{ _id: req.params.id },
+			{ $set: { title: req.body.title }, 
+			$currentDate: { lastModified: true } }
+		);
 		res.send(console.log('Prediction updated.'));
 	} catch (error) {
 		next(error.message);
