@@ -117,6 +117,7 @@ app.post('/api/upload', async (req, res) => {
 			probability: req.body.probability,
 			date: req.body.date,
 			publicId: uploadResponse.public_id,
+			lastModified: req.body.date,
 		});
 
 		building
@@ -135,7 +136,12 @@ app.post('/api/upload', async (req, res) => {
 
 app.patch('/api/edit/:id', async (req, res, next) => {
 	try {
-		await Building.findOneAndUpdate({ _id: req.params.id }, { $set: req.body });
+		console.log(req.body);
+		await Building.updateOne(
+			{ _id: req.params.id },
+			{ $set: { title: req.body.title }, 
+			$currentDate: { lastModified: true } }
+		);
 		res.send(console.log('Prediction updated.'));
 	} catch (error) {
 		next(error.message);
