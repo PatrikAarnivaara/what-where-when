@@ -135,6 +135,7 @@ app.post('/api/upload', async (req, res) => {
 
 app.patch('/api/edit/:id', async (req, res, next) => {
 	try {
+		console.log(req.body)
 		await Building.findOneAndUpdate({ _id: req.params.id }, { $set: req.body });
 		res.send(console.log('Prediction updated.'));
 	} catch (error) {
