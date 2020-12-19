@@ -117,6 +117,7 @@ app.post('/api/upload', async (req, res) => {
 			probability: req.body.probability,
 			date: req.body.date,
 			publicId: uploadResponse.public_id,
+			lastModified: req.body.date,
 		});
 
 		building
