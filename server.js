@@ -21,7 +21,7 @@ app.use(cors());
 // set up rate limiter: maximum of five requests per minute
 const RateLimit = require('express-rate-limit');
 const limiter = new RateLimit({
-	windowMs: 1 * 60 * 1000, // 1 minute
+	windowMs: 1 * 60 * 2000, // 1 minute
 	max: 5,
 });
 
@@ -85,21 +85,18 @@ app.post('/api/tensorflow', async (req, res, next) => {
 	}
 });
 
-app.get('/api/predictions', function (req, res) {
-	/* error handling */
-	Record.find(function (err, records) {
-		res.json(records);
-	});
+app.get('/api/predictions', async (req, res) => {
+	const records = await Record.find({});
+	res.send(records);
 });
 
-app.get('/api/predictions/:id', function (req, res) {
-	Record.findById(req.params.id, function (err, record) {
-		if (!record) {
-			res.status(404).send('No result found');
-		} else {
-			res.json(record);
-		}
-	});
+app.get('/api/predictions/:id', async (req, res) => {
+	const record = await Record.findOne({ _id: req.params.id });
+	if (!record) {
+		res.status(404).json('No result found');
+	} else {
+		res.send(record);
+	}
 });
 
 app.post('/api/upload', async (req, res) => {
@@ -108,7 +105,6 @@ app.post('/api/upload', async (req, res) => {
 		const uploadResponse = await cloudinary.uploader.upload(fileStr, {
 			upload_preset: 'ml_default',
 		});
-		/* res.json({ msg: "HI CLOUDINARY!" }); */
 
 		let record = new Record({
 			url: uploadResponse.url,
@@ -119,15 +115,8 @@ app.post('/api/upload', async (req, res) => {
 			publicId: uploadResponse.public_id,
 			lastModified: req.body.date,
 		});
-
-		record
-			.save()
-			.then((record) => {
-				res.send(record);
-			})
-			.catch(function (err) {
-				res.status(422).send('Record add failed');
-			});
+		await record.save();
+		res.status(200).send('POST complete');
 	} catch (err) {
 		console.error(err);
 		res.status(500).json({ err: 'Something went wrong' });
@@ -139,8 +128,7 @@ app.patch('/api/edit/:id', async (req, res, next) => {
 		console.log(req.body);
 		await Record.updateOne(
 			{ _id: req.params.id },
-			{ $set: { title: req.body.title }, 
-			$currentDate: { lastModified: true } }
+			{ $set: { title: req.body.title }, $currentDate: { lastModified: true } }
 		);
 		res.send(console.log('Record updated.'));
 	} catch (error) {
