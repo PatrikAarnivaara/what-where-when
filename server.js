@@ -3,8 +3,8 @@ const app = express();
 const mongoose = require('mongoose');
 const { cloudinary } = require('./utils/cloudinary');
 const cors = require('cors');
-const bodyParser = require('body-parser');
-const Building = require('./models/building');
+/* const bodyParser = require('body-parser'); */
+const Record = require('./models/record');
 const tfnode = require('@tensorflow/tfjs-node');
 const mobilenet = require('@tensorflow-models/mobilenet');
 const fs = require('fs');
@@ -16,7 +16,7 @@ app.use(express.urlencoded({ limit: '5mb', extended: true }));
 app.use(cors());
 
 /* Is body parser necessary? */
-app.use(bodyParser.json());
+/* app.use(bodyParser.json()); */
 
 // set up rate limiter: maximum of five requests per minute
 const RateLimit = require('express-rate-limit');
@@ -87,17 +87,17 @@ app.post('/api/tensorflow', async (req, res, next) => {
 
 app.get('/api/predictions', function (req, res) {
 	/* error handling */
-	Building.find(function (err, buildings) {
-		res.json(buildings);
+	Record.find(function (err, records) {
+		res.json(records);
 	});
 });
 
 app.get('/api/predictions/:id', function (req, res) {
-	Building.findById(req.params.id, function (err, building) {
-		if (!building) {
+	Record.findById(req.params.id, function (err, record) {
+		if (!record) {
 			res.status(404).send('No result found');
 		} else {
-			res.json(building);
+			res.json(record);
 		}
 	});
 });
@@ -110,23 +110,23 @@ app.post('/api/upload', async (req, res) => {
 		});
 		/* res.json({ msg: "HI CLOUDINARY!" }); */
 
-		let building = new Building({
+		let record = new Record({
 			url: uploadResponse.url,
 			title: req.body.title,
-			description: req.body.description,
+			classification: req.body.description,
 			probability: req.body.probability,
 			date: req.body.date,
 			publicId: uploadResponse.public_id,
 			lastModified: req.body.date,
 		});
 
-		building
+		record
 			.save()
-			.then((building) => {
-				res.send(building);
+			.then((record) => {
+				res.send(record);
 			})
 			.catch(function (err) {
-				res.status(422).send('Building add failed');
+				res.status(422).send('Record add failed');
 			});
 	} catch (err) {
 		console.error(err);
@@ -137,29 +137,29 @@ app.post('/api/upload', async (req, res) => {
 app.patch('/api/edit/:id', async (req, res, next) => {
 	try {
 		console.log(req.body);
-		await Building.updateOne(
+		await Record.updateOne(
 			{ _id: req.params.id },
 			{ $set: { title: req.body.title }, 
 			$currentDate: { lastModified: true } }
 		);
-		res.send(console.log('Prediction updated.'));
+		res.send(console.log('Record updated.'));
 	} catch (error) {
 		next(error.message);
 	}
 });
 
 app.delete('/api/predictions/:id', function (req, res) {
-	Building.findById(req.params.id, function (err, building) {
-		if (!building) {
-			res.status(404).send('Building not found');
+	Record.findById(req.params.id, function (err, record) {
+		if (!record) {
+			res.status(404).send('Record not found');
 		} else {
-			cloudinary.uploader.destroy(building.publicId);
-			Building.findByIdAndRemove(req.params.id)
+			cloudinary.uploader.destroy(record.publicId);
+			Record.findByIdAndRemove(req.params.id)
 				.then(function () {
-					res.status(200).json('Building deleted');
+					res.status(200).json('Record deleted');
 				})
 				.catch(function (err) {
-					res.status(400).send('Building delete failed.');
+					res.status(400).send('Record delete failed.');
 				});
 		}
 	});
