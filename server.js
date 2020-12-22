@@ -3,20 +3,15 @@ const app = express();
 const mongoose = require('mongoose');
 const { cloudinary } = require('./utils/cloudinary');
 const cors = require('cors');
-/* const bodyParser = require('body-parser'); */
 const Record = require('./models/record');
 const tfnode = require('@tensorflow/tfjs-node');
 const mobilenet = require('@tensorflow-models/mobilenet');
 const fs = require('fs');
 const http = require('http');
 const sanitize = require('sanitize-filename');
-
 app.use(express.json({ limit: '5mb' }));
 app.use(express.urlencoded({ limit: '5mb', extended: true }));
 app.use(cors());
-
-/* Is body parser necessary? */
-/* app.use(bodyParser.json()); */
 
 // set up rate limiter: maximum of five requests per minute
 const RateLimit = require('express-rate-limit');
@@ -121,14 +116,13 @@ app.post('/api/upload', async (req, res) => {
 
 app.patch('/api/edit/:id', async (req, res) => {
 	try {
-		console.log(req.body);
 		await Record.updateOne(
 			{ _id: req.params.id },
 			{ $set: { title: req.body.title }, $currentDate: { lastModified: true } }
 		);
-		res.send(console.log('Record updated.'));
+		res.send('Record updated.');
 	} catch (error) {
-		res.status(500).send(err);
+		res.send(error);
 	}
 });
 
