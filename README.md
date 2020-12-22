@@ -4,7 +4,9 @@ Application for storing images with possibility of image classification.
 
 ## Screenshots
 Current state of application.
-![](screenshot.png)
+![](screenshot1.png)
+![](screenshot2.png)
+![](screenshot3.png)
 
 ## Functionality
 * Upload images and get classification and probability from TensorFlow
