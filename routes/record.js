@@ -1,7 +1,7 @@
 const Record = require('../models/record');
 const { cloudinary } = require('../utils/cloudinary');
 
-module.exports = function (app) {
+module.exports = (app) => {
 	app.get('/api/predictions', async (req, res) => {
 		const records = await Record.find({});
 		res.send(records);
@@ -45,18 +45,18 @@ module.exports = function (app) {
 		} catch (error) {
 			res.send(error);
 		}
-    });
-    
-    app.delete('/api/predictions/:id', async (req, res) => {
-        const record = await Record.findOne({ _id: req.params.id });
-        if (record) {
-            await cloudinary.uploader.destroy(record.publicId);
-            const recordDeleted = await Record.deleteOne({ _id: req.params.id });
-            if (recordDeleted.deletedCount === 1) {
-                res.send('Record deleted');
-            }
-        } else {
-            res.send('Record delete failed.');
-        }
-    });
+	});
+
+	app.delete('/api/predictions/:id', async (req, res) => {
+		const record = await Record.findOne({ _id: req.params.id });
+		if (record) {
+			await cloudinary.uploader.destroy(record.publicId);
+			const recordDeleted = await Record.deleteOne({ _id: req.params.id });
+			if (recordDeleted.deletedCount === 1) {
+				res.send('Record deleted');
+			}
+		} else {
+			res.send('Record delete failed.');
+		}
+	});
 };
