@@ -11,7 +11,8 @@ Current state of application.
 ## Functionality
 * Upload images and get classification and probability from TensorFlow
 * Render list of images and info
-* Edit and delete title
+* Edit title
+* Delete record
 
 ## Technologies
 * React
