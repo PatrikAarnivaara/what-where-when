@@ -1,17 +1,17 @@
 const mongoose = require('mongoose');
 
-const buildingSchema = new mongoose.Schema({
+const recordSchema = new mongoose.Schema({
 	url: {
 		type: String,
 		required: [true, 'Url is required'],
 	},
 	title: {
 		type: String,
-		required: [true, 'Prediction is required'],
+		required: [true, 'Title is required'],
 	},
-	description: {
+	classification: {
 		type: String,
-		required: [true, 'Prediction is required'],
+		required: [true, 'Classification is required'],
 	},
 	probability: {
 		type: String,
@@ -19,11 +19,11 @@ const buildingSchema = new mongoose.Schema({
 	},
 	date: {
 		type: String,
-		required: [true, 'Prediction is required'],
+		required: [true, 'Date is required'],
 	},
 	publicId: {
 		type: String,
-		required: [true, 'Prediction is required'],
+		required: [true, 'Public Id is required'],
 	},
 	lastModified: {
 		type: String,
@@ -31,4 +31,4 @@ const buildingSchema = new mongoose.Schema({
 	},
 });
 
-module.exports = mongoose.model('Building', buildingSchema);
+module.exports = mongoose.model('Record', recordSchema);

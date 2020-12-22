@@ -11,8 +11,9 @@ import ClassificationProbabilityList from '../../UI/ClassificationProbability/Cl
 const UploadForm = () => {
 	const classes = useStyles();
 	const [title, setTitle] = useState('');
-	const [description, setDescription] = useState('');
+	const [classification, setClassification] = useState('');
 	const [probability, setProbability] = useState('');
+	const [cloudinaryResponsePublicID, setCloudinaryResponsePublicID] = useState();
 	const [cloudinaryResponseUrl, setCloudinaryResponseUrl] = useState();
 	const [status, setStatus] = useState('');
 	const [previewSource, setPreviewSource] = useState('');
@@ -45,7 +46,9 @@ const UploadForm = () => {
 			};
 			const cloudinaryResponse = await post('/api/cloudinary', imageToUrlCloudinary);
 			if (cloudinaryResponse) setDisablePrediction(false);
+			console.log(cloudinaryResponse.data);
 			setCloudinaryResponseUrl(cloudinaryResponse.data.url);
+			setCloudinaryResponsePublicID(cloudinaryResponse.data.publicId);
 		} catch (error) {
 			console.log('error', error);
 		}
@@ -59,7 +62,7 @@ const UploadForm = () => {
 				file: 'image.jpg',
 			};
 
-			console.log(filePath)
+			console.log(filePath);
 			const predictionResponse = await post('/api/tensorflow', filePath);
 			setPredictions(predictionResponse.data);
 			if (predictionResponse) {
@@ -77,23 +80,23 @@ const UploadForm = () => {
 		/* Add cloudinary delete image request */
 		setPreviewSource('');
 		setTitle('');
-		setDescription('');
+		setClassification('');
 		setProbability('');
 		setPredictions([]);
 	};
 
 	const uploadWithJSON = async () => {
-		if (title && cloudinaryResponseUrl && probability && description) {
+		if (title && cloudinaryResponseUrl && probability && classification) {
 			try {
 				const data = {
+					url: cloudinaryResponseUrl,
 					title: title,
-					file: cloudinaryResponseUrl,
-					description: description,
+					classification: classification,
 					probability: probability,
 					date: new Date().toLocaleString(),
+					publicId: cloudinaryResponsePublicID,
 				};
-
-				/* Spinner? */
+				/* Spinner */
 				submitForm('application/json', data, (msg) => console.log('Upload SUBMIT JSON', msg));
 				setStatus('Upload successful.');
 				clearFields();
@@ -154,7 +157,7 @@ const UploadForm = () => {
 					{predictions.length > 0 && (
 						<ClassificationProbabilityList
 							predictions={predictions}
-							setDescription={setDescription}
+							setClassification={setClassification}
 							setProbability={setProbability}
 						/>
 					)}

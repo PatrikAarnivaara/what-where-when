@@ -15,7 +15,7 @@ const PredictionList = ({ predictions, showPredictionDetail }) => {
 						id={prediction._id}
 						url={prediction.url}
 						title={prediction.title}
-						description={prediction.description}
+						classification={prediction.classification}
 						probability={prediction.probability}
 						date={prediction.date}
 						index={index}

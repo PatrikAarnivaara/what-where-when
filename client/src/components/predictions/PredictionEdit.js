@@ -6,7 +6,7 @@ import useStyles from './useStyles';
 
 const PredictionEdit = (props) => {
 	const classes = useStyles();
-	const initialState = { title: '', description: '' };
+	const initialState = { title: '', classification: '' };
 	const [prediction, setPrediction] = useState(initialState);
 	const [previewSource, setPreviewSource] = useState('');
 
@@ -41,17 +41,13 @@ const PredictionEdit = (props) => {
 			}
 		}
 		updatePrediction();
-
-		/*  editForm("application/json", data, (msg) =>
-      console.log("Upload SUBMIT JSON", msg)
-    ); */
 	};
 
 	const clearFields = () => {
 		/* setFile("");
     setPreviewSource("");
     setTitle("");
-    setDescription(""); */
+    setClassification(""); */
 	};
 
 	return (

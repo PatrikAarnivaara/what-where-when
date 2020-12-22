@@ -12,18 +12,18 @@ const Prediction = () => {
 		_id: '',
 		url: '',
 		title: '',
-		description: '',
+		classification: '',
 		probability: '',
 		date: '',
 	});
 
-	const showPredictionDetail = (id, url, title, description, probability, date) => {
+	const showPredictionDetail = (id, url, title, classification, probability, date) => {
 		setPredictionDetailData({
 			...predictionDetailData,
 			_id: id,
 			url: url,
 			title: title,
-			description: description,
+			classification: classification,
 			probability: probability,
 			date: date,
 		});
