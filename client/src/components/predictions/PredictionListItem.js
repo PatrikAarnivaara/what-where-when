@@ -3,11 +3,11 @@ import { GridListTile } from '@material-ui/core/';
 import useStyles from './useStyles';
 import { Image } from 'cloudinary-react';
 
-const PredictionListItem = ({ index, id, url, title, description, probability, date, showPredictionDetail }) => {
+const PredictionListItem = ({ index, id, url, title, classification, probability, date, showPredictionDetail }) => {
 	const classes = useStyles();
 
 	const handleOnClickItem = () => {
-		showPredictionDetail(id, url, title, description, probability, date);
+		showPredictionDetail(id, url, title, classification, probability, date);
 	};
 
 	return (

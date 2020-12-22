@@ -8,10 +8,11 @@ const DeleteButton = (props) => {
 
 	const handleDelete = async () => {
 		try {
-			await axios.delete(`/api/predictions/${props.match.params._id}`);
+			const deleted = await axios.delete(`/api/predictions/${props.match.params._id}`);
+			console.log(deleted);
 			props.history.push('/predictions');
-		} catch (error) {
-			console.error(error);
+		} catch {
+			console.log('deleted?');
 		}
 	};
 	return (

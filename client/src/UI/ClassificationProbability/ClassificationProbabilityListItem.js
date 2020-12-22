@@ -3,14 +3,14 @@ import { Box, Typography } from '@material-ui/core/';
 import Radio from '@material-ui/core/Radio';
 import useStyles from './useStyles';
 
-const ClassificationProbabilityListItem = ({ classification, probability, setDescription, test }) => {
+const ClassificationProbabilityListItem = ({ classification, probability, setClassification, test }) => {
 	const classes = useStyles();
 	const [selectedValue, setSelectedValue] = useState();
 
 	const handleChange = (e) => {
 		console.log(test.toString());
 		setSelectedValue(e.target.value);
-		setDescription(classification);
+		setClassification(classification);
 	};
 
 	return (

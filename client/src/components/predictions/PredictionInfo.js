@@ -36,7 +36,7 @@ const PredictionInfo = (props) => {
 					quality="auto"
 				/>
 				<Typography>User: {prediction.title}</Typography>
-				<Typography>TensorFlow: {prediction.description}</Typography>
+				<Typography>TensorFlow: {prediction.classification}</Typography>
 				<Typography>Probability: {prediction.probability * 100}%</Typography>
 				<Typography className={classes.date}>Date: {prediction.date}</Typography>
 				<div className={classes.infoButtonWrapper}>

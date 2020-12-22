@@ -21,8 +21,8 @@ app.use(cors());
 // set up rate limiter: maximum of five requests per minute
 const RateLimit = require('express-rate-limit');
 const limiter = new RateLimit({
-	windowMs: 1 * 60 * 2000, // 1 minute
-	max: 5,
+	windowMs: 1 * 60 * 1000, // 1 minute
+	max: 25,
 });
 
 // apply rate limiter to all requests
@@ -100,19 +100,15 @@ app.get('/api/predictions/:id', async (req, res) => {
 });
 
 app.post('/api/upload', async (req, res) => {
+	console.log(req.body);
 	try {
-		const fileStr = req.body.file;
-		const uploadResponse = await cloudinary.uploader.upload(fileStr, {
-			upload_preset: 'ml_default',
-		});
-
 		let record = new Record({
-			url: uploadResponse.url,
+			url: req.body.url,
 			title: req.body.title,
-			classification: req.body.description,
+			classification: req.body.classification,
 			probability: req.body.probability,
 			date: req.body.date,
-			publicId: uploadResponse.public_id,
+			publicId: req.body.publicId,
 			lastModified: req.body.date,
 		});
 		await record.save();
@@ -123,7 +119,7 @@ app.post('/api/upload', async (req, res) => {
 	}
 });
 
-app.patch('/api/edit/:id', async (req, res, next) => {
+app.patch('/api/edit/:id', async (req, res) => {
 	try {
 		console.log(req.body);
 		await Record.updateOne(
@@ -132,25 +128,21 @@ app.patch('/api/edit/:id', async (req, res, next) => {
 		);
 		res.send(console.log('Record updated.'));
 	} catch (error) {
-		next(error.message);
+		res.status(500).send(err);
 	}
 });
 
-app.delete('/api/predictions/:id', function (req, res) {
-	Record.findById(req.params.id, function (err, record) {
-		if (!record) {
-			res.status(404).send('Record not found');
-		} else {
-			cloudinary.uploader.destroy(record.publicId);
-			Record.findByIdAndRemove(req.params.id)
-				.then(function () {
-					res.status(200).json('Record deleted');
-				})
-				.catch(function (err) {
-					res.status(400).send('Record delete failed.');
-				});
+app.delete('/api/predictions/:id', async (req, res) => {
+	const record = await Record.findOne({ _id: req.params.id });
+	if (record) {
+		await cloudinary.uploader.destroy(record.publicId);
+		const recordDeleted = await Record.deleteOne({ _id: req.params.id });
+		if (recordDeleted.deletedCount === 1) {
+			res.send('Record deleted');
 		}
-	});
+	} else {
+		res.send('Record delete failed.');
+	}
 });
 
 const PORT = process.env.PORT || 3001;

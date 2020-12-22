@@ -6,7 +6,7 @@ import EditOutlinedIcon from '@material-ui/icons/EditOutlined';
 import TouchAppIcon from '@material-ui/icons/TouchApp';
 import useStyles from './useStyles';
 
-const PredictionListItemDetail = ({ predictionDetailData: { _id, url, title, description, probability, date } }) => {
+const PredictionListItemDetail = ({ predictionDetailData: { _id, url, title, classification, probability, date } }) => {
 	const classes = useStyles();
 
 	return (
@@ -21,7 +21,7 @@ const PredictionListItemDetail = ({ predictionDetailData: { _id, url, title, des
 			{url ? (
 				<div>
 					<Typography>User: {title}</Typography>
-					<Typography>TensorFlow: {description}</Typography>
+					<Typography>TensorFlow: {classification}</Typography>
 					<Typography>Probability: {probability * 100}%</Typography>
 					<Typography>Date: {date}</Typography>
 					<Link to={`/predictions/${_id}`}>
