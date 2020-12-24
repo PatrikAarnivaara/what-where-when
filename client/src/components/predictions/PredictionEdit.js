@@ -10,21 +10,18 @@ const PredictionEdit = (props) => {
 	const [prediction, setPrediction] = useState(initialState);
 	const [previewSource, setPreviewSource] = useState('');
 
-	useEffect(
-		function () {
-			async function getPrediction() {
-				try {
-					const response = await get(`/api/predictions/${props.match.params._id}`);
-					setPrediction(response.data);
-					setPreviewSource(response.data.url);
-				} catch (error) {
-					console.log('error', error);
-				}
+	useEffect(() => {
+		const getPrediction = async () => {
+			try {
+				const response = await get(`/api/predictions/${props.match.params._id}`);
+				setPrediction(response.data);
+				setPreviewSource(response.data.url);
+			} catch (error) {
+				console.log('error', error);
 			}
-			getPrediction();
-		},
-		[props]
-	);
+		}
+		getPrediction();
+	}, [props]);
 
 	const handleInputChange = (e) => {
 		e.preventDefault();
@@ -32,7 +29,7 @@ const PredictionEdit = (props) => {
 	};
 
 	const uploadWithJSON = async () => {
-		async function updatePrediction() {
+		const updatePrediction = async() =>{
 			try {
 				await patch(`/api/edit/${props.match.params._id}`, prediction);
 				props.history.push(`/predictions/`);

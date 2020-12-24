@@ -96,7 +96,7 @@ const UploadForm = () => {
 					date: new Date().toLocaleString(),
 					publicId: cloudinaryResponsePublicID,
 				};
-				/* Spinner */
+				
 				submitForm('application/json', data, (msg) => console.log('Upload SUBMIT JSON', msg));
 				setStatus('Upload successful.');
 				clearFields();

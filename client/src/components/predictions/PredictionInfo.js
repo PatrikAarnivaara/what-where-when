@@ -10,20 +10,17 @@ const PredictionInfo = (props) => {
 	const classes = useStyles();
 	const [prediction, setPrediction] = useState({});
 
-	useEffect(
-		function () {
-			async function getPrediction() {
-				try {
-					const response = await axios.get(`/api/predictions/${props.match.params._id}`);
-					setPrediction(response.data);
-				} catch (error) {
-					console.log('error', error);
-				}
+	useEffect(() => {
+		const getPrediction = async () => {
+			try {
+				const response = await axios.get(`/api/predictions/${props.match.params._id}`);
+				setPrediction(response.data);
+			} catch (error) {
+				console.log('error', error);
 			}
-			getPrediction();
-		},
-		[props]
-	);
+		};
+		getPrediction();
+	}, [props]); 
 
 	return (
 		<div className={classes.infoWrapper}>
