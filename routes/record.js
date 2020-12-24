@@ -16,7 +16,7 @@ module.exports = (app) => {
 		}
 	});
 
-	app.post('/api/upload', async (req, res) => {
+	app.post('/api/records', async (req, res) => {
 		try {
 			let record = new Record({
 				url: req.body.url,
@@ -35,7 +35,7 @@ module.exports = (app) => {
 		}
 	});
 
-	app.patch('/api/edit/:id', async (req, res) => {
+	app.patch('/api/records/:id', async (req, res) => {
 		try {
 			await Record.updateOne(
 				{ _id: req.params.id },

@@ -31,7 +31,7 @@ const PredictionEdit = (props) => {
 	const uploadWithJSON = async () => {
 		const updatePrediction = async() =>{
 			try {
-				await patch(`/api/edit/${props.match.params._id}`, prediction);
+				await patch(`/api/records/${props.match.params._id}`, prediction);
 				props.history.push(`/predictions/`);
 			} catch (error) {
 				console.log(error);

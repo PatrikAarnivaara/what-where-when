@@ -22,7 +22,7 @@ const Prediction = () => {
 			...predictionDetailData,
 			_id: id,
 			url: url,
-			title: title,
+			title: title, 
 			classification: classification,
 			probability: probability,
 			date: date,
