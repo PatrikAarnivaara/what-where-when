@@ -13,7 +13,7 @@ const PredictionInfo = (props) => {
 	useEffect(() => {
 		const getPrediction = async () => {
 			try {
-				const response = await axios.get(`/api/predictions/${props.match.params._id}`);
+				const response = await axios.get(`/api/records/${props.match.params._id}`);
 				setPrediction(response.data);
 			} catch (error) {
 				console.log('error', error);

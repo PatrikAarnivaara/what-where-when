@@ -32,7 +32,7 @@ const Prediction = () => {
 	useEffect(() => {
 		const getPredictions = async () => {
 			try {
-				const response = await axios.get('/api/predictions');
+				const response = await axios.get('/api/records');
 				setPredictions(response.data);
 			} catch (error) {
 				console.log('error', error);
