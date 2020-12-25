@@ -34,7 +34,7 @@ const HeaderTest = ({ changeTheme, darkMode }) => {
 				</Link>
 			</Button>
 			<Button>
-				<Link to="/predictions" className={classes.images}>
+				<Link to="/records" className={classes.images}>
 					<PhotoLibraryIcon />
 				</Link>
 			</Button>

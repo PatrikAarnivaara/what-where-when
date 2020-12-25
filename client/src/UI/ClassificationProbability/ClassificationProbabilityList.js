@@ -4,7 +4,7 @@ import { Box, Typography } from '@material-ui/core/';
 import Radio from '@material-ui/core/Radio';
 import useStyles from './useStyles';
 
-const ClassificationProbabilityList = ({ predictions, setClassification, setProbability }) => {
+const ClassificationProbabilityList = ({ records, setClassification, setProbability }) => {
 	const classes = useStyles();
 
 	/* Set highest probability as default */
@@ -14,16 +14,16 @@ const ClassificationProbabilityList = ({ predictions, setClassification, setProb
 		setSelectedValue(e.target.value);
 		switch (e.target.value) {
 			case 'a':
-				setClassification(predictions[0].className);
-				setProbability(predictions[0].probability);
+				setClassification(records[0].className);
+				setProbability(records[0].probability);
 				break;
 			case 'b':
-				setClassification(predictions[1].className);
-				setProbability(predictions[1].probability);
+				setClassification(records[1].className);
+				setProbability(records[1].probability);
 				break;
 			case 'c':
-				setClassification(predictions[2].className);
-				setProbability(predictions[2].probability);
+				setClassification(records[2].className);
+				setProbability(records[2].probability);
 				break;
 			default:
 				return;
@@ -43,8 +43,8 @@ const ClassificationProbabilityList = ({ predictions, setClassification, setProb
 					/>
 				}
 				<Box className={classes.predictionData}>
-					<Typography>Classification: {predictions[0].className}</Typography>
-					<Typography>Probability: {predictions[0].probability * 100}%</Typography>
+					<Typography>Classification: {records[0].className}</Typography>
+					<Typography>Probability: {records[0].probability * 100}%</Typography>
 				</Box>
 			</Box>
 			<Box className={classes.radioButtonPredictionDataWrapper}>
@@ -58,8 +58,8 @@ const ClassificationProbabilityList = ({ predictions, setClassification, setProb
 					/>
 				}
 				<Box className={classes.predictionData}>
-					<Typography>Classification: {predictions[1].className}</Typography>
-					<Typography>Probability: {predictions[1].probability * 100}%</Typography>
+					<Typography>Classification: {records[1].className}</Typography>
+					<Typography>Probability: {records[1].probability * 100}%</Typography>
 				</Box>
 			</Box>
 			<Box className={classes.radioButtonPredictionDataWrapper}>
@@ -73,8 +73,8 @@ const ClassificationProbabilityList = ({ predictions, setClassification, setProb
 					/>
 				}
 				<Box className={classes.predictionData}>
-					<Typography>Classification: {predictions[2].className}</Typography>
-					<Typography>Probability: {predictions[2].probability * 100}%</Typography>
+					<Typography>Classification: {records[2].className}</Typography>
+					<Typography>Probability: {records[2].probability * 100}%</Typography>
 				</Box>
 			</Box>
 		</div>

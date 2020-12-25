@@ -2,12 +2,12 @@ const Record = require('../models/record');
 const { cloudinary } = require('../utils/cloudinary');
 
 module.exports = (app) => {
-	app.get('/api/predictions', async (req, res) => {
+	app.get('/api/records', async (req, res) => {
 		const records = await Record.find({});
 		res.send(records);
 	});
 
-	app.get('/api/predictions/:id', async (req, res) => {
+	app.get('/api/records/:id', async (req, res) => {
 		const record = await Record.findOne({ _id: req.params.id });
 		if (!record) {
 			res.status(404).json('No result found');
@@ -16,7 +16,7 @@ module.exports = (app) => {
 		}
 	});
 
-	app.post('/api/upload', async (req, res) => {
+	app.post('/api/records', async (req, res) => {
 		try {
 			let record = new Record({
 				url: req.body.url,
@@ -35,7 +35,7 @@ module.exports = (app) => {
 		}
 	});
 
-	app.patch('/api/edit/:id', async (req, res) => {
+	app.patch('/api/records/:id', async (req, res) => {
 		try {
 			await Record.updateOne(
 				{ _id: req.params.id },
@@ -47,7 +47,7 @@ module.exports = (app) => {
 		}
 	});
 
-	app.delete('/api/predictions/:id', async (req, res) => {
+	app.delete('/api/records/:id', async (req, res) => {
 		const record = await Record.findOne({ _id: req.params.id });
 		if (record) {
 			await cloudinary.uploader.destroy(record.publicId);

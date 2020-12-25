@@ -15,9 +15,9 @@ module.exports = (app) => {
 			const imageClassification = async (path) => {
 				const image = readImage(path);
 				const mobilenetModel = await mobilenet.load();
-				const predictions = await mobilenetModel.classify(image);
-				console.log('Classification Results:', predictions);
-				res.json(predictions);
+				const records = await mobilenetModel.classify(image);
+				console.log('Classification Results:', records);
+				res.json(records);
 			};
 			// Sanitize the string to be safe for use as a filename.
 			let fileName = sanitize(req.body.file);

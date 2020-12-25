@@ -17,7 +17,7 @@ const UploadForm = () => {
 	const [cloudinaryResponseUrl, setCloudinaryResponseUrl] = useState();
 	const [status, setStatus] = useState('');
 	const [previewSource, setPreviewSource] = useState('');
-	const [predictions, setPredictions] = useState([]);
+	const [records, setRecords] = useState([]);
 	const [spinner, setSpinner] = useState(false);
 	const [disableUpload, setDisableUpload] = useState(true);
 	const [disablePrediction, setDisablePrediction] = useState(true);
@@ -63,12 +63,12 @@ const UploadForm = () => {
 			};
 
 			console.log(filePath);
-			const predictionResponse = await post('/api/tensorflow', filePath);
-			setPredictions(predictionResponse.data);
-			if (predictionResponse) {
+			const recordResponse = await post('/api/tensorflow', filePath);
+			setRecords(recordResponse.data);
+			if (recordResponse) {
 				setDisableUpload(false);
 			}
-			if (predictionResponse) {
+			if (recordResponse) {
 				setSpinner(false);
 			}
 		} catch (error) {
@@ -82,7 +82,7 @@ const UploadForm = () => {
 		setTitle('');
 		setClassification('');
 		setProbability('');
-		setPredictions([]);
+		setRecords([]);
 	};
 
 	const uploadWithJSON = async () => {
@@ -96,7 +96,7 @@ const UploadForm = () => {
 					date: new Date().toLocaleString(),
 					publicId: cloudinaryResponsePublicID,
 				};
-				/* Spinner */
+				
 				submitForm('application/json', data, (msg) => console.log('Upload SUBMIT JSON', msg));
 				setStatus('Upload successful.');
 				clearFields();
@@ -154,9 +154,9 @@ const UploadForm = () => {
 						</label>
 						{spinner && <CircularProgress color="secondary" />}
 					</Box>
-					{predictions.length > 0 && (
+					{records.length > 0 && (
 						<ClassificationProbabilityList
-							predictions={predictions}
+							records={records}
 							setClassification={setClassification}
 							setProbability={setProbability}
 						/>

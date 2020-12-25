@@ -8,9 +8,9 @@ const DeleteButton = (props) => {
 
 	const handleDelete = async () => {
 		try {
-			const deleted = await axios.delete(`/api/predictions/${props.match.params._id}`);
+			const deleted = await axios.delete(`/api/records/${props.match.params._id}`);
 			console.log(deleted);
-			props.history.push('/predictions');
+			props.history.push('/records');
 		} catch {
 			console.log('deleted?');
 		}

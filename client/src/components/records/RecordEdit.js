@@ -4,43 +4,40 @@ import { Box, TextField, Button } from '@material-ui/core/';
 import { Image } from 'cloudinary-react';
 import useStyles from './useStyles';
 
-const PredictionEdit = (props) => {
+const RecordEdit = (props) => {
 	const classes = useStyles();
 	const initialState = { title: '', classification: '' };
-	const [prediction, setPrediction] = useState(initialState);
+	const [record, setRecord] = useState(initialState);
 	const [previewSource, setPreviewSource] = useState('');
 
-	useEffect(
-		function () {
-			async function getPrediction() {
-				try {
-					const response = await get(`/api/predictions/${props.match.params._id}`);
-					setPrediction(response.data);
-					setPreviewSource(response.data.url);
-				} catch (error) {
-					console.log('error', error);
-				}
+	useEffect(() => {
+		const getRecord = async () => {
+			try {
+				const response = await get(`/api/records/${props.match.params._id}`);
+				setRecord(response.data);
+				setPreviewSource(response.data.url);
+			} catch (error) {
+				console.log('error', error);
 			}
-			getPrediction();
-		},
-		[props]
-	);
+		}
+		getRecord();
+	}, [props]);
 
 	const handleInputChange = (e) => {
 		e.preventDefault();
-		setPrediction({ ...prediction, [e.target.name]: e.target.value });
+		setRecord({ ...record, [e.target.name]: e.target.value });
 	};
 
 	const uploadWithJSON = async () => {
-		async function updatePrediction() {
+		const updateRecord = async() =>{
 			try {
-				await patch(`/api/edit/${props.match.params._id}`, prediction);
-				props.history.push(`/predictions/`);
+				await patch(`/api/records/${props.match.params._id}`, record);
+				props.history.push(`/records/`);
 			} catch (error) {
 				console.log(error);
 			}
 		}
-		updatePrediction();
+		updateRecord();
 	};
 
 	const clearFields = () => {
@@ -73,7 +70,7 @@ const PredictionEdit = (props) => {
 						type="text"
 						name="title"
 						autoComplete="off"
-						value={prediction.title}
+						value={record.title}
 						onChange={handleInputChange}
 						className={classes.editTextField}
 					/>
@@ -98,4 +95,4 @@ const PredictionEdit = (props) => {
 	);
 };
 
-export default PredictionEdit;
+export default RecordEdit;

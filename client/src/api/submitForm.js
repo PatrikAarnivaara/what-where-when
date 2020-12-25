@@ -3,9 +3,8 @@ import axios from "axios";
 /* Check export of this function */
 
 export const submitForm = (contentType, data, setResponse) => {
-  
   axios({
-    url: "/api/upload",
+    url: "/api/records",
     method: "POST",
     data: data,
     headers: {
