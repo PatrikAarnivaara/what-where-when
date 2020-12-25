@@ -8,6 +8,7 @@ import VisibilityIcon from '@material-ui/icons/Visibility';
 import LockIcon from '@material-ui/icons/Lock';
 import LockOpenIcon from '@material-ui/icons/LockOpen';
 import useStyles from './useStyles';
+import Weather from "../../weather/Weather"
 
 const HeaderTest = ({ changeTheme, darkMode }) => {
 	const classes = useStyles();
@@ -20,14 +21,15 @@ const HeaderTest = ({ changeTheme, darkMode }) => {
 
 	return (
 		<Box className={classes.root}>
-			<Button
+			<Weather/>
+			{/* <Button
 				className={classes.login}
 				onClick={() => {
 					setLogin(!login);
 				}}
 			>
 				{login ? <LockIcon /> : <LockOpenIcon />}
-			</Button>
+			</Button> */}
 			<Button>
 				<Link to="/" className={classes.eye}>
 					<VisibilityIcon />
