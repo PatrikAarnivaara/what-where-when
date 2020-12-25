@@ -6,20 +6,20 @@ import EditButton from '../../UI/EditButton';
 import { Image } from 'cloudinary-react';
 import useStyles from './useStyles';
 
-const PredictionInfo = (props) => {
+const RecordInfo = (props) => {
 	const classes = useStyles();
-	const [prediction, setPrediction] = useState({});
+	const [record, setRecord] = useState({});
 
 	useEffect(() => {
-		const getPrediction = async () => {
+		const getRecord = async () => {
 			try {
 				const response = await axios.get(`/api/records/${props.match.params._id}`);
-				setPrediction(response.data);
+				setRecord(response.data);
 			} catch (error) {
 				console.log('error', error);
 			}
 		};
-		getPrediction();
+		getRecord();
 	}, [props]); 
 
 	return (
@@ -27,22 +27,22 @@ const PredictionInfo = (props) => {
 			<div className={classes.infoContentWrapper}>
 				<Image
 					cloudName={process.env.REACT_APP_CLOUDINARY_NAME}
-					publicId={prediction.url}
+					publicId={record.url}
 					width="300"
 					crop="scale"
 					quality="auto"
 				/>
-				<Typography>User: {prediction.title}</Typography>
-				<Typography>TensorFlow: {prediction.classification}</Typography>
-				<Typography>Probability: {prediction.probability * 100}%</Typography>
-				<Typography className={classes.date}>Date: {prediction.date}</Typography>
+				<Typography>User: {record.title}</Typography>
+				<Typography>TensorFlow: {record.classification}</Typography>
+				<Typography>Probability: {record.probability * 100}%</Typography>
+				<Typography className={classes.date}>Date: {record.date}</Typography>
 				<div className={classes.infoButtonWrapper}>
 					<DeleteButton {...props} />
-					<EditButton id={prediction._id} />
+					<EditButton id={record._id} />
 				</div>
 			</div>
 		</div>
 	);
 };
 
-export default PredictionInfo;
+export default RecordInfo;

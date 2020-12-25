@@ -5,9 +5,9 @@ import CssBaseline from '@material-ui/core/CssBaseline';
 
 import Header from './components/containers/Header/Header';
 import UploadForm from './components/UploadForm/UploadForm';
-import Prediction from './components/predictions/Prediction';
-import PredictionInfo from './components/predictions/PredictionInfo';
-import PredictionEdit from './components/predictions/PredictionEdit';
+import Record from './components/records/Record';
+import RecordInfo from './components/records/RecordInfo';
+import RecordEdit from './components/records/RecordEdit';
 
 const App = () => {
 	const [darkMode, setDarkMode] = useState(true);
@@ -29,9 +29,9 @@ const App = () => {
 					<Header darkMode={darkMode} changeTheme={changeTheme} />
 					<Switch>
 						<Route exact path="/" component={UploadForm} />
-						<Route exact path="/predictions" component={Prediction} />
-						<Route exact path="/predictions/:_id" component={PredictionInfo} />
-						<Route exact path="/predictions/:_id/edit" component={PredictionEdit} />
+						<Route exact path="/records" component={Record} />
+						<Route exact path="/records/:_id" component={RecordInfo} />
+						<Route exact path="/records/:_id/edit" component={RecordEdit} />
 					</Switch>
 				</Router>
 			</div>

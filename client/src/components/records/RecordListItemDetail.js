@@ -6,10 +6,10 @@ import EditOutlinedIcon from '@material-ui/icons/EditOutlined';
 import TouchAppIcon from '@material-ui/icons/TouchApp';
 import useStyles from './useStyles';
 
-const PredictionListItemDetail = ({ predictionDetailData: { _id, url, title, classification, probability, date } }) => {
+const RecordListItemDetail = ({ recordDetailData: { _id, url, title, classification, probability, date } }) => {
 	const classes = useStyles();
 
-	return (
+	return ( 
 		<div className={classes.itemDetailWrapper}>
 			<Image
 				cloudName={process.env.REACT_APP_CLOUDINARY_NAME}
@@ -24,7 +24,7 @@ const PredictionListItemDetail = ({ predictionDetailData: { _id, url, title, cla
 					<Typography>TensorFlow: {classification}</Typography>
 					<Typography>Probability: {probability * 100}%</Typography>
 					<Typography>Date: {date}</Typography>
-					<Link to={`/predictions/${_id}`}>
+					<Link to={`/records/${_id}`}>
 						<Button variant="outlined" className={classes.editButton}>
 							<EditOutlinedIcon />
 						</Button>
@@ -40,4 +40,4 @@ const PredictionListItemDetail = ({ predictionDetailData: { _id, url, title, cla
 	);
 };
 
-export default PredictionListItemDetail;
+export default RecordListItemDetail;
