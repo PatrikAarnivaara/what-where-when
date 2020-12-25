@@ -9,7 +9,7 @@ const useStyles = makeStyles((theme) => ({
 		marginBottom: '2em',
 		marginLeft: '2em',
 	},
-	predictionWrapper: {
+	recordWrapper: {
 		display: 'flex',
 		flexDirection: 'row',
 	},

@@ -8,7 +8,7 @@ const EditButton = ({ id }) => {
 	return (
 		<React.Fragment>
 			<Button variant="outlined" className={classes.editButton}>
-				<Link to={`/predictions/${id}/edit`} color="secondary" className={classes.link}>
+				<Link to={`/records/${id}/edit`} color="secondary" className={classes.link}>
 					EDIT
 				</Link>
 			</Button>

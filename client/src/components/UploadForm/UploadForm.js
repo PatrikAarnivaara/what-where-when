@@ -11,12 +11,13 @@ import ClassificationProbabilityList from '../../UI/ClassificationProbability/Cl
 const UploadForm = () => {
 	const classes = useStyles();
 	const [title, setTitle] = useState('');
-	const [description, setDescription] = useState('');
+	const [classification, setClassification] = useState('');
 	const [probability, setProbability] = useState('');
+	const [cloudinaryResponsePublicID, setCloudinaryResponsePublicID] = useState();
 	const [cloudinaryResponseUrl, setCloudinaryResponseUrl] = useState();
 	const [status, setStatus] = useState('');
 	const [previewSource, setPreviewSource] = useState('');
-	const [predictions, setPredictions] = useState([]);
+	const [records, setRecords] = useState([]);
 	const [spinner, setSpinner] = useState(false);
 	const [disableUpload, setDisableUpload] = useState(true);
 	const [disablePrediction, setDisablePrediction] = useState(true);
@@ -45,7 +46,9 @@ const UploadForm = () => {
 			};
 			const cloudinaryResponse = await post('/api/cloudinary', imageToUrlCloudinary);
 			if (cloudinaryResponse) setDisablePrediction(false);
+			console.log(cloudinaryResponse.data);
 			setCloudinaryResponseUrl(cloudinaryResponse.data.url);
+			setCloudinaryResponsePublicID(cloudinaryResponse.data.publicId);
 		} catch (error) {
 			console.log('error', error);
 		}
@@ -59,13 +62,13 @@ const UploadForm = () => {
 				file: 'image.jpg',
 			};
 
-			console.log(filePath)
-			const predictionResponse = await post('/api/tensorflow', filePath);
-			setPredictions(predictionResponse.data);
-			if (predictionResponse) {
+			console.log(filePath);
+			const recordResponse = await post('/api/tensorflow', filePath);
+			setRecords(recordResponse.data);
+			if (recordResponse) {
 				setDisableUpload(false);
 			}
-			if (predictionResponse) {
+			if (recordResponse) {
 				setSpinner(false);
 			}
 		} catch (error) {
@@ -77,23 +80,23 @@ const UploadForm = () => {
 		/* Add cloudinary delete image request */
 		setPreviewSource('');
 		setTitle('');
-		setDescription('');
+		setClassification('');
 		setProbability('');
-		setPredictions([]);
+		setRecords([]);
 	};
 
 	const uploadWithJSON = async () => {
-		if (title && cloudinaryResponseUrl && probability && description) {
+		if (title && cloudinaryResponseUrl && probability && classification) {
 			try {
 				const data = {
+					url: cloudinaryResponseUrl,
 					title: title,
-					file: cloudinaryResponseUrl,
-					description: description,
+					classification: classification,
 					probability: probability,
 					date: new Date().toLocaleString(),
+					publicId: cloudinaryResponsePublicID,
 				};
-
-				/* Spinner? */
+				
 				submitForm('application/json', data, (msg) => console.log('Upload SUBMIT JSON', msg));
 				setStatus('Upload successful.');
 				clearFields();
@@ -151,10 +154,10 @@ const UploadForm = () => {
 						</label>
 						{spinner && <CircularProgress color="secondary" />}
 					</Box>
-					{predictions.length > 0 && (
+					{records.length > 0 && (
 						<ClassificationProbabilityList
-							predictions={predictions}
-							setDescription={setDescription}
+							records={records}
+							setClassification={setClassification}
 							setProbability={setProbability}
 						/>
 					)}
