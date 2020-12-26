@@ -20,9 +20,9 @@ const HeaderTest = ({ changeTheme, darkMode }) => {
 
 	return (
 		<Box className={classes.root}>
-			<Button className={classes.weather}>
+			<Box className={classes.weather}>
 				<Weather />
-			</Button>
+			</Box>
 			<Button>
 				<Link to="/" className={classes.eye}>
 					<VisibilityIcon />

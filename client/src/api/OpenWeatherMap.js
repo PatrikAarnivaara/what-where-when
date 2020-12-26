@@ -4,7 +4,7 @@ export default async (/* { lat, lon } */) => {
 	/* console.log('lat: ', lat); */
 	try {
 		const result = await fetch(
-			`https://api.openweathermap.org/data/2.5/weather?lat=${55.854363799999994}&lon=${13.3077733}&appid=${process.env.REACT_APP_OPEN_WEATHER_MAP_API_KEY}`
+			`https://api.openweathermap.org/data/2.5/weather?lat=${55.854363799999994}&lon=${13.3077733}&units=metric&appid=${process.env.REACT_APP_OPEN_WEATHER_MAP_API_KEY}`
 		);
 		if (result.status === 200) {
 			return { success: true, data: await result.json() };

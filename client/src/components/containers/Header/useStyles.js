@@ -26,8 +26,8 @@ const useStyles = makeStyles((theme) => ({
 	},
 	weather: {
 		position: 'absolute',
-		left: 'calc(5% - 2rem)',
-		marginTop: '0.1em',
+		left: 'calc(5% - 1.5rem)',
+		marginTop: '0.7em',
 	},
 	mode: {
 		position: 'absolute',

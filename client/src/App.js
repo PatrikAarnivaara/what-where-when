@@ -28,6 +28,7 @@ const App = () => {
 		palette: {
 			type: darkMode ? 'dark' : 'light',
 		},
+		
 	});
 
 	const changeTheme = () => {
