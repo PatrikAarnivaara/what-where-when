@@ -5,10 +5,9 @@ import Brightness7Icon from '@material-ui/icons/Brightness7';
 import Brightness4Icon from '@material-ui/icons/Brightness4';
 import { Button, Box } from '@material-ui/core/';
 import VisibilityIcon from '@material-ui/icons/Visibility';
-import LockIcon from '@material-ui/icons/Lock';
-import LockOpenIcon from '@material-ui/icons/LockOpen';
+import Tooltip from '@material-ui/core/Tooltip';
 import useStyles from './useStyles';
-import Weather from "../../weather/Weather"
+import Weather from '../../weather/Weather';
 
 const HeaderTest = ({ changeTheme, darkMode }) => {
 	const classes = useStyles();
@@ -21,15 +20,9 @@ const HeaderTest = ({ changeTheme, darkMode }) => {
 
 	return (
 		<Box className={classes.root}>
-			<Weather/>
-			{/* <Button
-				className={classes.login}
-				onClick={() => {
-					setLogin(!login);
-				}}
-			>
-				{login ? <LockIcon /> : <LockOpenIcon />}
-			</Button> */}
+			<Button className={classes.weather}>
+				<Weather />
+			</Button>
 			<Button>
 				<Link to="/" className={classes.eye}>
 					<VisibilityIcon />
@@ -40,9 +33,11 @@ const HeaderTest = ({ changeTheme, darkMode }) => {
 					<PhotoLibraryIcon />
 				</Link>
 			</Button>
-			<Button className={classes.mode} onClick={switchTheme}>
-				{darkMode ? <Brightness7Icon /> : <Brightness4Icon />}
-			</Button>
+			<Tooltip title={darkMode ? 'light mode' : 'dark mode'} aria-label={darkMode ? 'light mode' : 'dark mode'}>
+				<Button className={classes.mode} onClick={switchTheme}>
+					{darkMode ? <Brightness7Icon /> : <Brightness4Icon />}
+				</Button>
+			</Tooltip>
 		</Box>
 	);
 };

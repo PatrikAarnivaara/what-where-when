@@ -12,10 +12,7 @@ const useStyles = makeStyles((theme) => ({
 		alignContent: 'center',
 		justifyContent: 'center',
 		opacity: '1',
-		marginBottom: "1em"
-	},
-	border: {
-		borderColor: 'red',
+		marginBottom: '1em',
 	},
 	eye: {
 		display: 'flex',
@@ -27,24 +24,15 @@ const useStyles = makeStyles((theme) => ({
 		color: '#008394',
 		fontSize: '1.5em',
 	},
-	icon: {
-		marginRight: theme.spacing(0.5),
-		width: 20,
-		height: 20,
-		fontSize: '1.5em',
-	},
-	login: {
-		display: 'flex',
+	weather: {
 		position: 'absolute',
 		left: 'calc(5% - 2rem)',
-		marginTop: "0.7em"
-		/* top: 'calc(5% - 1.5rem)', */
+		marginTop: '0.1em',
 	},
 	mode: {
 		position: 'absolute',
 		right: 'calc(5% - 2rem)',
-		marginTop: "0.7em"
-		/* top: 'calc(5% - 1rem)', */
+		marginTop: '0.7em',
 	},
 }));
 
