@@ -7,7 +7,7 @@ import { Button, Box } from '@material-ui/core/';
 import VisibilityIcon from '@material-ui/icons/Visibility';
 import Tooltip from '@material-ui/core/Tooltip';
 import useStyles from './useStyles';
-import Weather from '../../weather/Weather';
+import Position from '../../weather/Position';
 
 const HeaderTest = ({ changeTheme, darkMode }) => {
 	const classes = useStyles();
@@ -21,23 +21,30 @@ const HeaderTest = ({ changeTheme, darkMode }) => {
 	return (
 		<Box className={classes.root}>
 			<Box className={classes.weather}>
-				<Weather />
+				<Position />
 			</Box>
 			<Button>
-				<Link to="/" className={classes.eye}>
-					<VisibilityIcon />
-				</Link>
+				<Tooltip title="classify" aria-label="classify">
+					<Link to="/" className={classes.eye}>
+						<VisibilityIcon />
+					</Link>
+				</Tooltip>
 			</Button>
 			<Button>
-				<Link to="/records" className={classes.images}>
-					<PhotoLibraryIcon />
-				</Link>
+				<Tooltip title="images" aria-label="images">
+					<Link to="/records" className={classes.images}>
+						<PhotoLibraryIcon />
+					</Link>
+				</Tooltip>
 			</Button>
-			<Tooltip title={darkMode ? 'light mode' : 'dark mode'} aria-label={darkMode ? 'light mode' : 'dark mode'}>
-				<Button className={classes.mode} onClick={switchTheme}>
+			<Button className={classes.mode} onClick={switchTheme}>
+				<Tooltip
+					title={darkMode ? 'light mode' : 'dark mode'}
+					aria-label={darkMode ? 'light mode' : 'dark mode'}
+				>
 					{darkMode ? <Brightness7Icon /> : <Brightness4Icon />}
-				</Button>
-			</Tooltip>
+				</Tooltip>
+			</Button>
 		</Box>
 	);
 };
