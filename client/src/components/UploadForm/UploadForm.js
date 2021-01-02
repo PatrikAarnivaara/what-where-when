@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Box, CircularProgress, TextField, Button, IconButton, Typography } from '@material-ui/core/';
 import useStyles from './useStyles';
 import { submitForm } from '../../api/submitForm';
@@ -22,6 +22,15 @@ const UploadForm = () => {
 	const [spinner, setSpinner] = useState(false);
 	const [disableUpload, setDisableUpload] = useState(true);
 	const [disablePrediction, setDisablePrediction] = useState(true);
+	const [position, setPosition] = useState({ latitude: '', longitude: '' });
+
+	useEffect(() => {
+		if (navigator.geolocation)
+			navigator.geolocation.watchPosition((position) => {
+				console.log(position.coords.latitude)
+				setPosition({ ...position, latitude: position.coords.latitude, longitude: position.coords.longitude });
+			});
+	}, []);
 
 	const handleFileInputChange = (e) => {
 		e.preventDefault();
@@ -59,6 +68,7 @@ const UploadForm = () => {
 	const upload = async () => {
 		if (title && cloudinaryResponseUrl && probability && classification) {
 			try {
+				console.log(position.latitude)
 				const data = {
 					url: cloudinaryResponseUrl,
 					title: title,
@@ -66,8 +76,8 @@ const UploadForm = () => {
 					probability: probability,
 					date: new Date().toLocaleString(),
 					publicId: cloudinaryResponsePublicID,
-					latitude: 'test',
-					longitude: 'test',
+					latitude: position.latitude,
+					longitude: position.longitude,
 				};
 
 				submitForm('application/json', data, (msg) => console.log('Upload SUBMIT JSON', msg));
