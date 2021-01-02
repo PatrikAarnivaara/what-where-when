@@ -7,7 +7,7 @@ import { Button, Box } from '@material-ui/core/';
 import VisibilityIcon from '@material-ui/icons/Visibility';
 import Tooltip from '@material-ui/core/Tooltip';
 import useStyles from './useStyles';
-import Position from '../../weather/Position';
+import Position from '../../../UI/Position';
 
 const HeaderTest = ({ changeTheme, darkMode }) => {
 	const classes = useStyles();

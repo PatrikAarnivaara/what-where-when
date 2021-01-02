@@ -12,23 +12,7 @@ const Position = () => {
 			});
 	}, []);
 
-	return (
-		<div>
-			{position.lat ? (
-				<LocationOnIcon
-					onClick={() => {
-						console.log(position.lat);
-					}}
-				/>
-			) : (
-				<LocationOffIcon />
-			)}
-		</div>
-	);
+	return <div>{position.lat ? <LocationOnIcon /> : <LocationOffIcon />}</div>;
 };
-
-/* Weather.propTypes = {
-	location: PropTypes.string.isRequired,
-}; */
 
 export default Position;

@@ -1,5 +1,4 @@
 import React, { useState } from 'react';
-import { post } from 'axios';
 import { Box, CircularProgress, TextField, Button, IconButton, Typography } from '@material-ui/core/';
 import useStyles from './useStyles';
 import { submitForm } from '../../api/submitForm';
@@ -7,6 +6,8 @@ import PhotoCamera from '@material-ui/icons/PhotoCamera';
 import ClearIcon from '@material-ui/icons/Clear';
 import BackspaceIcon from '@material-ui/icons/Backspace';
 import ClassificationProbabilityList from '../../UI/ClassificationProbability/ClassificationProbabilityList';
+import Cloudinary from './Cloudinary';
+import TensorFlow from './TensorFlow';
 
 const UploadForm = () => {
 	const classes = useStyles();
@@ -36,45 +37,15 @@ const UploadForm = () => {
 		};
 	};
 
-	const saveUrlToLocalFile = async (base64Image) => {
-		try {
-			if (status) {
-				setStatus('');
-			}
-			const imageToUrlCloudinary = {
-				image: base64Image,
-			};
-			const cloudinaryResponse = await post('/api/cloudinary', imageToUrlCloudinary);
-			if (cloudinaryResponse) setDisablePrediction(false);
-			console.log(cloudinaryResponse.data);
-			setCloudinaryResponseUrl(cloudinaryResponse.data.url);
-			setCloudinaryResponsePublicID(cloudinaryResponse.data.publicId);
-		} catch (error) {
-			console.log('error', error);
-		}
-	};
+	const saveUrlToLocalFile = Cloudinary(
+		status,
+		setStatus,
+		setDisablePrediction,
+		setCloudinaryResponseUrl,
+		setCloudinaryResponsePublicID
+	);
 
-	const classifyImage = async () => {
-		try {
-			setSpinner(true);
-			const filePath = {
-				/* TODO: find alternative. */
-				file: 'image.jpg',
-			};
-
-			console.log(filePath);
-			const recordResponse = await post('/api/tensorflow', filePath);
-			setRecords(recordResponse.data);
-			if (recordResponse) {
-				setDisableUpload(false);
-			}
-			if (recordResponse) {
-				setSpinner(false);
-			}
-		} catch (error) {
-			console.log('error', error);
-		}
-	};
+	const classifyImage = TensorFlow(setSpinner, setRecords, setDisableUpload);
 
 	const clearFields = () => {
 		/* Add cloudinary delete image request */
@@ -85,7 +56,7 @@ const UploadForm = () => {
 		setRecords([]);
 	};
 
-	const uploadWithJSON = async () => {
+	const upload = async () => {
 		if (title && cloudinaryResponseUrl && probability && classification) {
 			try {
 				const data = {
@@ -95,8 +66,10 @@ const UploadForm = () => {
 					probability: probability,
 					date: new Date().toLocaleString(),
 					publicId: cloudinaryResponsePublicID,
+					latitude: 'test',
+					longitude: 'test',
 				};
-				
+
 				submitForm('application/json', data, (msg) => console.log('Upload SUBMIT JSON', msg));
 				setStatus('Upload successful.');
 				clearFields();
@@ -167,7 +140,7 @@ const UploadForm = () => {
 							color="secondary"
 							type="button"
 							value="Upload"
-							onClick={uploadWithJSON}
+							onClick={upload}
 							disabled={disableUpload}
 						>
 							UPLOAD
