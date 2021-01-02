@@ -16,7 +16,7 @@ const Record = () => {
 		date: '',
 	});
 
-	const showRecordDetail = (id, url, title, classification, probability, date) => {
+	const showRecordDetail = (id, url, title, classification, probability, date, lat, lon) => {
 		setRecordDetailData({
 			...recordDetailData,
 			_id: id,
@@ -25,6 +25,8 @@ const Record = () => {
 			classification: classification,
 			probability: probability,
 			date: date,
+			lat: lat,
+			lon, lon
 		});
 	};
 

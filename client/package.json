@@ -12,6 +12,7 @@
     "cloudinary-react": "^1.6.7",
     "dotenv": "^8.2.0",
     "fontsource-roboto": "^3.0.3",
+    "google-maps-react": "^2.0.6",
     "react": "^16.14.0",
     "react-dom": "^16.14.0",
     "react-router-dom": "^5.2.0",
