@@ -5,7 +5,6 @@ import { Image } from 'cloudinary-react';
 
 const RecordListItem = ({ index, id, url, title, classification, probability, date, showRecordDetail, lat, lon }) => {
 	const classes = useStyles();
-	console.log(lat, lon)
 	const handleOnClickItem = () => {
 		showRecordDetail(id, url, title, classification, probability, date, lat, lon);
 	};

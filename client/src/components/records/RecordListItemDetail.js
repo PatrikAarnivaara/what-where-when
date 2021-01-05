@@ -27,8 +27,8 @@ const RecordListItemDetail = ({
 					<Typography>TensorFlow: {classification}</Typography>
 					<Typography>Probability: {probability * 100}%</Typography>
 					<Typography>Date: {date}</Typography>
-					<Typography>Latitude: {lat}</Typography>
-					<Typography>Longitude: {lon}</Typography>
+					{/* <Typography>Latitude: {lat}</Typography>
+					<Typography>Longitude: {lon}</Typography> */}
 					<Link to={`/records/${_id}`}>
 						<Button variant="outlined" className={classes.editButton}>
 							<EditOutlinedIcon />

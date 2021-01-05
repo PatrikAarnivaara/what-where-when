@@ -1,31 +1,40 @@
-import React, { useState, useEffect } from 'react';
-import { Map, GoogleApiWrapper, Marker } from 'google-maps-react';
+import React, { memo, useEffect, useState } from 'react';
+import { GoogleMap, LoadScript, Marker } from '@react-google-maps/api';
 
-const GoogleMaps = ({ google, lat, lon }) => {
-	console.log(lat);
-	const mapStyles = {
-		width: '20%',
-		height: '20%',
-	};
+const containerStyle = {
+	width: '300px',
+	height: '300px',
+};
+
+const GoogleMaps = ({ lat, lon }) => {
+	/* const [center, setCenter] = useState({ lat: parseFloat(lat), lng: parseFloat(lon) });
+
+	useEffect(() => {
+		const setPosition = () => {
+			setCenter({ ...center, lat: parseFloat(lat), lng: parseFloat(lon) });
+		};
+		setPosition();
+	}, [setCenter]); */
 
 	return (
-		<div>
-			<Map
-				google={google}
-				zoom={14}
-				style={mapStyles}
-				initialCenter={{
+		<LoadScript googleMapsApiKey={process.env.GOOGLE_MAPS_API_KEY}>
+			<GoogleMap
+				mapContainerStyle={containerStyle}
+				center={{
 					lat: lat,
 					lng: lon,
 				}}
+				zoom={15}
 			>
-				{<Marker /* onClick={onMarkerClick} */ name={'Current location'} />}
-			</Map>
-		</div>
+				<Marker
+					position={{
+						lat: lat,
+						lng: lon,
+					}}
+				/>
+			</GoogleMap>
+		</LoadScript>
 	);
 };
 
-export default GoogleApiWrapper({
-	apiKey: process.env.GOOGLE_MAPS_API_KEY,
-	/* GoogleMaps: GoogleMaps, */
-})(GoogleMaps);
+export default /* memo( */ GoogleMaps /* ) */;

@@ -21,12 +21,12 @@ const Record = () => {
 			...recordDetailData,
 			_id: id,
 			url: url,
-			title: title, 
+			title: title,
 			classification: classification,
 			probability: probability,
 			date: date,
 			lat: lat,
-			lon, lon
+			lon: lon,
 		});
 	};
 

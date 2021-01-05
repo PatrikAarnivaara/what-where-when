@@ -3,7 +3,7 @@ import LocationOnIcon from '@material-ui/icons/LocationOn';
 import LocationOffIcon from '@material-ui/icons/LocationOff';
 
 const Position = () => {
-	const [position, setPosition] = useState({ lat: '', lon: '' });
+	const [position, setPosition] = useState({ lat: 0, lon: 0 });
 
 	useEffect(() => {
 		if (navigator.geolocation)

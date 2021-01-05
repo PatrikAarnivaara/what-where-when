@@ -25,11 +25,19 @@ const UploadForm = () => {
 	const [position, setPosition] = useState({ latitude: '', longitude: '' });
 
 	useEffect(() => {
-		if (navigator.geolocation)
-			navigator.geolocation.watchPosition((position) => {
-				console.log(position.coords.latitude)
-				setPosition({ ...position, latitude: position.coords.latitude, longitude: position.coords.longitude });
-			});
+		const getPosition = () => {
+			if (navigator.geolocation)
+				navigator.geolocation.watchPosition((position) => {
+					console.log(position.coords.latitude);
+					setPosition({
+						...position,
+						latitude: position.coords.latitude,
+						longitude: position.coords.longitude,
+					});
+					console.log(position);
+				});
+		};
+		getPosition();
 	}, []);
 
 	const handleFileInputChange = (e) => {
@@ -68,7 +76,7 @@ const UploadForm = () => {
 	const upload = async () => {
 		if (title && cloudinaryResponseUrl && probability && classification) {
 			try {
-				console.log(position.latitude)
+				console.log(position.latitude);
 				const data = {
 					url: cloudinaryResponseUrl,
 					title: title,
