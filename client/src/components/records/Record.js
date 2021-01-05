@@ -16,15 +16,17 @@ const Record = () => {
 		date: '',
 	});
 
-	const showRecordDetail = (id, url, title, classification, probability, date) => {
+	const showRecordDetail = (id, url, title, classification, probability, date, lat, lon) => {
 		setRecordDetailData({
 			...recordDetailData,
 			_id: id,
 			url: url,
-			title: title, 
+			title: title,
 			classification: classification,
 			probability: probability,
 			date: date,
+			lat: lat,
+			lon: lon,
 		});
 	};
 

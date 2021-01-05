@@ -5,7 +5,7 @@ import RecordListItem from './RecordListItem';
 
 const RecordList = ({ records, showRecordDetail }) => {
 	const classes = useStyles();
-
+	console.log(records)
 	return (
 		<div className={classes.root}>
 			<GridList cellHeight={100} cols={1}>
@@ -20,6 +20,8 @@ const RecordList = ({ records, showRecordDetail }) => {
 						date={record.date}
 						index={index}
 						showRecordDetail={showRecordDetail}
+						lat={record.latitude}
+						lon={record.longitude}
 					></RecordListItem>
 				))}
 			</GridList>

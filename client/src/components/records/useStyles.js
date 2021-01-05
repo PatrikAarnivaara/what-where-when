@@ -31,7 +31,7 @@ const useStyles = makeStyles((theme) => ({
 	},
 	itemDetailWrapper: {
 		marginRight: '2em',
-		marginLeft: "1em", 
+		marginLeft: '1em',
 		paddingTop: '1em',
 		maxWidth: '30vw',
 		minWidth: '280px',
@@ -48,6 +48,7 @@ const useStyles = makeStyles((theme) => ({
 	},
 	editButton: {
 		marginTop: '1em',
+		marginBottom: '1em',
 	},
 	clickImageInfoWrapper: {
 		display: 'flex',
