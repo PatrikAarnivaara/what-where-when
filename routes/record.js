@@ -26,6 +26,8 @@ module.exports = (app) => {
 				date: req.body.date,
 				publicId: req.body.publicId,
 				lastModified: req.body.date,
+				latitude: req.body.latitude,
+				longitude: req.body.longitude,
 			});
 			await record.save();
 			res.status(200).send('POST complete');

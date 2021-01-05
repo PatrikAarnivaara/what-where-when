@@ -9,17 +9,36 @@ import Record from './components/records/Record';
 import RecordInfo from './components/records/RecordInfo';
 import RecordEdit from './components/records/RecordEdit';
 
+
+/* const LOCAL_STORAGE_KEY = 'locations';
+	function saveToLocalStorage(locations) {
+		localStorage.setItem(LOCAL_STORAGE_KEY, JSON.stringify(locations));
+	}
+
+	function readFromLocalStorage() {
+		const storedLocations = localStorage.getItem(LOCAL_STORAGE_KEY);
+		return storedLocations ? JSON.parse(storedLocations) : [];
+	} */
+
 const App = () => {
 	const [darkMode, setDarkMode] = useState(true);
+	/* const [weatherLocations, setWeatherLocations] = useState(readFromLocalStorage()); */
+	
 	const theme = createMuiTheme({
 		palette: {
 			type: darkMode ? 'dark' : 'light',
 		},
+		
 	});
 
 	const changeTheme = () => {
 		setDarkMode(!darkMode);
 	};
+
+	/* const updateLocations = locations => {
+        setWeatherLocations(locations);
+        saveToLocalStorage(locations);
+    }; */
 
 	return (
 		<ThemeProvider theme={theme}>

@@ -29,6 +29,14 @@ const recordSchema = new mongoose.Schema({
 		type: String,
 		required: true,
 	},
+	latitude: {
+		type: Number,
+		required: true,
+	},
+	longitude: {
+		type: Number,
+		required: true,
+	},
 });
 
 module.exports = mongoose.model('Record', recordSchema);
