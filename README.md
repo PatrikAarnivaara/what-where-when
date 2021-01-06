@@ -3,7 +3,7 @@
 Application for classifying and storing images.
 
 ## General info
-An application where a user can upload an image and get three classification options from TensorFlow’s image classification model. The uploaded image, the user classification, selected classification, probability, date and GPS coordinates are saved in a MongoDB Atlas document. Uploaded images are saved to Cloudinary. The interface is built with Material-ui and a user can switch between dark and light mode, find uploaded images by clicking the image icon where a detailed view with location of was upload can be seen on a map. The user can also edit their own classification. The location icon in the left-hand corner shows if the user shares his or her geolocation, if that is the case it will be saved to the database when uploading an image. 
+An application where users can upload an image and get three classification options from TensorFlow’s image classification model. The user can also edit their own classifications. The interface is built with Material-UI. Users can browse uploaded images by clicking the image icon which displays a grid of images. When a user clicks on an image a detailed view is shown to the right side of the grid. The location icon in the left-hand corner shows if the user shares his or her geolocation, if that is the case it will be saved to the database when uploading an image. 
 
 ## Screenshots
 ![](screenshot1.png)
