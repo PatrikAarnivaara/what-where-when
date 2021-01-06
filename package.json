@@ -14,7 +14,6 @@
   "dependencies": {
     "@material-ui/core": "^4.11.2",
     "@material-ui/icons": "^4.9.1",
-    "@react-google-maps/api": "^2.0.2",
     "@tensorflow-models/mobilenet": "^2.0.4",
     "@tensorflow/tfjs-node": "^2.8.1",
     "base64-to-uint8array": "^1.0.0",
@@ -25,6 +24,7 @@
     "express-rate-limit": "^5.2.3",
     "http-proxy": "^1.18.1",
     "mongoose": "^5.10.9",
+    "mquery": "^3.2.3",
     "node-forge": "^0.10.0",
     "nodemon": "^2.0.6",
     "object-path": "^0.11.5",
