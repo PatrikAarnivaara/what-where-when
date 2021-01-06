@@ -45,7 +45,7 @@ module.exports = (app) => {
 			);
 			res.send('Record updated.');
 		} catch (error) {
-			res.send(error);
+			console.log(error)
 		}
 	});
 
